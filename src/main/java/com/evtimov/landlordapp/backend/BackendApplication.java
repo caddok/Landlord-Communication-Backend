@@ -24,6 +24,8 @@ public class BackendApplication {
                 .addAnnotatedClass(Place.class)
                 .addAnnotatedClass(Rent.class)
                 .addAnnotatedClass(Report.class)
+                .addAnnotatedClass(ChatsessionsUsers.class)
+                .addAnnotatedClass(UsersPlaces.class)
                 .buildSessionFactory();
     }
 }
