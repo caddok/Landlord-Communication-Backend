@@ -1,5 +1,6 @@
 package com.evtimov.landlordapp.backend;
 
+import com.evtimov.landlordapp.backend.models.*;
 import org.hibernate.SessionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,13 @@ public class BackendApplication {
     public SessionFactory sessionFactory(){
         return new org.hibernate.cfg.Configuration()
                 .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(User.class)
+                .addAnnotatedClass(ChatSession.class)
+                .addAnnotatedClass(Card.class)
+                .addAnnotatedClass(Payment.class)
+                .addAnnotatedClass(Place.class)
+                .addAnnotatedClass(Rent.class)
+                .addAnnotatedClass(Report.class)
                 .buildSessionFactory();
     }
 }
