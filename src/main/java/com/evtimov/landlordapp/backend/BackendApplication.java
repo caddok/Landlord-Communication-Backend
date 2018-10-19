@@ -18,7 +18,7 @@ public class BackendApplication {
         return new org.hibernate.cfg.Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(User.class)
-                .addAnnotatedClass(ChatSession.class)
+                .addAnnotatedClass(Chatsession.class)
                 .addAnnotatedClass(Card.class)
                 .addAnnotatedClass(Payment.class)
                 .addAnnotatedClass(Place.class)

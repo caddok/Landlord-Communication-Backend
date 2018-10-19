@@ -1,6 +1,7 @@
 package com.evtimov.landlordapp.backend.repositories;
 
 
+import com.evtimov.landlordapp.backend.models.Place;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
