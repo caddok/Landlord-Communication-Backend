@@ -5,10 +5,10 @@ import com.evtimov.landlordapp.backend.models.Place;
 import com.evtimov.landlordapp.backend.repositories.base.PlaceRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -43,16 +43,46 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     @Override
     public List<Place> getAllByTenantId(int tenantId) {
 
-        List<Place> places = new ArrayList<>();
+        List<Place> places;
+        String pattern = String.valueOf(tenantId);
+        String statement = "from Place where tenantID = :pattern ";  // Place is the pojo class, tenantID is field in the class
 
-        return null;
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("tenantID", pattern);
+            places = query.list();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return places;
     }
 
     @Override
     public List<Place> getAllByLandlordId(int landlordId) {
 
-        List<Place> places = new ArrayList<>();
+        List<Place> places;
+        String pattern = String.valueOf(landlordId);
+        String statement = "from Place where landlordID = :pattern ";  // Place is the pojo class, landlordID is field in the class
 
-        return null;
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("landlordID", pattern);
+            places = query.list();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return places;
     }
 }

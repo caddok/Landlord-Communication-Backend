@@ -12,31 +12,29 @@ public class Place {
     @Column(name = "placeId")
     private int placeID;
 
+    @Column(name = "tenantId")
+    private int tenantID;
+
+    @Column(name = "landlordId")
+    private int landlordID;
+
     @Column(name = "address")
     private String address;
 
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usersplaces",
-            joinColumns = @JoinColumn(name = "placeId"),
-            inverseJoinColumns = @JoinColumn(name = "userId"))
-    private Set<User> users;
-
     @OneToMany
-    @JoinColumn(name = "placeId")
-    private Set<Report> reports;
-
-    @OneToMany
-    @JoinColumn(name = "placeId")
+    @JoinColumn(name = "placeId", insertable = false, updatable = false)
     private Set<Rent> rents;
 
-    public Place(){
+    public Place() {
         //default
     }
 
-    public Place(int placeID, String address, String description){
+    public Place(int placeID, String address, String description, int tenantID, int landlordID) {
+        setTenantID(tenantID);
+        setLandlordID(landlordID);
         setPlaceID(placeID);
         setAddress(address);
         setDescription(description);
@@ -47,7 +45,7 @@ public class Place {
         return placeID;
     }
 
-    public void setPlaceID(int placeID) {
+    private void setPlaceID(int placeID) {
         this.placeID = placeID;
     }
 
@@ -55,7 +53,7 @@ public class Place {
         return address;
     }
 
-    public void setAddress(String address) {
+    private void setAddress(String address) {
         this.address = address;
     }
 
@@ -63,31 +61,27 @@ public class Place {
         return description;
     }
 
-    public void setDescription(String description) {
+    private void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public Set<Report> getReports() {
-        return reports;
-    }
-
-    public void setReports(Set<Report> reports) {
-        this.reports = reports;
     }
 
     public Set<Rent> getRents() {
         return rents;
     }
 
-    public void setRents(Set<Rent> rents) {
-        this.rents = rents;
+    public int getTenantID() {
+        return tenantID;
+    }
+
+    private void setTenantID(int tenantID) {
+        this.tenantID = tenantID;
+    }
+
+    public int getLandlordID() {
+        return landlordID;
+    }
+
+    private void setLandlordID(int landlordID) {
+        this.landlordID = landlordID;
     }
 }

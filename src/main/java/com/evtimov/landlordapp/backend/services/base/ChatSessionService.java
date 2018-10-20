@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface ChatSessionService {
 
-    List<ChatSession> getAllByUserId(int userId);
+    List<ChatSession> getAllByTenantId(int tenantId);
+
+    List<ChatSession> getAllByLandlordId(int landlordId);
 
     ChatSession createChat(ChatSession chat);
 

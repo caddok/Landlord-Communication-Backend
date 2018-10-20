@@ -16,15 +16,11 @@ public class Message {
     @Column(name = "timestamp")
     private Date timestamp;
 
-    @Column(name = "senderId")
-    private int senderID;
+    @Column(name = "tenantId")
+    private int tenantID;
 
-    @Column(name = "receiverId")
-    private int receiverID;
-
-    @ManyToOne
-    @JoinColumn(name = "chatsessionId")
-    private ChatSession chatsession;
+    @Column(name = "landlordId")
+    private int landlordID;
 
     @Column(name = "text")
     private String text;
@@ -32,16 +28,8 @@ public class Message {
     @Column(name = "picture")
     private String picture;
 
-    @Column(name = "status")
-    private String status;
-
-    @ManyToOne
-    @JoinColumn(name = "senderId",insertable = false,updatable = false)
-    private User sender;
-
-    @ManyToOne
-    @JoinColumn(name = "receiverId", insertable = false, updatable = false)
-    private User receiver;
+    @Column(name = "isdelivered")
+    private boolean isDelivered;
 
 
     public Message() {
@@ -49,14 +37,14 @@ public class Message {
     }
 
     public Message(int messageID, Date timestamp, String text,
-                   String picture, String status, int senderID, int receiverID) {
-        setReceiverID(receiverID);
-        setSenderID(senderID);
+                   String picture, int tenantID, int landlordID, boolean isDelivered) {
+        setTenantID(tenantID);
+        setLandlordID(landlordID);
+        setIsDelivered(isDelivered);
         setMessageID(messageID);
         setTimestamp(timestamp);
         setText(text);
         setPicture(picture);
-        setStatus(status);
     }
 
     public int getMessageID() {
@@ -92,51 +80,27 @@ public class Message {
         this.picture = picture;
     }
 
-    public String getStatus() {
-        return status;
+    public int getTenantID() {
+        return tenantID;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    private void setTenantID(int tenantID) {
+        this.tenantID = tenantID;
     }
 
-    public ChatSession getChatsession() {
-        return chatsession;
+    public int getLandlordID() {
+        return landlordID;
     }
 
-    public void setChatsession(ChatSession chatsession) {
-        this.chatsession = chatsession;
+    private void setLandlordID(int landlordID) {
+        this.landlordID = landlordID;
     }
 
-    public User getSender() {
-        return sender;
+    public boolean getIsDelivered() {
+        return isDelivered;
     }
 
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-
-    public User getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
-    }
-
-    public int getSenderID() {
-        return senderID;
-    }
-
-    public void setSenderID(int senderID) {
-        this.senderID = senderID;
-    }
-
-    public int getReceiverID() {
-        return receiverID;
-    }
-
-    public void setReceiverID(int receiverID) {
-        this.receiverID = receiverID;
+    private void setIsDelivered(boolean isDelivered) {
+        this.isDelivered = isDelivered;
     }
 }

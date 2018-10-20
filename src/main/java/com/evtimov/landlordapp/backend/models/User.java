@@ -49,29 +49,13 @@ public class User {
     @Column(name = "votesum")
     private double voteSum;
 
-    @OneToMany
-    @JoinColumn(name = "userId")
-    private Set<Card> myCards;
 
-    @OneToMany
-    @JoinColumn(name = "userId")
-    private Set<Payment> myPayments;
-
-    @OneToMany
-    @JoinColumn(name = "senderId")
-    private Set<Message> sentMessages;
-
-    @OneToMany
-    @JoinColumn(name = "receiverId")
-    private Set<Message> receivedMessages;
-
-
-    public User(){
+    public User() {
         //default
     }
 
     public User(int userID, boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
-                boolean isOnline, String passwordHash, String passwordSalt, int votes, double voteSum){
+                boolean isOnline, String passwordHash, String passwordSalt, int votes, double voteSum) {
         setUserID(userID);
         setIsLandlord(isLandlord);
         setUsername(username);
@@ -90,7 +74,7 @@ public class User {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    private void setUserID(int userID) {
         this.userID = userID;
     }
 
@@ -98,7 +82,7 @@ public class User {
         return this.isLandlord;
     }
 
-    public void setIsLandlord(boolean isLandlord) {
+    private void setIsLandlord(boolean isLandlord) {
         this.isLandlord = isLandlord;
     }
 
@@ -106,7 +90,7 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
+    private void setUsername(String username) {
         this.username = username;
     }
 
@@ -162,7 +146,7 @@ public class User {
         return passwordHash;
     }
 
-    public void setPasswordHash(String passwordHash) {
+    private void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 
@@ -170,7 +154,7 @@ public class User {
         return passwordSalt;
     }
 
-    public void setPasswordSalt(String passwordSalt) {
+    private void setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
     }
 
@@ -188,37 +172,5 @@ public class User {
 
     public void setVoteSum(double voteSum) {
         this.voteSum = voteSum;
-    }
-
-    public Set<Card> getMyCards() {
-        return myCards;
-    }
-
-    public void setMyCards(Set<Card> myCards) {
-        this.myCards = myCards;
-    }
-
-    public Set<Payment> getMyPayments() {
-        return myPayments;
-    }
-
-    public void setMyPayments(Set<Payment> myPayments) {
-        this.myPayments = myPayments;
-    }
-
-    public Set<Message> getSentMessages() {
-        return sentMessages;
-    }
-
-    public void setSentMessages(Set<Message> sentMessages) {
-        this.sentMessages = sentMessages;
-    }
-
-    public Set<Message> getReceivedMessages() {
-        return receivedMessages;
-    }
-
-    public void setReceivedMessages(Set<Message> receivedMessages) {
-        this.receivedMessages = receivedMessages;
     }
 }

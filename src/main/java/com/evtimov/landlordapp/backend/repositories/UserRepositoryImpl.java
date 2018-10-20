@@ -8,14 +8,13 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    final
+    private final
     SessionFactory sessionFactory;
 
     @Autowired
@@ -45,7 +44,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAllTenants() {
-        List<User> users = new ArrayList<>();
+        List<User> users;
 
         users = getAll().stream().filter(u -> !u.getIsLandlord()).collect(Collectors.toList());
 
@@ -54,16 +53,16 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAllLandlords() {
-        List<User> users = new ArrayList<>();
+        List<User> users;
 
-        users = getAll().stream().filter(u -> u.getIsLandlord()).collect(Collectors.toList());
+        users = getAll().stream().filter(User::getIsLandlord).collect(Collectors.toList());
 
         return users;
     }
 
     @Override
     public User updateUserData(int userId, User model) {
-        User userToChange = null;
+        User userToChange;
         try(
                 Session session = sessionFactory.openSession();
         )
@@ -84,7 +83,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUserByUsername(String pattern) {
-        List<User> users = new ArrayList<>();
+        List<User> users;
         String statement = "from User where username = :pattern ";  // User is the pojo class, username is field in the class
 
         try(
@@ -104,7 +103,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findUserByRating(String pattern) {
-        List<User> users = new ArrayList<>();
+        List<User> users;
         String statement = "from User where rating = :pattern ";
 
         try(
@@ -123,7 +122,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     private List<User> getAll(){
-        List<User> users = new ArrayList<>();
+        List<User> users;
 
         try(
                 Session session = sessionFactory.openSession();

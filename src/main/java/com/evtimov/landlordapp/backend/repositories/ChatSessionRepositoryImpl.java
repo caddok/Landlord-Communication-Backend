@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import org.hibernate.query.Query;
 import java.util.List;
 
 @Repository
@@ -22,8 +23,47 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
 
 
     @Override
-    public List<ChatSession> getAllByUserId(int userId) {
-        return null;
+    public List<ChatSession> getAllByTenantId(int tenantId) {
+        List<ChatSession> chats;
+        String pattern = String.valueOf(tenantId);
+        String statement = "from ChatSession where tenantID = :pattern ";  // ChatSession is the pojo class, tenantID is field in the class
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("tenantID", pattern);
+            chats = query.list();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return chats;
+    }
+
+    @Override
+    public List<ChatSession> getAllByLandlordId(int landlordId) {
+        List<ChatSession> chats;
+        String pattern = String.valueOf(landlordId);
+        String statement = "from ChatSession where landlordID = :pattern ";  // ChatSession is the pojo class, landlordID is field in the class
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("landlordID", pattern);
+            chats = query.list();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return chats;
     }
 
     @Override
@@ -47,7 +87,7 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
     @Override
     public ChatSession deleteChat(int chatId) {
 
-        ChatSession chat = null;
+        ChatSession chat;
 
         try(
                 Session session = sessionFactory.openSession();

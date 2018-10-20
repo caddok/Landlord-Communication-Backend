@@ -3,7 +3,6 @@ package com.evtimov.landlordapp.backend.models;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
-import com.evtimov.landlordapp.backend.models.Message;
 
 
 @Entity
@@ -15,25 +14,27 @@ public class ChatSession {
     @Column(name = "chatsessionId")
     private int chatsessionID;
 
+    @Column(name = "tenantId")
+    private int tenantID;
+
+    @Column(name = "landlordId")
+    private int landlordID;
+
     @Column(name = "createdate")
     private Date createDate;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "chatsessionsusers",
-            joinColumns = @JoinColumn(name = "chatsessionId"),
-            inverseJoinColumns = @JoinColumn(name = "userId"))
-    private Set<User> users;
-
     @OneToMany
     @JoinColumn(name = "chatsessionId")
-    private Set<com.evtimov.landlordapp.backend.models.Message> messages;
+    private Set<Message> messages;
 
 
-    public ChatSession(){
+    public ChatSession() {
         //default
     }
 
-    public ChatSession(int chatsessionID, Date createDate){
+    public ChatSession(int chatsessionID, Date createDate, int tenantID, int landlordID) {
+        setTenantID(tenantID);
+        setLandlordID(landlordID);
         setChatsessionID(chatsessionID);
         setCreateDate(createDate);
     }
@@ -42,7 +43,7 @@ public class ChatSession {
         return chatsessionID;
     }
 
-    public void setChatsessionID(int chatsessionID) {
+    private void setChatsessionID(int chatsessionID) {
         this.chatsessionID = chatsessionID;
     }
 
@@ -50,23 +51,27 @@ public class ChatSession {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    private void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public Set<com.evtimov.landlordapp.backend.models.Message> getMessages() {
+    public Set<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
+    public int getTenantID() {
+        return tenantID;
+    }
+
+    private void setTenantID(int tenantID) {
+        this.tenantID = tenantID;
+    }
+
+    public int getLandlordID() {
+        return landlordID;
+    }
+
+    private void setLandlordID(int landlordID) {
+        this.landlordID = landlordID;
     }
 }

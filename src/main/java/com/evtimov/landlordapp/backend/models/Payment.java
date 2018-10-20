@@ -19,28 +19,8 @@ public class Payment {
     @Column(name = "cardId")
     private int cardID;
 
-    @Column(name = "placeId")
-    private int placeID;
-
     @Column(name = "rentId")
     private int rentID;
-
-    @ManyToOne
-    @JoinColumn(name = "userId",insertable = false,updatable = false)
-    private User user;
-
-
-    @ManyToOne
-    @JoinColumn(name = "cardId",insertable = false,updatable = false)
-    private Card card;
-
-    @ManyToOne
-    @JoinColumn(name = "placeId",insertable = false,updatable = false)
-    private Place place;
-
-    @ManyToOne
-    @JoinColumn(name = "rentId",insertable = false,updatable = false)
-    private Rent rent;
 
     @Column(name = "amount")
     private double amount;
@@ -48,13 +28,25 @@ public class Payment {
     @Column(name = "date")
     private Date date;
 
-    public Payment(){
+    @ManyToOne
+    @JoinColumn(name = "cardId", insertable = false, updatable = false)
+    private Card card;
+
+    @ManyToOne
+    @JoinColumn(name = "placeId", insertable = false, updatable = false)
+    private Place place;
+
+    @ManyToOne
+    @JoinColumn(name = "rentId", insertable = false, updatable = false)
+    private Rent rent;
+
+
+    public Payment() {
         //default
     }
 
-    public Payment(int paymentID, double amount, Date date, int userID, int cardID, int placeID, int rentID){
+    public Payment(int paymentID, double amount, Date date, int userID, int cardID, int rentID) {
         setRentID(rentID);
-        setPlaceID(placeID);
         setUserID(userID);
         setCardID(cardID);
         setPaymentID(paymentID);
@@ -66,7 +58,7 @@ public class Payment {
         return paymentID;
     }
 
-    public void setPaymentID(int paymentID) {
+    private void setPaymentID(int paymentID) {
         this.paymentID = paymentID;
     }
 
@@ -74,7 +66,7 @@ public class Payment {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    private void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -82,16 +74,8 @@ public class Payment {
         return date;
     }
 
-    public void setDate(Date date) {
+    private void setDate(Date date) {
         this.date = date;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Rent getRent() {
@@ -122,7 +106,7 @@ public class Payment {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    private void setUserID(int userID) {
         this.userID = userID;
     }
 
@@ -130,23 +114,15 @@ public class Payment {
         return cardID;
     }
 
-    public void setCardID(int cardID) {
+    private void setCardID(int cardID) {
         this.cardID = cardID;
-    }
-
-    public int getPlaceID() {
-        return placeID;
-    }
-
-    public void setPlaceID(int placeID) {
-        this.placeID = placeID;
     }
 
     public int getRentID() {
         return rentID;
     }
 
-    public void setRentID(int rentID) {
+    private void setRentID(int rentID) {
         this.rentID = rentID;
     }
 }

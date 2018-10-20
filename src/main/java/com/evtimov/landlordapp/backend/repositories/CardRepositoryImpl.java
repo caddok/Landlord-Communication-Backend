@@ -5,6 +5,7 @@ import com.evtimov.landlordapp.backend.models.Card;
 import com.evtimov.landlordapp.backend.repositories.base.CardRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -41,7 +42,7 @@ public class CardRepositoryImpl implements CardRepository {
     @Override
     public Card removeCard(int cardId) {
 
-        Card card = null;
+        Card card;
 
         try(
                 Session session = sessionFactory.openSession();
@@ -61,6 +62,24 @@ public class CardRepositoryImpl implements CardRepository {
 
     @Override
     public List<Card> getAllCardsByUserId(int userId) {
-        return null;
+
+        List<Card> cards;
+        String pattern = String.valueOf(userId);
+        String statement = "from Card where userID = :pattern ";  // Card is the pojo class, userID is field in the class
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("userID", pattern);
+            cards = query.list();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return cards;
     }
 }

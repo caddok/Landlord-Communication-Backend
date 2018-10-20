@@ -5,6 +5,7 @@ import com.evtimov.landlordapp.backend.models.Payment;
 import com.evtimov.landlordapp.backend.repositories.base.PaymentRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -40,6 +41,24 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
     @Override
     public List<Payment> getAllPaymentsByUserId(int userId){
-        return null;
+
+        List<Payment> payments;
+        String pattern = String.valueOf(userId);
+        String statement = "from Payment where userID = :pattern ";  // Payment is the pojo class, userID is field in the class
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("userID", pattern);
+            payments = query.list();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return payments;
     }
 }

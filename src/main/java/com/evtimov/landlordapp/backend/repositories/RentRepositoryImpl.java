@@ -39,7 +39,7 @@ public class RentRepositoryImpl implements RentRepository {
     @Override
     public Rent updateRent(int rentId, Rent model) {
 
-        Rent rentToChange = null;
+        Rent rentToChange;
         try(
                 Session session = sessionFactory.openSession();
         )

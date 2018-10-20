@@ -21,13 +21,23 @@ public class ChatSessionServiceImpl implements ChatSessionService {
     }
 
     @Override
-    public List<ChatSession> getAllByUserId(int userId) {
-        return repository.getAllByUserId(userId);
+    public List<ChatSession> getAllByTenantId(int tenantId) {
+        return repository.getAllByTenantId(tenantId);
     }
 
     @Override
-    public ChatSession createSession(ChatSession chat){
+    public List<ChatSession> getAllByLandlordId(int landlordId) {
+        return repository.getAllByLandlordId(landlordId);
+    }
+
+    @Override
+    public ChatSession createChat(ChatSession chat){
         repository.createSession(chat);
         return chat;
+    }
+
+    @Override
+    public void deleteChat(int chatId) {
+        repository.deleteChat(chatId);
     }
 }

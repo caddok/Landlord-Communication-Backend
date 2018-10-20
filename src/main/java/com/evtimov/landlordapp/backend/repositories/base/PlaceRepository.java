@@ -8,7 +8,6 @@ public interface PlaceRepository {
 
     Place addPlace(Place place);
 
-
     List<Place> getAllByTenantId(int tenantId);
 
     List<Place> getAllByLandlordId(int landlordId);
