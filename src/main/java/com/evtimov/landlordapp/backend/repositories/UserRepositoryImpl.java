@@ -25,14 +25,13 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User registerUser(User entity) {
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        )
-        {
+        ) {
             session.beginTransaction();
             session.save(entity);
             session.getTransaction().commit();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }
@@ -61,19 +60,20 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User updateUserData(int userId, User model) {
+    public User updateUserRating(int userId, User model) {
         User userToChange;
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        )
-        {
+        ) {
             session.beginTransaction();
             userToChange = session.get(User.class, userId);
 
-            //update user
+            userToChange.setVotes(model.getVotes());
+            userToChange.setVoteSum(model.getVoteSum());
+            userToChange.setRating(userToChange.getVoteSum() / userToChange.getVotes());
 
             session.getTransaction().commit();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }
@@ -82,19 +82,39 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User updateUserOnlineStatus(int userId, User model) {
+
+        User userToChange;
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            userToChange = session.get(User.class, userId);
+
+            userToChange.setIsOnline(model.getIsOnline());
+
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new RuntimeException();
+        }
+        return userToChange;
+    }
+
+    @Override
     public User getUserByUsername(String pattern) {
         List<User> users;
-        String statement = "from User where username = :pattern ";  // User is the pojo class, username is field in the class
+        String statement = "from User where username = :pattern ";
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        ){
+        ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("username", pattern);
+            query.setParameter("pattern", pattern);
             users = query.list();
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
@@ -102,36 +122,35 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findUserByRating(String pattern) {
+    public List<User> findUserByRating(double pattern) {
         List<User> users;
         String statement = "from User where rating = :pattern ";
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        ){
+        ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("rating", pattern);
+            query.setParameter("pattern", pattern);
             users = query.list();
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
         return users;
     }
 
-    private List<User> getAll(){
+    private List<User> getAll() {
         List<User> users;
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        )
-        {
+        ) {
             session.beginTransaction();
             users = session.createQuery("from User").list();
             session.getTransaction().commit();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }

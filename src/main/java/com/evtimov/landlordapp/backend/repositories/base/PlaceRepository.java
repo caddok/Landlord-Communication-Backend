@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PlaceRepository {
 
-    Place addPlace(Place place);
+    Place addLandlordPlace(Place place);
 
     List<Place> getAllByTenantId(int tenantId);
 

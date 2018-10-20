@@ -12,9 +12,11 @@ public interface UserRepository {
 
     List<User> findAllLandlords();
 
-    User updateUserData(int userId, User model);
+    User updateUserRating(int userId, User model);
+
+    User updateUserOnlineStatus(int userId, User model);
 
     User getUserByUsername(String pattern);
 
-    List<User> findUserByRating(String pattern);
+    List<User> findUserByRating(double pattern);
 }

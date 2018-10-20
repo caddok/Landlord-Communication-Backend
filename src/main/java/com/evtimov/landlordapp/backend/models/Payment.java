@@ -45,11 +45,10 @@ public class Payment {
         //default
     }
 
-    public Payment(int paymentID, double amount, Date date, int userID, int cardID, int rentID) {
+    public Payment(double amount, Date date, int userID, int cardID, int rentID) {
         setRentID(rentID);
         setUserID(userID);
         setCardID(cardID);
-        setPaymentID(paymentID);
         setAmount(amount);
         setDate(date);
     }

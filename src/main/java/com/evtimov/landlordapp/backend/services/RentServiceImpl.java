@@ -25,9 +25,12 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public Rent updateRent(int rentId, Rent model) {
-        repository.updateRent(rentId, model);
+    public void updateRentRemaining(int rentId, double remain) {
+        repository.updateRentRemaining(rentId, remain);
+    }
 
-        return model;
+    @Override
+    public void updateRentIsPaidStatus(int rentId, boolean isPaid) {
+        repository.updateRentIsPaidStatus(rentId, isPaid);
     }
 }

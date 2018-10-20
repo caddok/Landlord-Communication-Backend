@@ -6,5 +6,7 @@ public interface RentRepository {
 
     Rent addRent(Rent rent);
 
-    Rent updateRent(int rentId, Rent rent);
+    Rent updateRentRemaining(int rentId, double remain);
+
+    Rent updateRentIsPaidStatus(int rentId, boolean isPaid);
 }

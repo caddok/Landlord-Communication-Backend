@@ -4,9 +4,10 @@ import com.evtimov.landlordapp.backend.models.Rent;
 
 public interface RentService {
 
-    Rent addRent(Rent entity);
+    Rent addRent(Rent rent);
 
-    Rent updateRent(int rentId, Rent model);
+    void updateRentRemaining(int rentId, double remain);
 
+    void updateRentIsPaidStatus(int rentId, boolean isPaid);
 
 }

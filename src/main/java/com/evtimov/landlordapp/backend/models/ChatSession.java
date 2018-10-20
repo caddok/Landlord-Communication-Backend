@@ -32,10 +32,9 @@ public class ChatSession {
         //default
     }
 
-    public ChatSession(int chatsessionID, Date createDate, int tenantID, int landlordID) {
+    public ChatSession(Date createDate, int tenantID, int landlordID) {
         setTenantID(tenantID);
         setLandlordID(landlordID);
-        setChatsessionID(chatsessionID);
         setCreateDate(createDate);
     }
 

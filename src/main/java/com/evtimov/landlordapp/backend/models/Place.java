@@ -24,7 +24,7 @@ public class Place {
     @Column(name = "description")
     private String description;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "placeId", insertable = false, updatable = false)
     private Set<Rent> rents;
 

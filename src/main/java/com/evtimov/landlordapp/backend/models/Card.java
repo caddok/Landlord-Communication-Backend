@@ -40,13 +40,12 @@ public class Card {
         //default
     }
 
-    public Card(int cardID, String brand, String type, String cardNumber, int cvvNumber, double balance, int userID) {
+    public Card(String brand, String type, String cardNumber, int cvvNumber, double balance, int userID) {
         setUserID(userID);
         setBrand(brand);
         setType(type);
         setCardNumber(cardNumber);
         setCvvNumber(cvvNumber);
-        setCardID(cardID);
         setBalance(balance);
     }
 

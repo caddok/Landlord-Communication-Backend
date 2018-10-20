@@ -1,10 +1,12 @@
 package com.evtimov.landlordapp.backend.controllers;
 
 
+import com.evtimov.landlordapp.backend.models.Message;
 import com.evtimov.landlordapp.backend.services.base.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/messages")
@@ -15,5 +17,31 @@ public class MessageController {
     @Autowired
     public MessageController(MessageService service) {
         this.service = service;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Message createMessage(@RequestBody Message message){
+        service.createMessage(message);
+        return message;
+    }
+
+    @RequestMapping(value = "/{tenantIdDelivered}", method = RequestMethod.GET)
+    public List<Message> getAllDeliveredMessagesByTenantId(@PathVariable(value = "tenantIdDelivered") int tenantId){
+        return service.getAllDeliveredMessagesByTenantId(tenantId);
+    }
+
+    @RequestMapping(value = "/{tenantIdUndelivered}", method = RequestMethod.GET)
+    public List<Message> getAllUndeliveredMessagesByTenantId(@PathVariable(value = "tenantIdUndelivered") int tenantId){
+        return service.getAllUndeliveredMessagesByTenantId(tenantId);
+    }
+
+    @RequestMapping(value = "/{landlordIdDelivered}", method = RequestMethod.GET)
+    public List<Message> getAllDeliveredMessagesByLandlordId(@PathVariable(value = "landlordIdDelivered") int landlordId){
+        return service.getAllDeliveredMessagesByLandlordId(landlordId);
+    }
+
+    @RequestMapping(value = "/{landlordIdUndelivered}", method = RequestMethod.GET)
+    public List<Message> getAllUndeliveredMessagesByLandlordId(@PathVariable(value = "landlordIdUndelivered") int landlordId){
+        return service.getAllUndeliveredMessagesByLandlordId(landlordId);
     }
 }

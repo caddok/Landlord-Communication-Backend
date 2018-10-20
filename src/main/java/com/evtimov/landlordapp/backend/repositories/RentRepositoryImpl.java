@@ -21,14 +21,13 @@ public class RentRepositoryImpl implements RentRepository {
 
     @Override
     public Rent addRent(Rent rent) {
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        )
-        {
+        ) {
             session.beginTransaction();
             session.save(rent);
             session.getTransaction().commit();
-        }catch(Exception ex){
+        } catch (Exception ex) {
 
             System.out.println(ex.getMessage());
             throw new RuntimeException();
@@ -37,20 +36,40 @@ public class RentRepositoryImpl implements RentRepository {
     }
 
     @Override
-    public Rent updateRent(int rentId, Rent model) {
+    public Rent updateRentRemaining(int rentId, double remain) {
 
         Rent rentToChange;
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        )
-        {
+        ) {
             session.beginTransaction();
             rentToChange = session.get(Rent.class, rentId);
 
-            //update rent
+            rentToChange.setRemaining(remain);
 
             session.getTransaction().commit();
-        }catch(Exception ex){
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new RuntimeException();
+        }
+
+        return rentToChange;
+    }
+
+    @Override
+    public Rent updateRentIsPaidStatus(int rentId, boolean isPaid) {
+
+        Rent rentToChange;
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            rentToChange = session.get(Rent.class, rentId);
+
+            rentToChange.setIsPaid(isPaid);
+
+            session.getTransaction().commit();
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }

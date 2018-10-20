@@ -1,11 +1,14 @@
 package com.evtimov.landlordapp.backend.services;
 
+import com.evtimov.landlordapp.backend.DTOmodels.PlaceDTO;
 import com.evtimov.landlordapp.backend.models.Place;
+import com.evtimov.landlordapp.backend.models.Rent;
 import com.evtimov.landlordapp.backend.repositories.base.PlaceRepository;
 import com.evtimov.landlordapp.backend.services.base.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,19 +23,59 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public Place addPlace(Place place) {
-        repository.addPlace(place);
+    public Place addLandlordPlace(Place place) {
+        repository.addLandlordPlace(place);
         return place;
     }
 
 
     @Override
-    public List<Place> getAllByTenantId(int tenantId) {
-        return repository.getAllByTenantId(tenantId);
+    public List<PlaceDTO> getAllByTenantId(int tenantId) {
+        List<Place> places = repository.getAllByTenantId(tenantId);
+        List<PlaceDTO> placesDTO = new ArrayList<>();
+
+        for (Place place:places) {
+            PlaceDTO placeDTO = new PlaceDTO();
+            placeDTO.setPlaceID(place.getPlaceID());
+            placeDTO.setAddress(place.getAddress());
+            placeDTO.setDescription(place.getDescription());
+            placeDTO.setLandlordID(place.getLandlordID());
+            placeDTO.setTenantID(place.getTenantID());
+            if(place.getRents() != null){
+                for (Rent rent:place.getRents()) {
+                    placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
+                            + rent.getRemaining() + "\n" + "Due date: "
+                            + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");
+                }
+            }
+            placesDTO.add(placeDTO);
+        }
+
+        return placesDTO;
     }
 
     @Override
-    public List<Place> getAllByLandlordId(int landlordId) {
-        return repository.getAllByLandlordId(landlordId);
+    public List<PlaceDTO> getAllByLandlordId(int landlordId) {
+        List<Place> places = repository.getAllByLandlordId(landlordId);
+        List<PlaceDTO> placesDTO = new ArrayList<>();
+
+        for (Place place:places) {
+            PlaceDTO placeDTO = new PlaceDTO();
+            placeDTO.setPlaceID(place.getPlaceID());
+            placeDTO.setAddress(place.getAddress());
+            placeDTO.setDescription(place.getDescription());
+            placeDTO.setLandlordID(place.getLandlordID());
+            placeDTO.setTenantID(place.getTenantID());
+            if(place.getRents() != null){
+                for (Rent rent:place.getRents()) {
+                    placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
+                            + rent.getRemaining() + "\n" + "Due date: "
+                            + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");
+                }
+            }
+            placesDTO.add(placeDTO);
+        }
+
+        return placesDTO;
     }
 }

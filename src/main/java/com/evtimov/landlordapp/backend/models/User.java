@@ -54,9 +54,8 @@ public class User {
         //default
     }
 
-    public User(int userID, boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
+    public User(boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
                 boolean isOnline, String passwordHash, String passwordSalt, int votes, double voteSum) {
-        setUserID(userID);
         setIsLandlord(isLandlord);
         setUsername(username);
         setPicture(picture);
@@ -72,10 +71,6 @@ public class User {
 
     public int getUserID() {
         return userID;
-    }
-
-    private void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public boolean getIsLandlord() {

@@ -1,6 +1,7 @@
 package com.evtimov.landlordapp.backend.controllers;
 
 
+import com.evtimov.landlordapp.backend.DTOmodels.PlaceDTO;
 import com.evtimov.landlordapp.backend.models.Place;
 import com.evtimov.landlordapp.backend.services.base.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +21,18 @@ public class PlaceController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Place addPlace(@RequestBody Place place){
-        service.addPlace(place);
+    public Place addLandlordPlace(@RequestBody Place place){
+        service.addLandlordPlace(place);
         return place;
     }
 
-    @RequestMapping(value = "/{tenantId}", method = RequestMethod.GET)
-    public List<Place> getAllByTenantId(@PathVariable(value = "tenantId") int tenantId){
+    @RequestMapping(value = "/tenant/{tenantId}", method = RequestMethod.GET)
+    public List<PlaceDTO> getAllByTenantId(@PathVariable(value = "tenantId") int tenantId){
         return service.getAllByTenantId(tenantId);
     }
 
-    @RequestMapping(value = "/{landlordId}", method = RequestMethod.GET)
-    public List<Place> getAllByLandlordId(@PathVariable(value = "landlordId") int landlordId){
+    @RequestMapping(value = "/landlord/{landlordId}", method = RequestMethod.GET)
+    public List<PlaceDTO> getAllByLandlordId(@PathVariable(value = "landlordId") int landlordId){
         return service.getAllByLandlordId(landlordId);
     }
 }

@@ -23,7 +23,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     }
 
     @Override
-    public Place addPlace(Place place) {
+    public Place addLandlordPlace(Place place) {
         try(
                 Session session = sessionFactory.openSession();
         )
@@ -44,15 +44,14 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     public List<Place> getAllByTenantId(int tenantId) {
 
         List<Place> places;
-        String pattern = String.valueOf(tenantId);
-        String statement = "from Place where tenantID = :pattern ";  // Place is the pojo class, tenantID is field in the class
+        String statement = "from Place where tenantID = :pattern ";
 
         try(
                 Session session = sessionFactory.openSession();
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("tenantID", pattern);
+            query.setParameter("pattern", tenantId);
             places = query.list();
             session.getTransaction().commit();
         }catch (Exception e){
@@ -67,15 +66,14 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     public List<Place> getAllByLandlordId(int landlordId) {
 
         List<Place> places;
-        String pattern = String.valueOf(landlordId);
-        String statement = "from Place where landlordID = :pattern ";  // Place is the pojo class, landlordID is field in the class
+        String statement = "from Place where landlordID = :pattern ";
 
         try(
                 Session session = sessionFactory.openSession();
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("landlordID", pattern);
+            query.setParameter("pattern", landlordId);
             places = query.list();
             session.getTransaction().commit();
         }catch (Exception e){

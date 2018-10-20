@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class UserController {                    //CHECKED
 
     private final UserService service;
 
@@ -27,12 +27,12 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/tenants", method = RequestMethod.GET)
     public List<User> getAllTenants(){
         return service.findAllTenants();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "landlords", method = RequestMethod.GET)
     public List<User> getAllLandlords(){
         return service.findAllLandlords();
     }
@@ -42,16 +42,24 @@ public class UserController {
         return service.findUserByUsername(username);
     }
 
-    @RequestMapping(value = "/{rating}", method = RequestMethod.GET)
-    public List<User> getUsersByRating(@PathVariable(value = "rating") String rating){
+    @RequestMapping(value = "/rating/{rating}", method = RequestMethod.GET)
+    public List<User> getUsersByRating(@PathVariable(value = "rating") double rating){
         return service.findUserByRating(rating);
     }
 
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-    public User updateUserData(@PathVariable(value = "userId") int userId, @RequestBody User user){
+    @RequestMapping(value = "/updaterating/{userId}", method = RequestMethod.PUT)
+    public User updateUserRating(@PathVariable(value = "userId") int userId, @RequestBody User user){
 
-        service.updateUserData(userId, user);
+        service.updateUserRating(userId, user);
+
+        return user;
+    }
+
+    @RequestMapping(value = "/updatestatus/{userId}", method = RequestMethod.PUT)
+    public User updateUserOnlineStatus(@PathVariable(value = "userId") int userId, @RequestBody User user){
+
+        service.updateUserOnlineStatus(userId, user);
 
         return user;
     }

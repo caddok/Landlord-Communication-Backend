@@ -33,7 +33,7 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("tenantID", pattern);
+            query.setParameter("pattern", pattern);
             chats = query.list();
             session.getTransaction().commit();
         }catch (Exception e){
@@ -55,7 +55,7 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("landlordID", pattern);
+            query.setParameter("pattern", pattern);
             chats = query.list();
             session.getTransaction().commit();
         }catch (Exception e){

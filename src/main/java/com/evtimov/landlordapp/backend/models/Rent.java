@@ -38,9 +38,8 @@ public class Rent {
         //default
     }
 
-    public Rent(int rentID, double totalAmount, double remaining, boolean isPaid, Date dueDate, int placeID) {
+    public Rent(double totalAmount, double remaining, boolean isPaid, Date dueDate, int placeID) {
         setPlaceID(placeID);
-        setRentID(rentID);
         setTotalAmount(totalAmount);
         setRemaining(remaining);
         setIsPaid(isPaid);

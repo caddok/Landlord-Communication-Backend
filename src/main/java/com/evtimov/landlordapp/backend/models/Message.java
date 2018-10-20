@@ -36,12 +36,11 @@ public class Message {
         //default
     }
 
-    public Message(int messageID, Date timestamp, String text,
+    public Message(Date timestamp, String text,
                    String picture, int tenantID, int landlordID, boolean isDelivered) {
         setTenantID(tenantID);
         setLandlordID(landlordID);
         setIsDelivered(isDelivered);
-        setMessageID(messageID);
         setTimestamp(timestamp);
         setText(text);
         setPicture(picture);

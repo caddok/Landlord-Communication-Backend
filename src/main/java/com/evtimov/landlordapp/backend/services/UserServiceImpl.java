@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User registerUser(User entity) {
+        entity.setRating(entity.getVoteSum()/entity.getVotes());
         repository.registerUser(entity);
         return entity;
     }
@@ -42,13 +43,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUserByRating(String pattern){
+    public List<User> findUserByRating(double pattern){
         return repository.findUserByRating(pattern);
     }
 
     @Override
-    public User updateUserData(int userId, User model){
-        repository.updateUserData(userId, model);
+    public User updateUserRating(int userId, User model){
+        repository.updateUserRating(userId, model);
+        return model;
+    }
+
+    @Override
+    public User updateUserOnlineStatus(int userId, User model){
+        repository.updateUserOnlineStatus(userId, model);
         return model;
     }
 }

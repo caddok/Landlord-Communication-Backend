@@ -22,10 +22,13 @@ public class RentController {
         service.addRent(rent);
     }
 
-    @RequestMapping(value = "/{rentId}", method = RequestMethod.PUT)
-    public Rent updateRent(@PathVariable(value = "rentId") int rentId, @RequestBody Rent rent){
-        service.updateRent(rentId, rent);
+    @RequestMapping(value = "/{rentIdRemaining}", method = RequestMethod.PUT)
+    public void updateRentRemaining(@PathVariable(value = "rentIdRemaining") int rentId, double remaining){
+        service.updateRentRemaining(rentId, remaining);
+    }
 
-        return rent;
+    @RequestMapping(value = "/{rentIdStatus}", method = RequestMethod.PUT)
+    public void updateRentStatus(@PathVariable(value = "rentIdStatus") int rentId, boolean status){
+        service.updateRentIsPaidStatus(rentId, status);
     }
 }

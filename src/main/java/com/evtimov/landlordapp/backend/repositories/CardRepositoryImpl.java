@@ -72,7 +72,7 @@ public class CardRepositoryImpl implements CardRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("userID", pattern);
+            query.setParameter("pattern", pattern);
             cards = query.list();
             session.getTransaction().commit();
         }catch (Exception e){
