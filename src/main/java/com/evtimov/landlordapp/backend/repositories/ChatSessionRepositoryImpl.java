@@ -21,7 +21,6 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
     }
 
 
-    // we don't need it, cause we will user user.getAllChatSessions()
     @Override
     public List<ChatSession> getAllByUserId(int userId) {
         return null;
@@ -46,7 +45,7 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
     }
 
     @Override
-    public ChatSession deleteUselessSession(int chatId) {
+    public ChatSession deleteChat(int chatId) {
 
         ChatSession chat = null;
 

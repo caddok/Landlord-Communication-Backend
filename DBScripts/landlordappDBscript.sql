@@ -1,3 +1,5 @@
+CREATE SCHEMA `landlordcommunicationdb` ;
+
 CREATE TABLE `landlordcommunicationdb`.`users` (
   `userId` INT NOT NULL AUTO_INCREMENT,
   `picture` BLOB NULL,
@@ -7,7 +9,7 @@ CREATE TABLE `landlordcommunicationdb`.`users` (
   `lastname` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `isonline` TINYINT NOT NULL DEFAULT 0,
-  `raiting` DECIMAL(2,1) NOT NULL DEFAULT 1.0,
+  `rating` DECIMAL(2,1) NOT NULL DEFAULT 1.0,
   `passwordhash` TINYTEXT NOT NULL,
   `passwordsalt` TINYTEXT NOT NULL,
   `votes` INT NOT NULL DEFAULT 0,
@@ -21,6 +23,8 @@ COLLATE = utf8_unicode_ci;
 
 CREATE TABLE `landlordcommunicationdb`.`places` (
   `placeId` INT NOT NULL AUTO_INCREMENT,
+  `landlordId` INT NOT NULL,
+  `tenantId` INT NOT NULL,
   `address` VARCHAR(55) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`placeId`))
@@ -43,35 +47,11 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
 
-CREATE TABLE `landlordcommunicationdb`.`usersplaces` (
-  `userId` INT NOT NULL,
-  `placeId` INT NOT NULL,
-  PRIMARY KEY (`userId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
-
-CREATE TABLE `landlordcommunicationdb`.`reports` (
-  `reportId` INT NOT NULL AUTO_INCREMENT,
-  `placeId` INT NOT NULL,
-  `issue` VARCHAR(35) NOT NULL,
-  `picture` BLOB NULL,
-  `date` DATE NOT NULL,
-  `description` TINYTEXT NOT NULL,
-  `isresolved` TINYINT NOT NULL DEFAULT 0,
-  `userId` INT NOT NULL,
-  PRIMARY KEY (`reportId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
 
 CREATE TABLE `landlordcommunicationdb`.`payments` (
   `paymentId` INT NOT NULL AUTO_INCREMENT,
   `userId` INT NOT NULL,
   `cardId` INT NOT NULL,
-  `placeId` INT NOT NULL,
   `rentId` INT NOT NULL,
   `amount` DECIMAL(7,2) NOT NULL,
   `date` DATE NOT NULL,
@@ -96,6 +76,8 @@ COLLATE = utf8_unicode_ci;
 
 CREATE TABLE `landlordcommunicationdb`.`chatsessions` (
   `chatsessionId` INT NOT NULL AUTO_INCREMENT,
+  `landlordId` INT NOT NULL,
+  `tenantId` INT NOT NULL,
   `createdate` DATE NOT NULL,
   PRIMARY KEY (`chatsessionId`))
 ENGINE = InnoDB
@@ -105,22 +87,14 @@ COLLATE = utf8_unicode_ci;
 
 CREATE TABLE `landlordcommunicationdb`.`messages` (
   `messageId` INT NOT NULL AUTO_INCREMENT,
-  `senderId` INT NOT NULL,
-  `recieverId` INT NOT NULL,
+  `tenantId` INT NOT NULL,
+  `landlordId` INT NOT NULL,
   `timestamp` DATE NOT NULL,
   `text` MEDIUMTEXT NOT NULL,
   `chatsessionId` INT NOT NULL,
   `picture` BLOB NULL,
-  `status` VARCHAR(45) NOT NULL,
+  `isdelivered` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`messageId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
-CREATE TABLE `landlordcommunicationdb`.`chatsessionsusers` (
-  `chatsessionId` INT NOT NULL,
-  `userId` INT NOT NULL,
-  PRIMARY KEY (`chatsessionId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
@@ -131,46 +105,7 @@ ADD CONSTRAINT `FK_Card_User`
   FOREIGN KEY (`userId`)
   REFERENCES `landlordcommunicationdb`.`users` (`userId`)
   ON DELETE CASCADE
-  ON UPDATE CASCADE;
-  
-ALTER TABLE `landlordcommunicationdb`.`chatsessionsusers` 
-DROP PRIMARY KEY,
-ADD PRIMARY KEY (`chatsessionId`, `userId`);
-;
-ALTER TABLE `landlordcommunicationdb`.`chatsessionsusers` 
-ADD CONSTRAINT `FK_Chatsession_User`
-  FOREIGN KEY (`userId`)
-  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-ADD CONSTRAINT `FK_User_Chatsession`
-  FOREIGN KEY (`chatsessionId`)
-  REFERENCES `landlordcommunicationdb`.`chatsessions` (`chatsessionId`)
-  ON DELETE CASCADE
   ON UPDATE CASCADE;  
-  
-
-ALTER TABLE `landlordcommunicationdb`.`messages` 
-ADD INDEX `FK_Message_User_idx` (`senderId` ASC) ,
-ADD INDEX `FK_Message_User_idx1` (`recieverId` ASC) ,
-ADD INDEX `FK_Message_Chatsession_idx` (`chatsessionId` ASC) ;
-;
-ALTER TABLE `landlordcommunicationdb`.`messages` 
-ADD CONSTRAINT `FK_Sender_User`
-  FOREIGN KEY (`senderId`)
-  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-ADD CONSTRAINT `FK_Reciever_User`
-  FOREIGN KEY (`recieverId`)
-  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,  
-ADD CONSTRAINT `FK_Message_Chatsession`
-  FOREIGN KEY (`chatsessionId`)
-  REFERENCES `landlordcommunicationdb`.`chatsessions` (`chatsessionId`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE;
   
 
 
@@ -189,11 +124,6 @@ ADD CONSTRAINT `FK_Payment_User`
 ADD CONSTRAINT `FK_Payment_Card`
   FOREIGN KEY (`cardId`)
   REFERENCES `landlordcommunicationdb`.`cards` (`cardId`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-ADD CONSTRAINT `FK_Payment_Place`
-  FOREIGN KEY (`placeId`)
-  REFERENCES `landlordcommunicationdb`.`places` (`placeId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 ADD CONSTRAINT `FK_Payment_Rent`
@@ -215,37 +145,51 @@ ADD CONSTRAINT `FK_Rent_Place`
   ON UPDATE CASCADE;
   
   
-ALTER TABLE `landlordcommunicationdb`.`reports` 
-ADD INDEX `FK_Report_Place_idx` (`placeId` ASC) ,
-ADD INDEX `FK_Report_User_idx` (`userId` ASC) ;
-;
-ALTER TABLE `landlordcommunicationdb`.`reports` 
-ADD CONSTRAINT `FK_Report_Place`
-  FOREIGN KEY (`placeId`)
-  REFERENCES `landlordcommunicationdb`.`places` (`placeId`)
+ALTER TABLE `landlordcommunicationdb`.`messages` 
+DROP FOREIGN KEY `FK_Messages_Users`;
+ALTER TABLE `landlordcommunicationdb`.`messages` 
+ADD CONSTRAINT `FK_MessagesTenant_Users`
+  FOREIGN KEY (`tenantId`)
+  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
-ADD CONSTRAINT `FK_Report_User`
-  FOREIGN KEY (`userId`)
+ADD CONSTRAINT `FK_MessagesLandlord_User`
+  FOREIGN KEY (`landlordId`)
   REFERENCES `landlordcommunicationdb`.`users` (`userId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
   
-  
-  
-ALTER TABLE `landlordcommunicationdb`.`usersplaces` 
-DROP PRIMARY KEY,
-ADD PRIMARY KEY (`userId`, `placeId`),
-ADD INDEX `FK_User_Place_idx` (`placeId` ASC) ;
+ALTER TABLE `landlordcommunicationdb`.`chatsessions` 
+ADD INDEX `FK_ChatTenant_Users_idx` (`tenantId` ASC) ,
+ADD INDEX `FK_ChatLandlord_User_idx` (`landlordId` ASC) ;
 ;
-ALTER TABLE `landlordcommunicationdb`.`usersplaces` 
-ADD CONSTRAINT `FK_User_Place`
-  FOREIGN KEY (`placeId`)
-  REFERENCES `landlordcommunicationdb`.`places` (`placeId`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-ADD CONSTRAINT `FK_Place_User`
-  FOREIGN KEY (`userId`)
+ALTER TABLE `landlordcommunicationdb`.`chatsessions` 
+ADD CONSTRAINT `FK_ChatTenant_User`
+  FOREIGN KEY (`tenantId`)
   REFERENCES `landlordcommunicationdb`.`users` (`userId`)
   ON DELETE CASCADE
-  ON UPDATE CASCADE;  
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `FK_ChatLandlord_User`
+  FOREIGN KEY (`landlordId`)
+  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+  
+ALTER TABLE `landlordcommunicationdb`.`places` 
+ADD INDEX `FK_PlaceTenant_User_idx` (`tenantId` ASC) ,
+ADD INDEX `FK_PlaceLandlord_User_idx` (`landlordId` ASC) ;
+;
+ALTER TABLE `landlordcommunicationdb`.`places` 
+ADD CONSTRAINT `FK_PlaceTenant_User`
+  FOREIGN KEY (`tenantId`)
+  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `FK_PlaceLandlord_User`
+  FOREIGN KEY (`landlordId`)
+  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+  
+
+  

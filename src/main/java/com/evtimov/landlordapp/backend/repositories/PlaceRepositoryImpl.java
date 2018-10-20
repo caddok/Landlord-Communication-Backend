@@ -41,10 +41,17 @@ public class PlaceRepositoryImpl implements PlaceRepository {
 
 
     @Override
-    public List<Place> getAllByUserId(int userId) {
+    public List<Place> getAllByTenantId(int tenantId) {
 
         List<Place> places = new ArrayList<>();
 
+        return null;
+    }
+
+    @Override
+    public List<Place> getAllByLandlordId(int landlordId) {
+
+        List<Place> places = new ArrayList<>();
 
         return null;
     }

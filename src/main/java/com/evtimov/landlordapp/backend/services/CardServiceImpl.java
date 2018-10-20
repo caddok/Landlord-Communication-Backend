@@ -29,8 +29,8 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<Card> getAllCardsByUser(int userId) {
-        return repository.getAllCardsByUser(userId);
+    public List<Card> getAllCardsByUserId(int userId) {
+        return repository.getAllCardsByUserId(userId);
     }
 }
 

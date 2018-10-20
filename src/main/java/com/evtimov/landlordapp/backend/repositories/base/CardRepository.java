@@ -10,5 +10,5 @@ public interface CardRepository {
 
     Card removeCard(int cardId);
 
-    List<Card> getAllCardsByUser(int userId);
+    List<Card> getAllCardsByUserId(int userId);
 }

@@ -10,5 +10,5 @@ public interface ChatSessionRepository {
 
     ChatSession createSession(ChatSession chat);
 
-    ChatSession deleteUselessSession(int chatId);
+    ChatSession deleteChat(int chatId);
 }

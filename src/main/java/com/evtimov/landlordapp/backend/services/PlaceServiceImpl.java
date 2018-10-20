@@ -27,7 +27,12 @@ public class PlaceServiceImpl implements PlaceService {
 
 
     @Override
-    public List<Place> getAllByUserId(int userId) {
-        return repository.getAllByUserId(userId);
+    public List<Place> getAllByTenantId(int tenantId) {
+        return repository.getAllByTenantId(tenantId);
+    }
+
+    @Override
+    public List<Place> getAllByLandlordId(int landlordId) {
+        return repository.getAllByLandlordId(landlordId);
     }
 }

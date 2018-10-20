@@ -8,6 +8,8 @@ public interface ChatSessionService {
 
     List<ChatSession> getAllByUserId(int userId);
 
-    ChatSession createSession(ChatSession chat);
+    ChatSession createChat(ChatSession chat);
+
+    void deleteChat(int chatId);
 
 }

@@ -59,9 +59,8 @@ public class CardRepositoryImpl implements CardRepository {
     }
 
 
-    //we don't need it, we will use user.getAllCards()
     @Override
-    public List<Card> getAllCardsByUser(int userId) {
+    public List<Card> getAllCardsByUserId(int userId) {
         return null;
     }
 }
