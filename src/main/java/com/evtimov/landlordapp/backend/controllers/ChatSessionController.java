@@ -19,9 +19,14 @@ public class ChatSessionController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public List<ChatSession> getAllByUserId(@PathVariable(value = "userId") int userId){
-        return service.getAllByUserId(userId);
+    @RequestMapping(value = "/{tenantId}", method = RequestMethod.GET)
+    public List<ChatSession> getAllByTenantId(@PathVariable(value = "tenantId") int tenantId){
+        return service.getAllByTenantId(tenantId);
+    }
+
+    @RequestMapping(value = "/{landlordId}", method = RequestMethod.GET)
+    public List<ChatSession> getAllByLandlordId(@PathVariable(value = "landlordId") int landlordId){
+        return service.getAllByLandlordId(landlordId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
