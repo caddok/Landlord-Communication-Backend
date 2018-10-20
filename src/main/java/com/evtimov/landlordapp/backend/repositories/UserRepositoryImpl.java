@@ -1,6 +1,7 @@
 package com.evtimov.landlordapp.backend.repositories;
 
 import com.evtimov.landlordapp.backend.models.User;
+import com.evtimov.landlordapp.backend.repositories.base.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -9,23 +10,25 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
-public class UserRepository {
+public class UserRepositoryImpl implements UserRepository {
 
     final
     SessionFactory sessionFactory;
 
     @Autowired
-    public UserRepository(SessionFactory sessionFactory) {
+    public UserRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
 
-    public User registerUser(User entity){
+    @Override
+    public User registerUser(User entity) {
         try(
                 Session session = sessionFactory.openSession();
-                )
+        )
         {
             session.beginTransaction();
             session.save(entity);
@@ -36,47 +39,34 @@ public class UserRepository {
         }
 
         return entity;
-    }
 
-    public User deleteUser(int userId){
-
-        User entity = null;
-        try(
-                Session session = sessionFactory.openSession();
-                )
-        {
-            session.beginTransaction();
-            entity = session.get(User.class, userId);
-            session.delete(entity);
-            session.getTransaction().commit();
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-            throw new RuntimeException();
-        }
-
-        return entity;
-    }
-
-    public List<User> findAllTenants(){
-
-
-
-        return ;
-    }
-
-    public List<User> findAllLandlords(){
-
-
-
-        return ;
     }
 
 
-    public User updateUserData(int userId, User model){
+    @Override
+    public List<User> findAllTenants() {
+        List<User> users = new ArrayList<>();
+
+        users = getAll().stream().filter(u -> !u.getIsLandlord()).collect(Collectors.toList());
+
+        return users;
+    }
+
+    @Override
+    public List<User> findAllLandlords() {
+        List<User> users = new ArrayList<>();
+
+        users = getAll().stream().filter(u -> u.getIsLandlord()).collect(Collectors.toList());
+
+        return users;
+    }
+
+    @Override
+    public User updateUserData(int userId, User model) {
         User userToChange = null;
         try(
                 Session session = sessionFactory.openSession();
-                )
+        )
         {
             session.beginTransaction();
             userToChange = session.get(User.class, userId);
@@ -92,7 +82,8 @@ public class UserRepository {
         return userToChange;
     }
 
-    public User getUserByUsername(String pattern){
+    @Override
+    public User getUserByUsername(String pattern) {
         List<User> users = new ArrayList<>();
         String statement = "from User where username = :pattern ";  // User is the pojo class, username is field in the class
 
@@ -111,7 +102,8 @@ public class UserRepository {
         return users.get(0);
     }
 
-    public List<User> findUsersByRating(String pattern){
+    @Override
+    public List<User> findUserByRating(String pattern) {
         List<User> users = new ArrayList<>();
         String statement = "from User where rating = :pattern ";
 
@@ -130,14 +122,12 @@ public class UserRepository {
         return users;
     }
 
-
-
     private List<User> getAll(){
         List<User> users = new ArrayList<>();
 
         try(
                 Session session = sessionFactory.openSession();
-                )
+        )
         {
             session.beginTransaction();
             users = session.createQuery("from User").list();
@@ -148,4 +138,5 @@ public class UserRepository {
         }
         return users;
     }
+
 }

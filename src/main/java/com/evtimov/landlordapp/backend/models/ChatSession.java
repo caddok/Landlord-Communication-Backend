@@ -8,7 +8,7 @@ import com.evtimov.landlordapp.backend.models.Message;
 
 @Entity
 @Table(name = "chatsessions")
-public class Chatsession {
+public class ChatSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +29,11 @@ public class Chatsession {
     private Set<com.evtimov.landlordapp.backend.models.Message> messages;
 
 
-    public Chatsession(){
+    public ChatSession(){
         //default
     }
 
-    public Chatsession(int chatsessionID, Date createDate){
+    public ChatSession(int chatsessionID, Date createDate){
         setChatsessionID(chatsessionID);
         setCreateDate(createDate);
     }

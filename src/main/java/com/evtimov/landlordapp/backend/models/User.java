@@ -49,25 +49,9 @@ public class User {
     @Column(name = "votesum")
     private double voteSum;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usersplaces",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "placeId"))
-    private Set<Place> myPlaces;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "chatsessionsusers",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "chatsessionId"))
-    private Set<Chatsession> myChats;
-
     @OneToMany
     @JoinColumn(name = "userId")
     private Set<Card> myCards;
-
-    @OneToMany
-    @JoinColumn(name = "userId")
-    private Set<Report> myReports;
 
     @OneToMany
     @JoinColumn(name = "userId")
@@ -206,36 +190,12 @@ public class User {
         this.voteSum = voteSum;
     }
 
-    public Set<Place> getMyPlaces() {
-        return myPlaces;
-    }
-
-    public void setMyPlaces(Set<Place> myPlaces) {
-        this.myPlaces = myPlaces;
-    }
-
-    public Set<Chatsession> getMyChats() {
-        return myChats;
-    }
-
-    public void setMyChats(Set<Chatsession> myChats) {
-        this.myChats = myChats;
-    }
-
     public Set<Card> getMyCards() {
         return myCards;
     }
 
     public void setMyCards(Set<Card> myCards) {
         this.myCards = myCards;
-    }
-
-    public Set<Report> getMyReports() {
-        return myReports;
-    }
-
-    public void setMyReports(Set<Report> myReports) {
-        this.myReports = myReports;
     }
 
     public Set<Payment> getMyPayments() {

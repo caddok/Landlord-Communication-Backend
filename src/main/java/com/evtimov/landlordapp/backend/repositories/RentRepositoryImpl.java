@@ -1,62 +1,61 @@
 package com.evtimov.landlordapp.backend.repositories;
 
 
+import com.evtimov.landlordapp.backend.models.Rent;
+import com.evtimov.landlordapp.backend.repositories.base.RentRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public class CardRepository {
+public class RentRepositoryImpl implements RentRepository {
+
 
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public CardRepository(SessionFactory sessionFactory) {
+    public RentRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public Card addCard(Card card){
-
+    @Override
+    public Rent addRent(Rent rent) {
         try(
                 Session session = sessionFactory.openSession();
         )
         {
             session.beginTransaction();
-            session.save(card);
+            session.save(rent);
             session.getTransaction().commit();
         }catch(Exception ex){
 
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }
-        return card;
+        return rent;
     }
 
-    public Card removeCard(int cardId) {
+    @Override
+    public Rent updateRent(int rentId, Rent model) {
 
-        Card card = null;
-
+        Rent rentToChange = null;
         try(
                 Session session = sessionFactory.openSession();
         )
         {
             session.beginTransaction();
-            card = session.get(Card.class, cardId);
-            session.delete(card);
+            rentToChange = session.get(Rent.class, rentId);
+
+            //update rent
+
             session.getTransaction().commit();
         }catch(Exception ex){
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }
-        return card;
+
+        return rentToChange;
     }
 
-
-        //we don't need it, we will use user.getAllCards()
-    public List<Card> getAllCardsByUser(int id) {
-        return null;
-    }
 }

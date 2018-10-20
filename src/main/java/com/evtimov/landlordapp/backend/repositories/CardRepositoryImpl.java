@@ -1,57 +1,67 @@
 package com.evtimov.landlordapp.backend.repositories;
 
 
+import com.evtimov.landlordapp.backend.models.Card;
+import com.evtimov.landlordapp.backend.repositories.base.CardRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class RentRepository {
+import java.util.List;
 
+@Repository
+public class CardRepositoryImpl implements CardRepository {
 
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public RentRepository(SessionFactory sessionFactory) {
+    public CardRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public Rent addRent(Rent rent) {
+    @Override
+    public Card addCard(Card card){
+
         try(
                 Session session = sessionFactory.openSession();
         )
         {
             session.beginTransaction();
-            session.save(rent);
+            session.save(card);
             session.getTransaction().commit();
         }catch(Exception ex){
 
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }
-        return rent;
+        return card;
     }
 
-    public Rent updateRent(int rentId, Rent model) {
+    @Override
+    public Card removeCard(int cardId) {
 
-        Rent rentToChange = null;
+        Card card = null;
+
         try(
                 Session session = sessionFactory.openSession();
         )
         {
             session.beginTransaction();
-            rentToChange = session.get(Rent.class, rentId);
-
-            //update rent
-
+            card = session.get(Card.class, cardId);
+            session.delete(card);
             session.getTransaction().commit();
         }catch(Exception ex){
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }
-
-        return rentToChange;
+        return card;
     }
 
+
+    //we don't need it, we will use user.getAllCards()
+    @Override
+    public List<Card> getAllCardsByUser(int userId) {
+        return null;
+    }
 }

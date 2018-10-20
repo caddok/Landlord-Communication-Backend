@@ -3,7 +3,6 @@ package com.evtimov.landlordapp.backend.models;
 
 import javax.persistence.*;
 import java.util.Date;
-import com.evtimov.landlordapp.backend.models.User;
 
 @Entity
 @Table(name = "messages")
@@ -25,7 +24,7 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "chatsessionId")
-    private Chatsession chatsession;
+    private ChatSession chatsession;
 
     @Column(name = "text")
     private String text;
@@ -101,11 +100,11 @@ public class Message {
         this.status = status;
     }
 
-    public Chatsession getChatsession() {
+    public ChatSession getChatsession() {
         return chatsession;
     }
 
-    public void setChatsession(Chatsession chatsession) {
+    public void setChatsession(ChatSession chatsession) {
         this.chatsession = chatsession;
     }
 

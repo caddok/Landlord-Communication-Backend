@@ -18,14 +18,12 @@ public class BackendApplication {
         return new org.hibernate.cfg.Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(User.class)
-                .addAnnotatedClass(Chatsession.class)
+                .addAnnotatedClass(ChatSession.class)
                 .addAnnotatedClass(Card.class)
                 .addAnnotatedClass(Payment.class)
                 .addAnnotatedClass(Place.class)
                 .addAnnotatedClass(Rent.class)
-                .addAnnotatedClass(Report.class)
-                .addAnnotatedClass(ChatsessionsUsers.class)
-                .addAnnotatedClass(UsersPlaces.class)
+                .addAnnotatedClass(Message.class)
                 .buildSessionFactory();
     }
 }
