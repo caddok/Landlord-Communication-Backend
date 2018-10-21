@@ -23,8 +23,8 @@ public class ChatSession {
     @Column(name = "createdate")
     private Date createDate;
 
-    @OneToMany
-    @JoinColumn(name = "chatsessionId")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "chatsessionId", insertable = false, updatable = false)
     private Set<Message> messages;
 
 

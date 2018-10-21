@@ -21,10 +21,9 @@ public class PlaceDTO {
         //default
     }
 
-    public PlaceDTO(int placeID, String address, String description, int tenantID, int landlordID) {
+    public PlaceDTO(String address, String description, int tenantID, int landlordID) {
         setTenantID(tenantID);
         setLandlordID(landlordID);
-        setPlaceID(placeID);
         setAddress(address);
         setDescription(description);
     }

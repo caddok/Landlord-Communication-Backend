@@ -33,10 +33,6 @@ public class Payment {
     private Card card;
 
     @ManyToOne
-    @JoinColumn(name = "placeId", insertable = false, updatable = false)
-    private Place place;
-
-    @ManyToOne
     @JoinColumn(name = "rentId", insertable = false, updatable = false)
     private Rent rent;
 
@@ -91,14 +87,6 @@ public class Payment {
 
     public void setCard(Card card) {
         this.card = card;
-    }
-
-    public Place getPlace() {
-        return place;
-    }
-
-    public void setPlace(Place place) {
-        this.place = place;
     }
 
     public int getUserID() {

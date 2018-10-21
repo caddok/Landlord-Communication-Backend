@@ -145,15 +145,22 @@ ADD CONSTRAINT `FK_Rent_Place`
   ON UPDATE CASCADE;
   
   
-ALTER TABLE `landlordcommunicationdb`.`messages` 
-DROP FOREIGN KEY `FK_Messages_Users`;
-ALTER TABLE `landlordcommunicationdb`.`messages` 
-ADD CONSTRAINT `FK_MessagesTenant_Users`
+ALTER TABLE `landlordcommunicationdb`.`chatsessions` 
+DROP FOREIGN KEY `FK_ChatLandlord_User`;
+ALTER TABLE `landlordcommunicationdb`.`chatsessions` 
+ADD INDEX `FK_ChatTenant_User_idx` (`tenantId` ASC) ,
+ADD INDEX `FK_ChatLandlord_User_idx` (`landlordId` ASC) ,
+DROP INDEX `FK_ChatLandlord_User` ,
+DROP INDEX `FK_ChatTenant_User` ;
+;
+ALTER TABLE `landlordcommunicationdb`.`chatsessions` 
+DROP FOREIGN KEY `FK_ChatTenant_User`;
+ALTER TABLE `landlordcommunicationdb`.`chatsessions` ADD CONSTRAINT `FK_ChatTenant_User`
   FOREIGN KEY (`tenantId`)
   REFERENCES `landlordcommunicationdb`.`users` (`userId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
-ADD CONSTRAINT `FK_MessagesLandlord_User`
+ADD CONSTRAINT `FK_ChatLandlord_User`
   FOREIGN KEY (`landlordId`)
   REFERENCES `landlordcommunicationdb`.`users` (`userId`)
   ON DELETE CASCADE

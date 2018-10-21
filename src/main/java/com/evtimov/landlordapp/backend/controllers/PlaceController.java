@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/places")
+@RequestMapping("/api/places")                 //CHECKED
 public class PlaceController {
 
     private final PlaceService service;
@@ -34,5 +34,11 @@ public class PlaceController {
     @RequestMapping(value = "/landlord/{landlordId}", method = RequestMethod.GET)
     public List<PlaceDTO> getAllByLandlordId(@PathVariable(value = "landlordId") int landlordId){
         return service.getAllByLandlordId(landlordId);
+    }
+
+    @RequestMapping(value = "/{placeId}", method = RequestMethod.GET)
+    public PlaceDTO getPlaceById(@PathVariable(value = "placeId") int placeId){
+
+        return service.getPlaceById(placeId);
     }
 }

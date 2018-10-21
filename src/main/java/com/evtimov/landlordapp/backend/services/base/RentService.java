@@ -6,8 +6,8 @@ public interface RentService {
 
     Rent addRent(Rent rent);
 
-    void updateRentRemaining(int rentId, double remain);
+    Rent updateRentRemaining(int rentId, Rent rent);
 
-    void updateRentIsPaidStatus(int rentId, boolean isPaid);
+    Rent updateRentIsPaidStatus(int rentId, Rent rent);
 
 }

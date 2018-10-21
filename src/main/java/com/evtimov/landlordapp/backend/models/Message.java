@@ -22,6 +22,9 @@ public class Message {
     @Column(name = "landlordId")
     private int landlordID;
 
+    @Column(name = "chatsessionId")
+    private int chatSessionId;
+
     @Column(name = "text")
     private String text;
 
@@ -37,7 +40,8 @@ public class Message {
     }
 
     public Message(Date timestamp, String text,
-                   String picture, int tenantID, int landlordID, boolean isDelivered) {
+                   String picture, int tenantID, int landlordID, boolean isDelivered, int chatSessionId) {
+        setChatSessionId(chatSessionId);
         setTenantID(tenantID);
         setLandlordID(landlordID);
         setIsDelivered(isDelivered);
@@ -101,5 +105,13 @@ public class Message {
 
     private void setIsDelivered(boolean isDelivered) {
         this.isDelivered = isDelivered;
+    }
+
+    public int getChatSessionId() {
+        return chatSessionId;
+    }
+
+    public void setChatSessionId(int chatSessionId) {
+        this.chatSessionId = chatSessionId;
     }
 }

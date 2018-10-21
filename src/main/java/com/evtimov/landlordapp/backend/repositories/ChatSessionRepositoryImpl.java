@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.hibernate.query.Query;
+
 import java.util.List;
 
 @Repository
@@ -25,18 +26,17 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
     @Override
     public List<ChatSession> getAllByTenantId(int tenantId) {
         List<ChatSession> chats;
-        String pattern = String.valueOf(tenantId);
-        String statement = "from ChatSession where tenantID = :pattern ";  // ChatSession is the pojo class, tenantID is field in the class
+        String statement = "from ChatSession where tenantID = :pattern ";
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        ){
+        ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
+            query.setParameter("pattern", tenantId);
             chats = query.list();
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
@@ -47,18 +47,17 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
     @Override
     public List<ChatSession> getAllByLandlordId(int landlordId) {
         List<ChatSession> chats;
-        String pattern = String.valueOf(landlordId);
-        String statement = "from ChatSession where landlordID = :pattern ";  // ChatSession is the pojo class, landlordID is field in the class
+        String statement = "from ChatSession where landlordID = :pattern ";
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        ){
+        ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
+            query.setParameter("pattern", landlordId);
             chats = query.list();
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
@@ -67,16 +66,15 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
     }
 
     @Override
-    public ChatSession createSession(ChatSession chat){
+    public ChatSession createSession(ChatSession chat) {
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-                )
-        {
+        ) {
             session.beginTransaction();
             session.save(chat);
             session.getTransaction().commit();
-        }catch(Exception ex){
+        } catch (Exception ex) {
 
             System.out.println(ex.getMessage());
             throw new RuntimeException();
@@ -89,15 +87,14 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
 
         ChatSession chat;
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-                )
-        {
+        ) {
             session.beginTransaction();
             chat = session.get(ChatSession.class, chatId);
             session.delete(chat);
             session.getTransaction().commit();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }

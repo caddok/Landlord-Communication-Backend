@@ -28,6 +28,29 @@ public class PlaceServiceImpl implements PlaceService {
         return place;
     }
 
+    @Override
+    public PlaceDTO getPlaceById(int placeId) {
+
+        Place place = repository.getPlaceById(placeId);
+
+        PlaceDTO placeDTO = new PlaceDTO();
+
+        placeDTO.setPlaceID(place.getPlaceID());
+        placeDTO.setAddress(place.getAddress());
+        placeDTO.setDescription(place.getDescription());
+        placeDTO.setLandlordID(place.getLandlordID());
+        placeDTO.setTenantID(place.getTenantID());
+        if(place.getRents() != null){
+            for (Rent rent:place.getRents()) {
+                placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
+                        + rent.getRemaining() + "\n" + "Due date: "
+                        + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");
+            }
+        }
+
+        return placeDTO;
+    }
+
 
     @Override
     public List<PlaceDTO> getAllByTenantId(int tenantId) {
@@ -78,4 +101,6 @@ public class PlaceServiceImpl implements PlaceService {
 
         return placesDTO;
     }
+
+
 }

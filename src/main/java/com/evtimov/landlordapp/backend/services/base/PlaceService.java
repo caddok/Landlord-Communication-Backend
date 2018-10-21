@@ -9,6 +9,8 @@ public interface PlaceService {
 
     Place addLandlordPlace(Place place);
 
+    PlaceDTO getPlaceById(int placeId);
+
     List<PlaceDTO> getAllByTenantId(int tenantId);
 
     List<PlaceDTO> getAllByLandlordId(int landlordId);

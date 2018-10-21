@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/chats")
+@RequestMapping("/api/chats")                    //CHECKED
 public class ChatSessionController {
 
     private final ChatSessionService service;
@@ -19,12 +19,12 @@ public class ChatSessionController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/{tenantId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/tenantchats/{tenantId}", method = RequestMethod.GET)
     public List<ChatSession> getAllByTenantId(@PathVariable(value = "tenantId") int tenantId){
         return service.getAllByTenantId(tenantId);
     }
 
-    @RequestMapping(value = "/{landlordId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/landlordchats/{landlordId}", method = RequestMethod.GET)
     public List<ChatSession> getAllByLandlordId(@PathVariable(value = "landlordId") int landlordId){
         return service.getAllByLandlordId(landlordId);
     }

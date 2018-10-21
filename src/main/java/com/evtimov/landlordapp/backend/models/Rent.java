@@ -29,10 +29,6 @@ public class Rent {
     @Column(name = "duedate")
     private Date dueDate;
 
-    @ManyToOne
-    @JoinColumn(name = "placeId", insertable = false, updatable = false)
-    private Place place;
-
 
     public Rent() {
         //default
@@ -84,10 +80,6 @@ public class Rent {
 
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
-    }
-
-    public Place getPlace() {
-        return place;
     }
 
     public int getPlaceID() {

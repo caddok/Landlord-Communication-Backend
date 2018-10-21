@@ -36,7 +36,7 @@ public class RentRepositoryImpl implements RentRepository {
     }
 
     @Override
-    public Rent updateRentRemaining(int rentId, double remain) {
+    public Rent updateRentRemaining(int rentId, Rent rent) {
 
         Rent rentToChange;
         try (
@@ -45,7 +45,7 @@ public class RentRepositoryImpl implements RentRepository {
             session.beginTransaction();
             rentToChange = session.get(Rent.class, rentId);
 
-            rentToChange.setRemaining(remain);
+            rentToChange.setRemaining(rent.getRemaining());
 
             session.getTransaction().commit();
         } catch (Exception ex) {
@@ -57,7 +57,7 @@ public class RentRepositoryImpl implements RentRepository {
     }
 
     @Override
-    public Rent updateRentIsPaidStatus(int rentId, boolean isPaid) {
+    public Rent updateRentIsPaidStatus(int rentId, Rent rent) {
 
         Rent rentToChange;
         try (
@@ -66,7 +66,7 @@ public class RentRepositoryImpl implements RentRepository {
             session.beginTransaction();
             rentToChange = session.get(Rent.class, rentId);
 
-            rentToChange.setIsPaid(isPaid);
+            rentToChange.setIsPaid(rent.getIsPaid());
 
             session.getTransaction().commit();
         } catch (Exception ex) {

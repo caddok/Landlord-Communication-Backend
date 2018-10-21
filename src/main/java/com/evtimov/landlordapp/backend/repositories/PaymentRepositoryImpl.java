@@ -43,15 +43,14 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     public List<Payment> getAllPaymentsByUserId(int userId){
 
         List<Payment> payments;
-        String pattern = String.valueOf(userId);
-        String statement = "from Payment where userID = :pattern ";  // Payment is the pojo class, userID is field in the class
+        String statement = "from Payment where userID = :pattern ";
 
         try(
                 Session session = sessionFactory.openSession();
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
+            query.setParameter("pattern", userId);
             payments = query.list();
             session.getTransaction().commit();
         }catch (Exception e){

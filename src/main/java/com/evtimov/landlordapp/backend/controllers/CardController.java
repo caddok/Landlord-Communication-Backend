@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController                                  //CHECKED
 @RequestMapping("/api/cards")
 public class CardController {
 
@@ -32,8 +32,8 @@ public class CardController {
         service.removeCard(cardId);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Card> getAllCardsByUserId(int userId){
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public List<Card> getAllCardsByUserId(@PathVariable(value = "userId") int userId){
         return service.getAllCardsByUserId(userId);
     }
 }

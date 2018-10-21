@@ -32,10 +32,9 @@ public class Place {
         //default
     }
 
-    public Place(int placeID, String address, String description, int tenantID, int landlordID) {
+    public Place(String address, String description, int tenantID, int landlordID) {
         setTenantID(tenantID);
         setLandlordID(landlordID);
-        setPlaceID(placeID);
         setAddress(address);
         setDescription(description);
     }
@@ -43,10 +42,6 @@ public class Place {
 
     public int getPlaceID() {
         return placeID;
-    }
-
-    private void setPlaceID(int placeID) {
-        this.placeID = placeID;
     }
 
     public String getAddress() {

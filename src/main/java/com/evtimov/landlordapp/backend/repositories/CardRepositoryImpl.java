@@ -64,15 +64,14 @@ public class CardRepositoryImpl implements CardRepository {
     public List<Card> getAllCardsByUserId(int userId) {
 
         List<Card> cards;
-        String pattern = String.valueOf(userId);
-        String statement = "from Card where userID = :pattern ";  // Card is the pojo class, userID is field in the class
+        String statement = "from Card where userID = :pattern ";
 
         try(
                 Session session = sessionFactory.openSession();
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
+            query.setParameter("pattern", userId);
             cards = query.list();
             session.getTransaction().commit();
         }catch (Exception e){

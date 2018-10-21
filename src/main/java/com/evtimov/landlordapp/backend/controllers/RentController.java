@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/rents")
+@RequestMapping("/api/rents")                //CHECKED
 public class RentController {
 
     private final RentService service;
@@ -22,13 +22,17 @@ public class RentController {
         service.addRent(rent);
     }
 
-    @RequestMapping(value = "/{rentIdRemaining}", method = RequestMethod.PUT)
-    public void updateRentRemaining(@PathVariable(value = "rentIdRemaining") int rentId, double remaining){
-        service.updateRentRemaining(rentId, remaining);
+    @RequestMapping(value = "/updateremaining/{rentIdRemaining}", method = RequestMethod.PUT)
+    public Rent updateRentRemaining(@PathVariable(value = "rentIdRemaining") int rentId, @RequestBody Rent rent){
+        service.updateRentRemaining(rentId, rent);
+
+        return rent;
     }
 
-    @RequestMapping(value = "/{rentIdStatus}", method = RequestMethod.PUT)
-    public void updateRentStatus(@PathVariable(value = "rentIdStatus") int rentId, boolean status){
-        service.updateRentIsPaidStatus(rentId, status);
+    @RequestMapping(value = "/updatestatus/{rentIdStatus}", method = RequestMethod.PUT)
+    public Rent updateRentStatus(@PathVariable(value = "rentIdStatus") int rentId, @RequestBody Rent rent){
+        service.updateRentIsPaidStatus(rentId, rent);
+
+        return rent;
     }
 }

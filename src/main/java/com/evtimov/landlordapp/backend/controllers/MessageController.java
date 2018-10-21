@@ -19,28 +19,28 @@ public class MessageController {
         this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)                      // NOT WORKING
     public Message createMessage(@RequestBody Message message){
         service.createMessage(message);
         return message;
     }
 
-    @RequestMapping(value = "/{tenantIdDelivered}", method = RequestMethod.GET)
+    @RequestMapping(value = "/tenantdelivered/{tenantIdDelivered}", method = RequestMethod.GET)
     public List<Message> getAllDeliveredMessagesByTenantId(@PathVariable(value = "tenantIdDelivered") int tenantId){
         return service.getAllDeliveredMessagesByTenantId(tenantId);
     }
 
-    @RequestMapping(value = "/{tenantIdUndelivered}", method = RequestMethod.GET)
+    @RequestMapping(value = "/tenantundelivered/{tenantIdUndelivered}", method = RequestMethod.GET)
     public List<Message> getAllUndeliveredMessagesByTenantId(@PathVariable(value = "tenantIdUndelivered") int tenantId){
         return service.getAllUndeliveredMessagesByTenantId(tenantId);
     }
 
-    @RequestMapping(value = "/{landlordIdDelivered}", method = RequestMethod.GET)
+    @RequestMapping(value = "/landlorddelivered/{landlordIdDelivered}", method = RequestMethod.GET)
     public List<Message> getAllDeliveredMessagesByLandlordId(@PathVariable(value = "landlordIdDelivered") int landlordId){
         return service.getAllDeliveredMessagesByLandlordId(landlordId);
     }
 
-    @RequestMapping(value = "/{landlordIdUndelivered}", method = RequestMethod.GET)
+    @RequestMapping(value = "/landlordundelivered/{landlordIdUndelivered}", method = RequestMethod.GET)
     public List<Message> getAllUndeliveredMessagesByLandlordId(@PathVariable(value = "landlordIdUndelivered") int landlordId){
         return service.getAllUndeliveredMessagesByLandlordId(landlordId);
     }

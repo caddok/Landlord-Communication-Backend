@@ -39,6 +39,24 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         return place;
     }
 
+    @Override
+    public Place getPlaceById(int placeId) {
+        Place place;
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            place = session.get(Place.class, placeId);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return place;
+    }
+
 
     @Override
     public List<Place> getAllByTenantId(int tenantId) {
