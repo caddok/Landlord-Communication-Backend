@@ -94,6 +94,7 @@ CREATE TABLE `landlordcommunicationdb`.`messages` (
   `chatsessionId` INT NOT NULL,
   `picture` BLOB NULL,
   `isdelivered` TINYINT NOT NULL DEFAULT 0,
+  `archive` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`messageId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

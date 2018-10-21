@@ -20,4 +20,8 @@ public interface UserService {
 
     List<User> findUserByRating(double pattern);
 
+    String checkUsername(String pattern);
+
+    String checkEmail(String pattern);
+
 }

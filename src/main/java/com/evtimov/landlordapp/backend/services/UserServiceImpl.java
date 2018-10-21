@@ -2,7 +2,6 @@ package com.evtimov.landlordapp.backend.services;
 
 
 import com.evtimov.landlordapp.backend.models.User;
-import com.evtimov.landlordapp.backend.repositories.UserRepositoryImpl;
 import com.evtimov.landlordapp.backend.repositories.base.UserRepository;
 import com.evtimov.landlordapp.backend.services.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +44,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUserByRating(double pattern){
         return repository.findUserByRating(pattern);
+    }
+
+    @Override
+    public String checkUsername(String pattern) {
+        return repository.checkUsername(pattern);
+    }
+
+    @Override
+    public String checkEmail(String pattern) {
+        return repository.checkEmail(pattern);
     }
 
     @Override

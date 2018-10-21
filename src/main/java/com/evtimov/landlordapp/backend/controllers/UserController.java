@@ -32,7 +32,7 @@ public class UserController {                    //CHECKED
         return service.findAllTenants();
     }
 
-    @RequestMapping(value = "landlords", method = RequestMethod.GET)
+    @RequestMapping(value = "/landlords", method = RequestMethod.GET)
     public List<User> getAllLandlords(){
         return service.findAllLandlords();
     }
@@ -62,5 +62,15 @@ public class UserController {                    //CHECKED
         service.updateUserOnlineStatus(userId, user);
 
         return user;
+    }
+
+    @RequestMapping(value = "/checkusername/{username}", method = RequestMethod.GET)
+    public String checkUsername(@PathVariable(value = "username") String username){
+        return service.checkUsername(username);
+    }
+
+    @RequestMapping(value = "/checkemail/{email}", method = RequestMethod.GET)
+    public String checkEmail(@PathVariable(value = "email") String email){
+        return service.checkEmail(email);
     }
 }

@@ -19,7 +19,7 @@ public class MessageController {
         this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.POST)                      // NOT WORKING
+    @RequestMapping(method = RequestMethod.POST)                      // NOT WORKING POST method
     public Message createMessage(@RequestBody Message message){
         service.createMessage(message);
         return message;

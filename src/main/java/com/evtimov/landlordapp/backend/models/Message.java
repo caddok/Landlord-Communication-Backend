@@ -34,13 +34,17 @@ public class Message {
     @Column(name = "isdelivered")
     private boolean isDelivered;
 
+    @Column(name = "archive")
+    private boolean isArchived;
+
 
     public Message() {
         //default
     }
 
     public Message(Date timestamp, String text,
-                   String picture, int tenantID, int landlordID, boolean isDelivered, int chatSessionId) {
+                   String picture, int tenantID, int landlordID, boolean isDelivered, int chatSessionId, boolean isArchived) {
+        setArchived(isArchived);
         setChatSessionId(chatSessionId);
         setTenantID(tenantID);
         setLandlordID(landlordID);
@@ -63,7 +67,7 @@ public class Message {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    private void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -71,7 +75,7 @@ public class Message {
         return text;
     }
 
-    public void setText(String text) {
+    private void setText(String text) {
         this.text = text;
     }
 
@@ -79,7 +83,7 @@ public class Message {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    private void setPicture(String picture) {
         this.picture = picture;
     }
 
@@ -111,7 +115,15 @@ public class Message {
         return chatSessionId;
     }
 
-    public void setChatSessionId(int chatSessionId) {
+    private void setChatSessionId(int chatSessionId) {
         this.chatSessionId = chatSessionId;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
     }
 }

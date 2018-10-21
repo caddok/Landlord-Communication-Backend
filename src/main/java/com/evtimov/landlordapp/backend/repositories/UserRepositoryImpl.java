@@ -118,7 +118,11 @@ public class UserRepositoryImpl implements UserRepository {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        return users.get(0);
+        if (users.size() > 0) {
+            return users.get(0);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -138,7 +142,63 @@ public class UserRepositoryImpl implements UserRepository {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        return users;
+        if (users.size() > 0) {
+            return users;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public String checkUsername(String pattern) {
+        List<User> users;
+        String username;
+        String statement = "from User where username = :pattern ";
+
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("pattern", pattern);
+            users = query.list();
+            if (users.size() > 0) {
+                username = users.get(0).getUsername();
+            }else{
+                username = null;
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return username;
+    }
+
+    @Override
+    public String checkEmail(String pattern) {
+        List<User> users;
+        String email;
+        String statement = "from User where email = :pattern ";
+
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("pattern", pattern);
+            users = query.list();
+            if (users.size() > 0) {
+                email = users.get(0).getEmail();
+            }else{
+                email = null;
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return email;
     }
 
     private List<User> getAll() {

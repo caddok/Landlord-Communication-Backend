@@ -22,16 +22,15 @@ public class CardRepositoryImpl implements CardRepository {
     }
 
     @Override
-    public Card addCard(Card card){
+    public Card addCard(Card card) {
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        )
-        {
+        ) {
             session.beginTransaction();
             session.save(card);
             session.getTransaction().commit();
-        }catch(Exception ex){
+        } catch (Exception ex) {
 
             System.out.println(ex.getMessage());
             throw new RuntimeException();
@@ -44,15 +43,14 @@ public class CardRepositoryImpl implements CardRepository {
 
         Card card;
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        )
-        {
+        ) {
             session.beginTransaction();
             card = session.get(Card.class, cardId);
             session.delete(card);
             session.getTransaction().commit();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }
@@ -66,15 +64,15 @@ public class CardRepositoryImpl implements CardRepository {
         List<Card> cards;
         String statement = "from Card where userID = :pattern ";
 
-        try(
+        try (
                 Session session = sessionFactory.openSession();
-        ){
+        ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
             query.setParameter("pattern", userId);
             cards = query.list();
             session.getTransaction().commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }

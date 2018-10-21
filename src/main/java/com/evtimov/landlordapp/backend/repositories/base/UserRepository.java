@@ -19,4 +19,8 @@ public interface UserRepository {
     User getUserByUsername(String pattern);
 
     List<User> findUserByRating(double pattern);
+
+    String checkUsername(String pattern);
+
+    String checkEmail(String pattern);
 }
