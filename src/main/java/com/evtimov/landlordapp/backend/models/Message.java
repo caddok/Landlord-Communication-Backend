@@ -3,7 +3,6 @@ package com.evtimov.landlordapp.backend.models;
 
 import javax.persistence.*;
 import java.util.Date;
-import com.evtimov.landlordapp.backend.models.User;
 
 @Entity
 @Table(name = "messages")
@@ -17,15 +16,14 @@ public class Message {
     @Column(name = "timestamp")
     private Date timestamp;
 
-    @Column(name = "senderId")
-    private int senderID;
+    @Column(name = "tenantId")
+    private int tenantID;
 
-    @Column(name = "receiverId")
-    private int receiverID;
+    @Column(name = "landlordId")
+    private int landlordID;
 
-    @ManyToOne
-    @JoinColumn(name = "chatsessionId")
-    private Chatsession chatsession;
+    @Column(name = "chatsessionId")
+    private int chatSessionID;
 
     @Column(name = "text")
     private String text;
@@ -33,31 +31,27 @@ public class Message {
     @Column(name = "picture")
     private String picture;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "isdelivered")
+    private boolean isDelivered;
 
-    @ManyToOne
-    @JoinColumn(name = "senderId",insertable = false,updatable = false)
-    private User sender;
-
-    @ManyToOne
-    @JoinColumn(name = "receiverId", insertable = false, updatable = false)
-    private User receiver;
+    @Column(name = "archive")
+    private boolean isArchived;
 
 
     public Message() {
         //default
     }
 
-    public Message(int messageID, Date timestamp, String text,
-                   String picture, String status, int senderID, int receiverID) {
-        setReceiverID(receiverID);
-        setSenderID(senderID);
-        setMessageID(messageID);
+    public Message(Date timestamp, String text,
+                   String picture, int tenantID, int landlordID, boolean isDelivered, int chatSessionId, boolean isArchived) {
+        setArchived(isArchived);
+        setChatSessionId(chatSessionId);
+        setTenantID(tenantID);
+        setLandlordID(landlordID);
+        setIsDelivered(isDelivered);
         setTimestamp(timestamp);
         setText(text);
         setPicture(picture);
-        setStatus(status);
     }
 
     public int getMessageID() {
@@ -73,7 +67,7 @@ public class Message {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    private void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -81,7 +75,7 @@ public class Message {
         return text;
     }
 
-    public void setText(String text) {
+    private void setText(String text) {
         this.text = text;
     }
 
@@ -89,55 +83,47 @@ public class Message {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    private void setPicture(String picture) {
         this.picture = picture;
     }
 
-    public String getStatus() {
-        return status;
+    public int getTenantID() {
+        return tenantID;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    private void setTenantID(int tenantID) {
+        this.tenantID = tenantID;
     }
 
-    public Chatsession getChatsession() {
-        return chatsession;
+    public int getLandlordID() {
+        return landlordID;
     }
 
-    public void setChatsession(Chatsession chatsession) {
-        this.chatsession = chatsession;
+    private void setLandlordID(int landlordID) {
+        this.landlordID = landlordID;
     }
 
-    public User getSender() {
-        return sender;
+    public boolean getIsDelivered() {
+        return isDelivered;
     }
 
-    public void setSender(User sender) {
-        this.sender = sender;
+    private void setIsDelivered(boolean isDelivered) {
+        this.isDelivered = isDelivered;
     }
 
-    public User getReceiver() {
-        return receiver;
+    public int getChatSessionId() {
+        return chatSessionID;
     }
 
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
+    private void setChatSessionId(int chatSessionId) {
+        this.chatSessionID = chatSessionId;
     }
 
-    public int getSenderID() {
-        return senderID;
+    public boolean isArchived() {
+        return isArchived;
     }
 
-    public void setSenderID(int senderID) {
-        this.senderID = senderID;
-    }
-
-    public int getReceiverID() {
-        return receiverID;
-    }
-
-    public void setReceiverID(int receiverID) {
-        this.receiverID = receiverID;
+    private void setArchived(boolean archived) {
+        isArchived = archived;
     }
 }

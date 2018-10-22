@@ -90,21 +90,6 @@ insert into users (userId, firstname, lastname, email, islandlord, username, rat
 insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (88, 'Natalya', 'Fewings', 'nfewings2f@yahoo.com', true, 'nfewings2f', 1, '123dfg', '456yjtyj', true, 15, 35.5);
 insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (89, 'Vanny', 'Quarrie', 'vquarrie2g@mac.com', true, 'vquarrie2g', 2, '123dfg', '456yjtyj', true, 15, 35.5);
 insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (90, 'Juditha', 'Byham', 'jbyham2h@addthis.com', false, 'jbyham2h', 1, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (91, 'Deanna', 'Reddel', 'dreddel2i@noaa.gov', true, 'dreddel2i', 5, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (92, 'Silas', 'Cumberledge', 'scumberledge2j@msn.com', true, 'scumberledge2j', 4, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (93, 'Carmel', 'Haglinton', 'chaglinton2k@squarespace.com', false, 'chaglinton2k', 5, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (94, 'Reggie', 'Powelee', 'rpowelee2l@usa.gov', true, 'rpowelee2l', 3, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (95, 'Tabby', 'Creus', 'tcreus2m@redcross.org', true, 'tcreus2m', 5, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (96, 'Virginia', 'Peepall', 'vpeepall2n@pinterest.com', false, 'vpeepall2n', 2, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (97, 'Gaston', 'Lehon', 'glehon2o@hatena.ne.jp', true, 'glehon2o', 3, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (98, 'Samuele', 'Klagge', 'sklagge2p@ebay.com', true, 'sklagge2p', 3, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (99, 'Heda', 'McAuslene', 'hmcauslene2q@nifty.com', true, 'hmcauslene2q', 1, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (100, 'Karisa', 'O''Doogan', 'kodoogan2r@netlog.com', false, 'kodoogan2r', 1, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (101, 'Rosetta', 'Ziebart', 'rziebart2s@prnewswire.com', false, 'rziebart2s', 4, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (102, 'Roger', 'Cochet', 'rcochet2t@who.int', false, 'rcochet2t', 4, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (103, 'Ignatius', 'Pane', 'ipane2u@webmd.com', true, 'ipane2u', 1, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (104, 'Bel', 'Dyett', 'bdyett2v@pinterest.com', false, 'bdyett2v', 2, '123dfg', '456yjtyj', true, 15, 35.5);
-insert into users (userId, firstname, lastname, email, islandlord, username, rating, passwordhash, passwordsalt, isonline, votes, votesum) values (105, 'Lion', 'Phythien', 'lphythien2w@mozilla.com', true, 'lphythien2w', 4, '123dfg', '456yjtyj', true, 15, 35.5);
 
 INSERT INTO cards (cardId, type, brand, cardnumber, cvvnumber, userId, balance) 
 VALUES
@@ -136,65 +121,37 @@ VALUES
 (26, 'creditcard', 'switch', '6759689506593999', 505, 26, 2447),
 (27, 'creditcard', 'laser', '3042594718070220', 968, 27, 6557),
 (61, 'creditcard', 'maestro', '6763228452177661', 907, 61, 3926),
-(87, 'creditcard', 'jcb', '3566239069266488', 542, 87, 5309),
-(108, 'creditcard',  'mastercard', '5048378598997735', 554, 104, 8074),
-(160, 'creditcard',  'switch', '6333511001747667', 853, 105, 6608);
+(87, 'creditcard', 'jcb', '3566239069266488', 542, 87, 5309);
 
-INSERT INTO places (placeId, description, address) 
+INSERT INTO places (placeId, tenantId, landlordId, description, address) 
 VALUES
-(1, 'Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam. Nam tristique tortor eu pede.', '03958 Superior Park'),
-(2, 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.', '07141 Darwin Street'),
-(3, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.', '69 Fallview Terrace'),
-(4, 'Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.', '6597 Nelson Park'),
-(5, 'In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst.', '430 Mesta Hill'),
-(6, 'Morbi porttitor lorem id ligula.', '1 Twin Pines Center'),
-(7, 'Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue.', '838 Colorado Trail'),
-(8, 'Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.', '3503 Lighthouse Bay Place'),
-(9, 'Nam tristique tortor eu pede.', '528 Service Hill'),
-(10, 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', '5716 School Lane'),
-(11, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '09193 Karstens Terrace'),
-(12, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', '8630 Buena Vista Way'),
-(13, 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum.', '6793 Crest Line Center'),
-(14, 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', '2 Quincy Hill'),
-(15, 'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc.', '653 Hansons Lane'),
-(16, 'Integer tincidunt ante vel ipsum.', '09725 Stoughton Hill'),
-(17, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.', '571 Granby Hill'),
-(18, 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', '9393 Browning Place'),
-(19, 'In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt.', '00 Hudson Avenue'),
-(20, 'Duis bibendum. Morbi non quam nec dui luctus rutrum.', '0549 Memorial Hill'),
-(21, 'Proin interdum mauris non ligula pellentesque ultrices.', '4040 Donald Junction'),
-(22, 'Proin risus.', '93799 Evergreen Road'),
-(23, 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.', '9771 Artisan Trail'),
-(24, 'Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', '01 Center Street'),
-(70, 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti.', '8039 Clyde Gallagher Lane'),
-(71, 'Nunc rhoncus dui vel sem. Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci.', '45708 Shoshone Junction'),
-(72, 'Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.', '548 Fair Oaks Street'),
-(73, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.', '7 Declaration Circle'),
-(74, 'Nulla tellus.', '62 Russell Hill'),
-(75, 'Fusce posuere felis sed lacus.', '8 Riverside Parkway'),
-(110, 'In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.', '146 Hintze Lane'),
-(111, 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy.', '993 Fieldstone Plaza'),
-(112, 'In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat.', '3554 Annamark Trail'),
-(113, 'Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '5 Rusk Parkway'),
-(179, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue.', '40221 Meadow Valley Avenue'),
-(180, 'Maecenas rhoncus aliquam lacus.', '460 Reindahl Park'),
-(181, 'Morbi a ipsum. Integer a nibh. In quis justo.', '9 Utah Street'),
-(182, 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.', '877 Anzinger Parkway'),
-(183, 'Donec vitae nisi.', '547 Kropf Court');
+(1, 1, 5, 'Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam. Nam tristique tortor eu pede.', '03958 Superior Park'),
+(2, 2, 6,'Suspendisse potenti. Cras in purus eu magna vulputate luctus.', '07141 Darwin Street'),
+(3, 3, 8,'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.', '69 Fallview Terrace'),
+(4, 4, 11,'Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.', '6597 Nelson Park'),
+(5, 7, 12,'In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst.', '430 Mesta Hill'),
+(6, 9, 13,'Morbi porttitor lorem id ligula.', '1 Twin Pines Center'),
+(7, 10, 15,'Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue.', '838 Colorado Trail'),
+(8, 14, 17,'Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.', '3503 Lighthouse Bay Place'),
+(9, 16, 20,'Nam tristique tortor eu pede.', '528 Service Hill'),
+(10,18, 21, 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', '5716 School Lane'),
+(11,19, 23, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', '09193 Karstens Terrace'),
+(12,22, 24, 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.', '8630 Buena Vista Way'),
+(13,27, 25, 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum.', '6793 Crest Line Center'),
+(14,28, 26, 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', '2 Quincy Hill'),
+(15,29, 30, 'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc.', '653 Hansons Lane'),
+(16,31, 32, 'Integer tincidunt ante vel ipsum.', '09725 Stoughton Hill'),
+(17,36, 33, 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.', '571 Granby Hill'),
+(18,39, 34, 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', '9393 Browning Place'),
+(19,40, 35, 'In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt.', '00 Hudson Avenue'),
+(20,42, 37, 'Duis bibendum. Morbi non quam nec dui luctus rutrum.', '0549 Memorial Hill'),
+(21,47, 38, 'Proin interdum mauris non ligula pellentesque ultrices.', '4040 Donald Junction'),
+(22,50, 41, 'Proin risus.', '93799 Evergreen Road'),
+(23,51, 43, 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.', '9771 Artisan Trail'),
+(24,60, 44, 'Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', '01 Center Street'),
+(25,61, 45, 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti.', '8039 Clyde Gallagher Lane');
 
 
-INSERT INTO payments (paymentId, amount, date, userId, placeId, cardId, rentId) 
-VALUES
-(1, 239, '2018-8-7',1,1,1,1),
-(2, 406, '2017-9-10',2,2,2,2),
-(3, 336, '2018-5-8',3,3,3,3),
-(4, 216, '2018-1-13',4,4,4,4),
-(5, 187, '2018-1-15',5,5,5,5),
-(6, 148, '2018-9-14',6,6,6,6),
-(7, 489, '2018-7-7',7,7,7,7),
-(8, 469, '2018-9-9',8,8,8,8),
-(9, 185, '2018-3-10',9,9,9,9),
-(10, 393, '2018-3-18',10,10,10,10);
 
 INSERT INTO rents (rentid, ispaid, totalamount, remaining, duedate, placeId) 
 VALUES
@@ -207,45 +164,33 @@ VALUES
 (7, false, 334, 147, '2018-10-18', 7),
 (8, false, 369, 26, '2018-6-6', 8),
 (9, false, 408, 125, '2018-7-7', 9),
-(10,false, 419, 157, '2018-9-10', 10),
+(10,true, 419, 157, '2018-9-10', 10),
 (11,false, 490, 31, '2018-12-12', 11),
-(12,false, 445, 118, '2018-10-17', 12),
+(12,true, 445, 118, '2018-10-17', 12),
 (13,false, 486, 134, '2018-6-8', 13),
 (14,false, 338, 153, '2018-12-13', 14),
 (15,false, 428, 3, '2018-8-8', 15),
-(16,false, 372, 9, '2018-1-2', 16),
+(16,true, 372, 9, '2018-1-2', 16),
 (17,false, 463, 168, '2018-5-5', 17),
 (18,false, 476, 173, '2018-7-7', 18),
 (19,false, 356, 7, '2018-9-12', 19),
 (20,false, 457, 18, '2018-5-12', 20),
 (21,false, 388, 82, '2018-6-7', 21),
-(22,false, 454, 13, '2018-7-15', 22),
+(22,true, 454, 13, '2018-7-15', 22),
 (23,false, 500, 156, '2018-4-3', 23),
 (24,false, 467, 37, '2018-4-4', 24),
-(25,false, 329, 118, '2018-8-4', 70),
-(26,true, 344, 117, '2018-6-3', 71),
-(27,true, 390, 183, '2018-7-3', 73),
-(28,true, 478, 196, '2018-1-2', 72),
-(29,true, 349, 129, '2018-6-6', 74),
-(30,true, 335, 41, '2018-10-10', 75),
-(31,true, 302, 23, '2018-12-12', 110),
-(32,true, 371, 50, '2018-12-17', 180),
-(33,true, 453, 150, '2018-11-11', 111),
-(34,true, 364, 72, '2018-5-5', 112),
-(54,true, 307, 114, '2018-9-14', 181),
-(55,true, 452, 184, '2018-9-13', 182),
-(57,true, 451, 87,  '2018-3-3', 183),
-(50,true, 382, 105, '2018-3-4', 113);
+(25,false, 329, 118, '2018-8-4', 25);
 
-INSERT INTO reports (reportId, issue, date, userId, description, isresolved, placeId) 
+
+INSERT INTO payments (paymentId, amount, date, userId, cardId, rentId) 
 VALUES
-(1, 'nibh', '2018-1-6', 3, 'Nunc purus. Phasellus in felis. Donec semper sapien a libero.', false,1),
-(2, 'id justo', '2018-2-23', 3, 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam.', true,2),
-(3, 'ipsum primis', '2018-3-29', 4, 'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', true,3),
-(4, 'mus etiam', '2017-11-26', 5, 'Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat.', true,4),
-(5, 'in', '2017-12-14', 2, 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', false,5),
-(6, 'in', '2018-9-7', 7, 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.', false,6),
-(7, 'maecenas pulvinar', '2018-9-28', 2, 'Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.', false,7),
-(8, 'leo', '2018-9-9', 3, 'Pellentesque eget nunc.', false,8),
-(9, 'pharetra magna', '2018-2-23', 8, 'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.', false,8),
-(10, 'risus', '2018-6-29', 2, 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.', true,9);
+(1, 239, '2018-8-7',1,1,1),
+(2, 406, '2017-9-10',2,2,2),
+(3, 336, '2018-5-8',3,3,3),
+(4, 216, '2018-1-13',4,4,4),
+(5, 187, '2018-1-15',5,5,5),
+(6, 148, '2018-9-14',6,6,6),
+(7, 489, '2018-7-7',7,7,7),
+(8, 469, '2018-9-9',8,8,8),
+(9, 185, '2018-3-10',9,9,9),
+(10, 393, '2018-3-18',10,10,10);

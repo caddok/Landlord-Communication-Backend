@@ -31,4 +31,6 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.3.7.Final'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
 
+    compile 'joda-time:joda-time:2.10'
+
 }

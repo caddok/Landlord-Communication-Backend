@@ -49,46 +49,13 @@ public class User {
     @Column(name = "votesum")
     private double voteSum;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usersplaces",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "placeId"))
-    private Set<Place> myPlaces;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "chatsessionsusers",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "chatsessionId"))
-    private Set<Chatsession> myChats;
-
-    @OneToMany
-    @JoinColumn(name = "userId")
-    private Set<Card> myCards;
-
-    @OneToMany
-    @JoinColumn(name = "userId")
-    private Set<Report> myReports;
-
-    @OneToMany
-    @JoinColumn(name = "userId")
-    private Set<Payment> myPayments;
-
-    @OneToMany
-    @JoinColumn(name = "senderId")
-    private Set<Message> sentMessages;
-
-    @OneToMany
-    @JoinColumn(name = "receiverId")
-    private Set<Message> receivedMessages;
-
-
-    public User(){
+    public User() {
         //default
     }
 
-    public User(int userID, boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
-                boolean isOnline, String passwordHash, String passwordSalt, int votes, double voteSum){
-        setUserID(userID);
+    public User(boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
+                boolean isOnline, String passwordHash, String passwordSalt, int votes, double voteSum) {
         setIsLandlord(isLandlord);
         setUsername(username);
         setPicture(picture);
@@ -106,15 +73,11 @@ public class User {
         return userID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
     public boolean getIsLandlord() {
         return this.isLandlord;
     }
 
-    public void setIsLandlord(boolean isLandlord) {
+    private void setIsLandlord(boolean isLandlord) {
         this.isLandlord = isLandlord;
     }
 
@@ -122,7 +85,7 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
+    private void setUsername(String username) {
         this.username = username;
     }
 
@@ -178,7 +141,7 @@ public class User {
         return passwordHash;
     }
 
-    public void setPasswordHash(String passwordHash) {
+    private void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 
@@ -186,7 +149,7 @@ public class User {
         return passwordSalt;
     }
 
-    public void setPasswordSalt(String passwordSalt) {
+    private void setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
     }
 
@@ -204,61 +167,5 @@ public class User {
 
     public void setVoteSum(double voteSum) {
         this.voteSum = voteSum;
-    }
-
-    public Set<Place> getMyPlaces() {
-        return myPlaces;
-    }
-
-    public void setMyPlaces(Set<Place> myPlaces) {
-        this.myPlaces = myPlaces;
-    }
-
-    public Set<Chatsession> getMyChats() {
-        return myChats;
-    }
-
-    public void setMyChats(Set<Chatsession> myChats) {
-        this.myChats = myChats;
-    }
-
-    public Set<Card> getMyCards() {
-        return myCards;
-    }
-
-    public void setMyCards(Set<Card> myCards) {
-        this.myCards = myCards;
-    }
-
-    public Set<Report> getMyReports() {
-        return myReports;
-    }
-
-    public void setMyReports(Set<Report> myReports) {
-        this.myReports = myReports;
-    }
-
-    public Set<Payment> getMyPayments() {
-        return myPayments;
-    }
-
-    public void setMyPayments(Set<Payment> myPayments) {
-        this.myPayments = myPayments;
-    }
-
-    public Set<Message> getSentMessages() {
-        return sentMessages;
-    }
-
-    public void setSentMessages(Set<Message> sentMessages) {
-        this.sentMessages = sentMessages;
-    }
-
-    public Set<Message> getReceivedMessages() {
-        return receivedMessages;
-    }
-
-    public void setReceivedMessages(Set<Message> receivedMessages) {
-        this.receivedMessages = receivedMessages;
     }
 }

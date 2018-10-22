@@ -33,20 +33,19 @@ public class Card {
     private int userID;
 
     @ManyToOne
-    @JoinColumn(name = "userId",insertable = false,updatable = false)
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
 
-    public Card(){
+    public Card() {
         //default
     }
 
-    public Card(int cardID, String brand, String type, String cardNumber, int cvvNumber, double balance, int userID){
+    public Card(String brand, String type, String cardNumber, int cvvNumber, double balance, int userID) {
         setUserID(userID);
         setBrand(brand);
         setType(type);
         setCardNumber(cardNumber);
         setCvvNumber(cvvNumber);
-        setCardID(cardID);
         setBalance(balance);
     }
 
@@ -54,7 +53,7 @@ public class Card {
         return cardID;
     }
 
-    public void setCardID(int cardID) {
+    private void setCardID(int cardID) {
         this.cardID = cardID;
     }
 
@@ -62,7 +61,7 @@ public class Card {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    private void setBrand(String brand) {
         this.brand = brand;
     }
 
@@ -70,7 +69,7 @@ public class Card {
         return type;
     }
 
-    public void setType(String type) {
+    private void setType(String type) {
         this.type = type;
     }
 
@@ -78,7 +77,7 @@ public class Card {
         return cardNumber;
     }
 
-    public void setCardNumber(String cardNumber) {
+    private void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
@@ -86,7 +85,7 @@ public class Card {
         return cvvNumber;
     }
 
-    public void setCvvNumber(int cvvNumber) {
+    private void setCvvNumber(int cvvNumber) {
         this.cvvNumber = cvvNumber;
     }
 
@@ -94,7 +93,7 @@ public class Card {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    private void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -102,15 +101,11 @@ public class Card {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public int getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    private void setUserID(int userID) {
         this.userID = userID;
     }
 }

@@ -29,21 +29,13 @@ public class Rent {
     @Column(name = "duedate")
     private Date dueDate;
 
-    @ManyToOne
-    @JoinColumn(name = "placeId",insertable = false,updatable = false)
-    private Place place;
 
-    @OneToMany
-    @JoinColumn(name = "rentId",insertable = false,updatable = false)
-    private Set<Payment> payments;
-
-    public Rent(){
+    public Rent() {
         //default
     }
 
-    public Rent(int rentID, double totalAmount, double remaining, boolean isPaid, Date dueDate, int placeID){
+    public Rent(double totalAmount, double remaining, boolean isPaid, Date dueDate, int placeID) {
         setPlaceID(placeID);
-        setRentID(rentID);
         setTotalAmount(totalAmount);
         setRemaining(remaining);
         setIsPaid(isPaid);
@@ -54,7 +46,7 @@ public class Rent {
         return rentID;
     }
 
-    public void setRentID(int rentID) {
+    private void setRentID(int rentID) {
         this.rentID = rentID;
     }
 
@@ -62,7 +54,7 @@ public class Rent {
         return totalAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
+    private void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -90,27 +82,11 @@ public class Rent {
         this.dueDate = dueDate;
     }
 
-    public Place getPlace() {
-        return place;
-    }
-
-    public void setPlace(Place place) {
-        this.place = place;
-    }
-
-    public Set<Payment> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(Set<Payment> payments) {
-        this.payments = payments;
-    }
-
     public int getPlaceID() {
         return placeID;
     }
 
-    public void setPlaceID(int placeID) {
+    private void setPlaceID(int placeID) {
         this.placeID = placeID;
     }
 }
