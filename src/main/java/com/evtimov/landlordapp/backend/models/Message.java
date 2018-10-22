@@ -23,7 +23,7 @@ public class Message {
     private int landlordID;
 
     @Column(name = "chatsessionId")
-    private int chatSessionId;
+    private int chatSessionID;
 
     @Column(name = "text")
     private String text;
@@ -112,18 +112,18 @@ public class Message {
     }
 
     public int getChatSessionId() {
-        return chatSessionId;
+        return chatSessionID;
     }
 
     private void setChatSessionId(int chatSessionId) {
-        this.chatSessionId = chatSessionId;
+        this.chatSessionID = chatSessionId;
     }
 
     public boolean isArchived() {
         return isArchived;
     }
 
-    public void setArchived(boolean archived) {
+    private void setArchived(boolean archived) {
         isArchived = archived;
     }
 }

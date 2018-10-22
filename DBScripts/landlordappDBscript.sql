@@ -24,7 +24,7 @@ COLLATE = utf8_unicode_ci;
 CREATE TABLE `landlordcommunicationdb`.`places` (
   `placeId` INT NOT NULL AUTO_INCREMENT,
   `landlordId` INT NOT NULL,
-  `tenantId` INT NOT NULL,
+  `tenantId` INT NULL,
   `address` VARCHAR(55) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`placeId`))
@@ -89,7 +89,7 @@ CREATE TABLE `landlordcommunicationdb`.`messages` (
   `messageId` INT NOT NULL AUTO_INCREMENT,
   `tenantId` INT NOT NULL,
   `landlordId` INT NOT NULL,
-  `timestamp` DATE NOT NULL,
+  `timestamp` DATETIME NOT NULL,
   `text` MEDIUMTEXT NOT NULL,
   `chatsessionId` INT NOT NULL,
   `picture` BLOB NULL,
@@ -199,5 +199,19 @@ ADD CONSTRAINT `FK_PlaceLandlord_User`
   ON DELETE CASCADE
   ON UPDATE CASCADE;
   
-
+ALTER TABLE `landlordcommunicationdb`.`messages` 
+ADD INDEX `FK_Tenant_Users_idx` (`tenantId` ASC) ,
+ADD INDEX `FK_Landlord_Users_idx` (`landlordId` ASC) ;
+;
+ALTER TABLE `landlordcommunicationdb`.`messages` 
+ADD CONSTRAINT `FK_Tenant_Users`
+  FOREIGN KEY (`tenantId`)
+  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `FK_Landlord_Users`
+  FOREIGN KEY (`landlordId`)
+  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
   
