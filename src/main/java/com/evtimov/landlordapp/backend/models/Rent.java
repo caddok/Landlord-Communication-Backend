@@ -2,6 +2,7 @@ package com.evtimov.landlordapp.backend.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,21 +13,35 @@ public class Rent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rentId")
+    @NotNull(message = "Rent ID cannot be null!")
+    @Min(value = 1, message = "Rent ID must be at least 1!")
+    @Max(value = 2147483647, message = "Rent ID is too big!")
     private int rentID;
 
     @Column(name = "totalamount")
+    @DecimalMax(value = "99999.99", message = "Amount is too big!")
+    @DecimalMin(value = "0.0", message = "Amount cannot be negative!")
+    @NotNull(message = "Amount cannot be null!")
     private double totalAmount;
 
     @Column(name = "placeId")
+    @NotNull(message = "Place ID cannot be null!")
+    @Min(value = 1, message = "Place ID must be at least 1!")
+    @Max(value = 2147483647, message = "Place ID is too big!")
     private int placeID;
 
     @Column(name = "remaining")
+    @DecimalMax(value = "99999.99", message = "Remaining is too big!")
+    @DecimalMin(value = "0.0", message = "Remaining cannot be negative!")
+    @NotNull(message = "Remaining cannot be null!")
     private double remaining;
 
     @Column(name = "ispaid")
+    @NotNull(message = "Is paid cannot be null!")
     private boolean isPaid;
 
     @Column(name = "duedate")
+    @NotNull(message = "Date cannot be null!")
     private Date dueDate;
 
 

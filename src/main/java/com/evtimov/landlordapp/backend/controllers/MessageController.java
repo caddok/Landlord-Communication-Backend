@@ -6,6 +6,7 @@ import com.evtimov.landlordapp.backend.services.base.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,29 +20,19 @@ public class MessageController {
         this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.POST)                      // NOT WORKING POST method
-    public Message createMessage(@RequestBody Message message){
+    @RequestMapping(method = RequestMethod.POST)
+    public Message createMessage(@RequestBody @Valid Message message){
         service.createMessage(message);
         return message;
     }
 
-    @RequestMapping(value = "/tenantdelivered/{tenantIdDelivered}", method = RequestMethod.GET)
-    public List<Message> getAllDeliveredMessagesByTenantId(@PathVariable(value = "tenantIdDelivered") int tenantId){
-        return service.getAllDeliveredMessagesByTenantId(tenantId);
+    @RequestMapping(value = "/sender/{chatId}/{senderId}", method = RequestMethod.GET)
+    public List<Message> getMessagesBySenderIdAndChatId(@PathVariable(value = "senderId") int senderId, @PathVariable(value = "chatId")int chatId){
+        return service.getMessagesBySenderIdAndChatId(senderId, chatId);
     }
 
-    @RequestMapping(value = "/tenantundelivered/{tenantIdUndelivered}", method = RequestMethod.GET)
-    public List<Message> getAllUndeliveredMessagesByTenantId(@PathVariable(value = "tenantIdUndelivered") int tenantId){
-        return service.getAllUndeliveredMessagesByTenantId(tenantId);
-    }
-
-    @RequestMapping(value = "/landlorddelivered/{landlordIdDelivered}", method = RequestMethod.GET)
-    public List<Message> getAllDeliveredMessagesByLandlordId(@PathVariable(value = "landlordIdDelivered") int landlordId){
-        return service.getAllDeliveredMessagesByLandlordId(landlordId);
-    }
-
-    @RequestMapping(value = "/landlordundelivered/{landlordIdUndelivered}", method = RequestMethod.GET)
-    public List<Message> getAllUndeliveredMessagesByLandlordId(@PathVariable(value = "landlordIdUndelivered") int landlordId){
-        return service.getAllUndeliveredMessagesByLandlordId(landlordId);
+    @RequestMapping(value = "/receiver/{chatId}/{receiverId}", method = RequestMethod.GET)
+    public List<Message> getMessagesByReceiverIdAndChatId(@PathVariable(value = "receiverId") int receiverId, @PathVariable(value = "chatId")int chatId){
+        return service.getMessagesByReceiverIdAndChatId(receiverId, chatId);
     }
 }

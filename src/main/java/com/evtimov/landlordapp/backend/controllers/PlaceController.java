@@ -7,10 +7,11 @@ import com.evtimov.landlordapp.backend.services.base.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/places")                 //CHECKED
+@RequestMapping("/api/places")
 public class PlaceController {
 
     private final PlaceService service;
@@ -21,7 +22,7 @@ public class PlaceController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Place addLandlordPlace(@RequestBody Place place){
+    public Place addLandlordPlace(@RequestBody @Valid Place place){
         service.addLandlordPlace(place);
         return place;
     }

@@ -29,22 +29,12 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> getAllDeliveredMessagesByTenantId(int tenantId) {
-        return repository.getAllDeliveredMessagesByTenantId(tenantId);
+    public List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId) {
+        return repository.getMessagesBySenderIdAndChatId(senderId,chatId);
     }
 
     @Override
-    public List<Message> getAllUndeliveredMessagesByTenantId(int tenantId) {
-        return repository.getAllUndeliveredMessagesByTenantId(tenantId);
-    }
-
-    @Override
-    public List<Message> getAllDeliveredMessagesByLandlordId(int landlordId) {
-        return repository.getAllDeliveredMessagesByLandlordId(landlordId);
-    }
-
-    @Override
-    public List<Message> getAllUndeliveredMessagesByLandlordId(int landlordId) {
-        return repository.getAllUndeliveredMessagesByLandlordId(landlordId);
+    public List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId) {
+        return repository.getMessagesByReceiverIdAndChatId(receiverId,chatId);
     }
 }

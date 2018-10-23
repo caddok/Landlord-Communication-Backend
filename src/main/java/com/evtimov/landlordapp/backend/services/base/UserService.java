@@ -12,13 +12,9 @@ public interface UserService {
 
     List<User> findAllLandlords();
 
-    User updateUserRating(int userId, User model);
-
     User updateUserOnlineStatus(int userId, User model);
 
     User findUserByUsername(String pattern);
-
-    List<User> findUserByRating(double pattern);
 
     String checkUsername(String pattern);
 

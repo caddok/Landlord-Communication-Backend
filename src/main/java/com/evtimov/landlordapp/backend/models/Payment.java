@@ -2,6 +2,7 @@ package com.evtimov.landlordapp.backend.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -11,21 +12,37 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "paymentId")
+    @NotNull(message = "Payment ID cannot be null!")
+    @Min(value = 1, message = "Payment ID must be at least 1!")
+    @Max(value = 2147483647, message = "Payment ID is too big!")
     private int paymentID;
 
     @Column(name = "userId")
+    @NotNull(message = "User ID cannot be null!")
+    @Min(value = 1, message = "User ID must be at least 1!")
+    @Max(value = 2147483647, message = "User ID is too big!")
     private int userID;
 
     @Column(name = "cardId")
+    @NotNull(message = "Card ID cannot be null!")
+    @Min(value = 1, message = "Card ID must be at least 1!")
+    @Max(value = 2147483647, message = "Card ID is too big!")
     private int cardID;
 
     @Column(name = "rentId")
+    @NotNull(message = "Rent ID cannot be null!")
+    @Min(value = 1, message = "Rent ID must be at least 1!")
+    @Max(value = 2147483647, message = "Rent ID is too big!")
     private int rentID;
 
     @Column(name = "amount")
+    @DecimalMax(value = "99999.99", message = "Amount is too big!")
+    @DecimalMin(value = "0.0", message = "Amount cannot be negative!")
+    @NotNull(message = "Amount cannot be null!")
     private double amount;
 
     @Column(name = "date")
+    @NotNull(message = "Date cannot be null!")
     private Date date;
 
     @ManyToOne

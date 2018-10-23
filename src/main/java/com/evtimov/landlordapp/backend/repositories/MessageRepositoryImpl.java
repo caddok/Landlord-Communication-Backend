@@ -43,12 +43,12 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<Message> getAllDeliveredMessagesByTenantId(int tenantId) {
+    public List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId) {
 
         Date date = dateProvider.getDateBeforeThreeMonths();
 
         List<Message> messages;
-        String statement = "from Message where tenantID = :idPattern and isDelivered = :deliveredPattern " +
+        String statement = "from Message where senderID = :idPattern and chatSessionID = :chatPattern " +
                 "and timestamp >= :datePattern ";
 
         try(
@@ -56,8 +56,8 @@ public class MessageRepositoryImpl implements MessageRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("idPattern", tenantId);
-            query.setParameter("deliveredPattern", true);
+            query.setParameter("idPattern", senderId);
+            query.setParameter("chatPattern", chatId);
             query.setParameter("datePattern", date);
             messages = query.list();
             session.getTransaction().commit();
@@ -69,11 +69,11 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<Message> getAllUndeliveredMessagesByTenantId(int tenantId) {
-
+    public List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId) {
         Date date = dateProvider.getDateBeforeThreeMonths();
-        List<Message> messages;
-        String statement = "from Message where tenantID = :idPattern and isDelivered = :deliveredPattern " +
+
+        List<Message> messages = null;
+        String statement = "from Message where receiverID = :idPattern and chatSessionID = :chatPattern " +
                 "and timestamp >= :datePattern ";
 
         try(
@@ -81,62 +81,13 @@ public class MessageRepositoryImpl implements MessageRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("idPattern", tenantId);
-            query.setParameter("deliveredPattern", false);
+            query.setParameter("idPattern", receiverId);
+            query.setParameter("chatPattern", chatId);
             query.setParameter("datePattern", date);
             messages = query.list();
             session.getTransaction().commit();
         }catch (Exception e){
             System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-        return messages;
-    }
-
-    @Override
-    public List<Message> getAllDeliveredMessagesByLandlordId(int landlordId) {
-        Date date = dateProvider.getDateBeforeThreeMonths();
-        List<Message> messages;
-        String statement = "from Message where landlordID = :idPattern and isDelivered = :deliveredPattern " +
-                "and timestamp >= :datePattern ";
-
-        try(
-                Session session = sessionFactory.openSession();
-        ){
-            session.beginTransaction();
-            Query query = session.createQuery(statement);
-            query.setParameter("idPattern", landlordId);
-            query.setParameter("deliveredPattern", true);
-            query.setParameter("datePattern", date);
-            messages = query.list();
-            session.getTransaction().commit();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-        return messages;
-    }
-
-    @Override
-    public List<Message> getAllUndeliveredMessagesByLandlordId(int landlordId) {
-        Date date = dateProvider.getDateBeforeThreeMonths();
-        List<Message> messages;
-        String statement = "from Message where landlordID = :idPattern and isDelivered = :deliveredPattern " +
-                "and timestamp >= :datePattern ";
-
-        try(
-                Session session = sessionFactory.openSession();
-        ){
-            session.beginTransaction();
-            Query query = session.createQuery(statement);
-            query.setParameter("idPattern", landlordId);
-            query.setParameter("deliveredPattern", false);
-            query.setParameter("datePattern", date);
-            messages = query.list();
-            session.getTransaction().commit();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
         }
         return messages;
     }

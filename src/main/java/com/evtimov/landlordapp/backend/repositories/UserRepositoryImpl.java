@@ -59,27 +59,6 @@ public class UserRepositoryImpl implements UserRepository {
         return users;
     }
 
-    @Override
-    public User updateUserRating(int userId, User model) {
-        User userToChange;
-        try (
-                Session session = sessionFactory.openSession();
-        ) {
-            session.beginTransaction();
-            userToChange = session.get(User.class, userId);
-
-            userToChange.setVotes(model.getVotes());
-            userToChange.setVoteSum(model.getVoteSum());
-            userToChange.setRating(userToChange.getVoteSum() / userToChange.getVotes());
-
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            throw new RuntimeException();
-        }
-
-        return userToChange;
-    }
 
     @Override
     public User updateUserOnlineStatus(int userId, User model) {
@@ -125,29 +104,6 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
-    @Override
-    public List<User> findUserByRating(double pattern) {
-        List<User> users;
-        String statement = "from User where rating = :pattern ";
-
-        try (
-                Session session = sessionFactory.openSession();
-        ) {
-            session.beginTransaction();
-            Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
-            users = query.list();
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-        if (users.size() > 0) {
-            return users;
-        } else {
-            return null;
-        }
-    }
 
     @Override
     public String checkUsername(String pattern) {
