@@ -2,6 +2,10 @@ package com.evtimov.landlordapp.backend.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -11,30 +15,47 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "messageId")
+    @Min(value = 1, message = "Message ID must be at least 1!")
+    @Max(value = 2147483647, message = "Message ID is too big!")
+    @NotNull(message = "Message ID cannot be null!")
     private int messageID;
 
     @Column(name = "timestamp")
+    @NotNull(message = "Date cannot be null!")
     private Date timestamp;
 
-    @Column(name = "tenantId")
-    private int tenantID;
+    @Column(name = "senderId")
+    @Min(value = 1, message = "Sender ID must be at least 1!")
+    @Max(value = 2147483647, message = "Sender ID is too big!")
+    @NotNull(message = "Sender ID cannot be null!")
+    private int senderID;
 
-    @Column(name = "landlordId")
-    private int landlordID;
+    @Column(name = "receiverId")
+    @Min(value = 1, message = "Receiver ID must be at least 1!")
+    @Max(value = 2147483647, message = "Receiver ID is too big!")
+    @NotNull(message = "Receiver ID cannot be null!")
+    private int receiverID;
 
     @Column(name = "chatsessionId")
+    @Min(value = 1, message = "ChatSession ID must be at least 1!")
+    @Max(value = 2147483647, message = "ChatSession ID is too big!")
+    @NotNull(message = "ChatSession ID cannot be null!")
     private int chatSessionID;
 
     @Column(name = "text")
+    @NotNull(message = "Text message cannot be null! Please enter something!")
+    @Size(min = 1, max = 16777215, message = "Enter a message with length between 1 and 16777215!")
     private String text;
 
     @Column(name = "picture")
     private String picture;
 
     @Column(name = "isdelivered")
+    @NotNull(message = "Is delivered cannot be null!")
     private boolean isDelivered;
 
     @Column(name = "archive")
+    @NotNull(message = "Is archived cannot be null!")
     private boolean isArchived;
 
 
@@ -43,11 +64,11 @@ public class Message {
     }
 
     public Message(Date timestamp, String text,
-                   String picture, int tenantID, int landlordID, boolean isDelivered, int chatSessionId, boolean isArchived) {
+                   String picture, int senderID, int receiverID, boolean isDelivered, int chatSessionId, boolean isArchived) {
         setArchived(isArchived);
         setChatSessionId(chatSessionId);
-        setTenantID(tenantID);
-        setLandlordID(landlordID);
+        setSenderID(senderID);
+        setReceiverID(receiverID);
         setIsDelivered(isDelivered);
         setTimestamp(timestamp);
         setText(text);
@@ -87,20 +108,20 @@ public class Message {
         this.picture = picture;
     }
 
-    public int getTenantID() {
-        return tenantID;
+    public int getSenderID() {
+        return senderID;
     }
 
-    private void setTenantID(int tenantID) {
-        this.tenantID = tenantID;
+    private void setSenderID(int senderID) {
+        this.senderID = senderID;
     }
 
-    public int getLandlordID() {
-        return landlordID;
+    public int getReceiverID() {
+        return receiverID;
     }
 
-    private void setLandlordID(int landlordID) {
-        this.landlordID = landlordID;
+    private void setReceiverID(int receiverID) {
+        this.receiverID = receiverID;
     }
 
     public boolean getIsDelivered() {

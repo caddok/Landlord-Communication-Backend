@@ -9,17 +9,25 @@ CREATE TABLE `landlordcommunicationdb`.`users` (
   `lastname` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `isonline` TINYINT NOT NULL DEFAULT 0,
-  `rating` DECIMAL(2,1) NOT NULL DEFAULT 1.0,
   `passwordhash` TINYTEXT NOT NULL,
   `passwordsalt` TINYTEXT NOT NULL,
-  `votes` INT NOT NULL DEFAULT 0,
-  `votesum` DECIMAL(5,1) NOT NULL DEFAULT 0.0,
   PRIMARY KEY (`userId`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
+
+CREATE TABLE `landlordcommunicationdb`.`ratings` (
+  `ratingId` INT NOT NULL AUTO_INCREMENT,
+  `rating` DECIMAL(2,1) NOT NULL,
+  `voteFrom` INT NOT NULL,
+  `voteFor` INT NOT NULL,
+  PRIMARY KEY (`ratingId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+
 
 CREATE TABLE `landlordcommunicationdb`.`places` (
   `placeId` INT NOT NULL AUTO_INCREMENT,
@@ -87,8 +95,8 @@ COLLATE = utf8_unicode_ci;
 
 CREATE TABLE `landlordcommunicationdb`.`messages` (
   `messageId` INT NOT NULL AUTO_INCREMENT,
-  `tenantId` INT NOT NULL,
-  `landlordId` INT NOT NULL,
+  `senderId` INT NOT NULL,
+  `receiverId` INT NOT NULL,
   `timestamp` DATETIME NOT NULL,
   `text` MEDIUMTEXT NOT NULL,
   `chatsessionId` INT NOT NULL,
@@ -130,6 +138,22 @@ ADD CONSTRAINT `FK_Payment_Card`
 ADD CONSTRAINT `FK_Payment_Rent`
   FOREIGN KEY (`rentId`)
   REFERENCES `landlordcommunicationdb`.`rents` (`rentId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+ALTER TABLE `landlordcommunicationdb`.`ratings` 
+ADD INDEX `FK_VoteFor_Users_idx` (`voteFor` ASC) ,
+ADD INDEX `FK_VoteFrom_Users_idx` (`voteFrom` ASC) ;
+;
+ALTER TABLE `landlordcommunicationdb`.`ratings` 
+ADD CONSTRAINT `FK_VoteFor_Users`
+  FOREIGN KEY (`voteFor`)
+  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `FK_VoteFrom_Users`
+  FOREIGN KEY (`voteFrom`)
+  REFERENCES `landlordcommunicationdb`.`users` (`userId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;  
 

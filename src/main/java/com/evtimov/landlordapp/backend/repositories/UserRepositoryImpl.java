@@ -59,27 +59,6 @@ public class UserRepositoryImpl implements UserRepository {
         return users;
     }
 
-    @Override
-    public User updateUserRating(int userId, User model) {
-        User userToChange;
-        try (
-                Session session = sessionFactory.openSession();
-        ) {
-            session.beginTransaction();
-            userToChange = session.get(User.class, userId);
-
-            userToChange.setVotes(model.getVotes());
-            userToChange.setVoteSum(model.getVoteSum());
-            userToChange.setRating(userToChange.getVoteSum() / userToChange.getVotes());
-
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            throw new RuntimeException();
-        }
-
-        return userToChange;
-    }
 
     @Override
     public User updateUserOnlineStatus(int userId, User model) {
@@ -126,16 +105,17 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findUserByRating(double pattern) {
+    public User checkUserLogin(String username, String passwordHash) {
         List<User> users;
-        String statement = "from User where rating = :pattern ";
+        String statement = "from User where username = :pattern and passwordhash = :passHash ";
 
         try (
                 Session session = sessionFactory.openSession();
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
+            query.setParameter("pattern", username);
+            query.setParameter("passHash", passwordHash);
             users = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -143,11 +123,12 @@ public class UserRepositoryImpl implements UserRepository {
             throw new RuntimeException(e);
         }
         if (users.size() > 0) {
-            return users;
+            return users.get(0);
         } else {
             return null;
         }
     }
+
 
     @Override
     public String checkUsername(String pattern) {

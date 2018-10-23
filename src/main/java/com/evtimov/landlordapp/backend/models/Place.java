@@ -1,6 +1,10 @@
 package com.evtimov.landlordapp.backend.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -10,18 +14,31 @@ public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "placeId")
+    @NotNull(message = "Place ID cannot be null!")
+    @Min(value = 1, message = "Place ID must be at least 1!")
+    @Max(value = 2147483647, message = "Place ID is too big!")
     private int placeID;
 
     @Column(name = "tenantId")
+//    @NotNull(message = "Tenant ID cannot be null!")
+    @Min(value = 1, message = "Tenant ID must be at least 1!")
+    @Max(value = 2147483647, message = "Tenant ID is too big!")
     private int tenantID;
 
     @Column(name = "landlordId")
+    @NotNull(message = "Landlord ID cannot be null!")
+    @Min(value = 1, message = "Landlord ID must be at least 1!")
+    @Max(value = 2147483647, message = "Landlord ID is too big!")
     private int landlordID;
 
     @Column(name = "address")
+    @NotNull(message = "Address cannot be null! Please enter something!")
+    @Size(min = 1, max = 55, message = "Enter address with length between 1 and 55!")
     private String address;
 
     @Column(name = "description")
+    @NotNull(message = "Description cannot be null! Please enter something!")
+    @Size(min = 1, max = 16777215, message = "Enter description with length between 1 and 16777215!")
     private String description;
 
     @OneToMany(fetch = FetchType.EAGER)

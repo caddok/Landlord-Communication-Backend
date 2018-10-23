@@ -5,11 +5,12 @@ import com.evtimov.landlordapp.backend.services.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {                    //CHECKED
+public class UserController {
 
     private final UserService service;
 
@@ -21,7 +22,7 @@ public class UserController {                    //CHECKED
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public User registerUser(@RequestBody User user){
+    public User registerUser(@RequestBody @Valid User user){
         service.registerUser(user);
 
         return user;
@@ -42,19 +43,6 @@ public class UserController {                    //CHECKED
         return service.findUserByUsername(username);
     }
 
-    @RequestMapping(value = "/rating/{rating}", method = RequestMethod.GET)
-    public List<User> getUsersByRating(@PathVariable(value = "rating") double rating){
-        return service.findUserByRating(rating);
-    }
-
-
-    @RequestMapping(value = "/updaterating/{userId}", method = RequestMethod.PUT)
-    public User updateUserRating(@PathVariable(value = "userId") int userId, @RequestBody User user){
-
-        service.updateUserRating(userId, user);
-
-        return user;
-    }
 
     @RequestMapping(value = "/updatestatus/{userId}", method = RequestMethod.PUT)
     public User updateUserOnlineStatus(@PathVariable(value = "userId") int userId, @RequestBody User user){
@@ -72,5 +60,10 @@ public class UserController {                    //CHECKED
     @RequestMapping(value = "/checkemail/{email}", method = RequestMethod.GET)
     public String checkEmail(@PathVariable(value = "email") String email){
         return service.checkEmail(email);
+    }
+
+    @RequestMapping(value = "/checklogin", method = RequestMethod.GET)
+    public User checkUserLogin(String username, String passwordHash){
+        return service.checkUserLogin(username, passwordHash);
     }
 }

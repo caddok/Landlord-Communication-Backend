@@ -1,6 +1,9 @@
 package com.evtimov.landlordapp.backend.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,15 +15,25 @@ public class ChatSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chatsessionId")
+    @NotNull(message = "ChatSession ID cannot be null!")
+    @Min(value = 1, message = "ChatSession ID must be at least 1!")
+    @Max(value = 2147483647, message = "ChatSession ID is too big!")
     private int chatsessionID;
 
     @Column(name = "tenantId")
+    @NotNull(message = "Tenant ID cannot be null!")
+    @Min(value = 1, message = "Tenant ID must be at least 1!")
+    @Max(value = 2147483647, message = "Tenant ID is too big!")
     private int tenantID;
 
     @Column(name = "landlordId")
+    @NotNull(message = "Landlord ID cannot be null!")
+    @Min(value = 1, message = "Landlord ID must be at least 1!")
+    @Max(value = 2147483647, message = "Landlord ID is too big!")
     private int landlordID;
 
     @Column(name = "createdate")
+    @NotNull(message = "Date cannot be null!")
     private Date createDate;
 
     @OneToMany(fetch = FetchType.EAGER)
