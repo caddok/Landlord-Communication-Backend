@@ -104,6 +104,31 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
+    @Override
+    public User checkUserLogin(String username, String passwordHash) {
+        List<User> users;
+        String statement = "from User where username = :pattern and passwordhash = :passHash ";
+
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("pattern", username);
+            query.setParameter("passHash", passwordHash);
+            users = query.list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        if (users.size() > 0) {
+            return users.get(0);
+        } else {
+            return null;
+        }
+    }
+
 
     @Override
     public String checkUsername(String pattern) {

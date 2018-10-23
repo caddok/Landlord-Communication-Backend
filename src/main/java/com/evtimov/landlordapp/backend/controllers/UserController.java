@@ -61,4 +61,9 @@ public class UserController {
     public String checkEmail(@PathVariable(value = "email") String email){
         return service.checkEmail(email);
     }
+
+    @RequestMapping(value = "/checklogin", method = RequestMethod.GET)
+    public User checkUserLogin(String username, String passwordHash){
+        return service.checkUserLogin(username, passwordHash);
+    }
 }

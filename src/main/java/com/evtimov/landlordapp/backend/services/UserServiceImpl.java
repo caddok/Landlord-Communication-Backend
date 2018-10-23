@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User checkUserLogin(String username, String passwordHash) {
+        return repository.checkUserLogin(username, passwordHash);
+    }
+
+    @Override
     public String checkUsername(String pattern) {
         return repository.checkUsername(pattern);
     }

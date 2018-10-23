@@ -16,6 +16,8 @@ public interface UserService {
 
     User findUserByUsername(String pattern);
 
+    User checkUserLogin(String username, String passwordHash);
+
     String checkUsername(String pattern);
 
     String checkEmail(String pattern);
