@@ -49,12 +49,10 @@ public class User {
     private boolean isOnline;
 
     @Column(name = "passwordhash")
-    @NotNull(message = "Pass hash cannot be null! Please enter pass hash!")
     @Size(min = 1, max = 255, message = "Enter pass hash with length between 1 and 255!")
     private String passwordHash;
 
     @Column(name = "passwordsalt")
-    @NotNull(message = "Pass salt cannot be null! Please enter pass salt!")
     @Size(min = 1, max = 255, message = "Enter pass salt with length between 1 and 255!")
     private String passwordSalt;
 
@@ -62,6 +60,11 @@ public class User {
 
     public User() {
         //default
+    }
+
+    public User(String passwordHash, String passwordSalt){
+        setPasswordHash(passwordHash);
+        setPasswordSalt(passwordSalt);
     }
 
     public User(boolean isLandlord, String username, String picture, String firstName, String lastName, String email,

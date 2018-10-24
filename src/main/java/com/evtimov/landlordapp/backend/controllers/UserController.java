@@ -23,9 +23,8 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public User registerUser(@RequestBody @Valid User user){
-        service.registerUser(user);
 
-        return user;
+        return service.registerUser(user);
     }
 
     @RequestMapping(value = "/tenants", method = RequestMethod.GET)
@@ -47,9 +46,7 @@ public class UserController {
     @RequestMapping(value = "/updatestatus/{userId}", method = RequestMethod.PUT)
     public User updateUserOnlineStatus(@PathVariable(value = "userId") int userId, @RequestBody User user){
 
-        service.updateUserOnlineStatus(userId, user);
-
-        return user;
+        return service.updateUserOnlineStatus(userId, user);
     }
 
     @RequestMapping(value = "/checkusername/{username}", method = RequestMethod.GET)
@@ -62,8 +59,8 @@ public class UserController {
         return service.checkEmail(email);
     }
 
-    @RequestMapping(value = "/checklogin", method = RequestMethod.GET)
-    public User checkUserLogin(String username, String passwordHash){
-        return service.checkUserLogin(username, passwordHash);
+    @RequestMapping(value = "/gethashandsalt/{username}", method = RequestMethod.GET)
+    public User getUserHashAndSaltByUsername(@PathVariable(value = "username") String username){
+        return service.getUserHashAndSaltByUsername(username);
     }
 }

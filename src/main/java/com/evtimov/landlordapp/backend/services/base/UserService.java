@@ -16,7 +16,7 @@ public interface UserService {
 
     User findUserByUsername(String pattern);
 
-    User checkUserLogin(String username, String passwordHash);
+    User getUserHashAndSaltByUsername(String username);
 
     String checkUsername(String pattern);
 

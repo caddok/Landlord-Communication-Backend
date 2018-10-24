@@ -9,8 +9,8 @@ CREATE TABLE `landlordcommunicationdb`.`users` (
   `lastname` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `isonline` TINYINT NOT NULL DEFAULT 0,
-  `passwordhash` TINYTEXT NOT NULL,
-  `passwordsalt` TINYTEXT NOT NULL,
+  `passwordhash` TINYTEXT NULL,
+  `passwordsalt` TINYTEXT NULL,
   PRIMARY KEY (`userId`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))

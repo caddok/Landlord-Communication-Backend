@@ -16,7 +16,7 @@ public interface UserRepository {
 
     User getUserByUsername(String pattern);
 
-    User checkUserLogin(String username, String passwordHash);
+    User getUserHashAndSaltByUsername(String username);
 
     String checkUsername(String pattern);
 
