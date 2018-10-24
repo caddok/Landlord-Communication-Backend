@@ -4,6 +4,7 @@ package com.evtimov.landlordapp.backend.services;
 import com.evtimov.landlordapp.backend.models.User;
 import com.evtimov.landlordapp.backend.repositories.base.UserRepository;
 import com.evtimov.landlordapp.backend.services.base.UserService;
+import com.evtimov.landlordapp.backend.utils.password.PasswordAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +14,17 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
+    private final PasswordAgent passwordAgent;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository) {
+    public UserServiceImpl(UserRepository repository, PasswordAgent passwordAgent) {
         this.repository = repository;
+        this.passwordAgent = passwordAgent;
     }
 
     public User registerUser(User entity) {
         repository.registerUser(entity);
-        return entity;
+        return repository.registerUser(entity);
     }
 
 
@@ -40,10 +43,6 @@ public class UserServiceImpl implements UserService {
         return repository.getUserByUsername(pattern);
     }
 
-    @Override
-    public User checkUserLogin(String username, String passwordHash) {
-        return repository.checkUserLogin(username, passwordHash);
-    }
 
     @Override
     public String checkUsername(String pattern) {
@@ -60,6 +59,11 @@ public class UserServiceImpl implements UserService {
     public User updateUserOnlineStatus(int userId, User model){
         repository.updateUserOnlineStatus(userId, model);
         return model;
+    }
+
+    @Override
+    public User getUserHashAndSaltByUsername(String username){
+        return repository.getUserHashAndSaltByUsername(username);
     }
 }
 

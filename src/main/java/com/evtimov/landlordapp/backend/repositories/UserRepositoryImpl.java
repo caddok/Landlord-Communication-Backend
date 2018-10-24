@@ -35,9 +35,7 @@ public class UserRepositoryImpl implements UserRepository {
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }
-
         return entity;
-
     }
 
 
@@ -105,9 +103,10 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User checkUserLogin(String username, String passwordHash) {
+    public User getUserHashAndSaltByUsername(String username) {
         List<User> users;
-        String statement = "from User where username = :pattern and passwordhash = :passHash ";
+        User model;
+        String statement = "from User where username = :pattern ";
 
         try (
                 Session session = sessionFactory.openSession();
@@ -115,18 +114,17 @@ public class UserRepositoryImpl implements UserRepository {
             session.beginTransaction();
             Query query = session.createQuery(statement);
             query.setParameter("pattern", username);
-            query.setParameter("passHash", passwordHash);
             users = query.list();
+            if (users.size() > 0) {
+                model = new User(users.get(0).getPasswordHash(), users.get(0).getPasswordSalt());
+                return model;
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        if (users.size() > 0) {
-            return users.get(0);
-        } else {
-            return null;
-        }
+        return null;
     }
 
 
@@ -145,7 +143,7 @@ public class UserRepositoryImpl implements UserRepository {
             users = query.list();
             if (users.size() > 0) {
                 username = users.get(0).getUsername();
-            }else{
+            } else {
                 username = null;
             }
             session.getTransaction().commit();
@@ -171,7 +169,7 @@ public class UserRepositoryImpl implements UserRepository {
             users = query.list();
             if (users.size() > 0) {
                 email = users.get(0).getEmail();
-            }else{
+            } else {
                 email = null;
             }
             session.getTransaction().commit();
