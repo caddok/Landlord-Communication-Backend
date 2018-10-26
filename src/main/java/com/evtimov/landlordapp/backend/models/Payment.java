@@ -12,8 +12,6 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "paymentId")
-    @NotNull(message = "Payment ID cannot be null!")
-    @Min(value = 1, message = "Payment ID must be at least 1!")
     @Max(value = 2147483647, message = "Payment ID is too big!")
     private int paymentID;
 

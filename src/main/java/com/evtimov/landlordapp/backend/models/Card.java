@@ -11,9 +11,7 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cardId")
-    @Min(value = 1, message = "Card ID must be at least 1!")
     @Max(value = 2147483647, message = "Card ID is too big!")
-    @NotNull(message = "Card ID cannot be null!")
     private int cardID;
 
     @Column(name = "brand")

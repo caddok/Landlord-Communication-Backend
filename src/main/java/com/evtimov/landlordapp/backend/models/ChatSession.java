@@ -15,8 +15,6 @@ public class ChatSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chatsessionId")
-    @NotNull(message = "ChatSession ID cannot be null!")
-    @Min(value = 1, message = "ChatSession ID must be at least 1!")
     @Max(value = 2147483647, message = "ChatSession ID is too big!")
     private int chatsessionID;
 

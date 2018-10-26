@@ -142,9 +142,9 @@ public class UserRepositoryImpl implements UserRepository {
             query.setParameter("pattern", pattern);
             users = query.list();
             if (users.size() > 0) {
-                username = users.get(0).getUsername();
+                username = "used";
             } else {
-                username = null;
+                username = "free";
             }
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -168,9 +168,9 @@ public class UserRepositoryImpl implements UserRepository {
             query.setParameter("pattern", pattern);
             users = query.list();
             if (users.size() > 0) {
-                email = users.get(0).getEmail();
+                email = "used";
             } else {
-                email = null;
+                email = "free";
             }
             session.getTransaction().commit();
         } catch (Exception e) {

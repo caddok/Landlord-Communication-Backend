@@ -32,7 +32,7 @@ COLLATE = utf8_unicode_ci;
 CREATE TABLE `landlordcommunicationdb`.`places` (
   `placeId` INT NOT NULL AUTO_INCREMENT,
   `landlordId` INT NOT NULL,
-  `tenantId` INT NULL,
+  `tenantId` INT NULL DEFAULT 0,
   `address` VARCHAR(55) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`placeId`))
@@ -75,7 +75,7 @@ CREATE TABLE `landlordcommunicationdb`.`rents` (
   `remaining` DECIMAL(7,2) NOT NULL,
   `placeId` INT NOT NULL,
   `ispaid` TINYINT NOT NULL DEFAULT 0,
-  `duedate` DATE NOT NULL,
+  `duedate` VARCHAR()15 NOT NULL,
   PRIMARY KEY (`rentId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

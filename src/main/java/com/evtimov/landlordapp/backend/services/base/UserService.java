@@ -18,8 +18,8 @@ public interface UserService {
 
     User getUserHashAndSaltByUsername(String username);
 
-    String checkUsername(String pattern);
+    User checkUsername(String pattern);
 
-    String checkEmail(String pattern);
+    User checkEmail(String pattern);
 
 }
