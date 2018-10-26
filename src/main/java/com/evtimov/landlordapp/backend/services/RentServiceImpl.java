@@ -23,34 +23,17 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public Rent addRent(Rent entity)  {
-
-        SimpleDateFormat sm = new SimpleDateFormat("yyyy-mm-dd");
-        String strDate = sm.format(entity.getDueDate());
-        Date dt = new Date();
-        try {
-            dt = sm.parse(strDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        entity.setDueDate(dt);
-
-        repository.addRent(entity);
-
-        return entity;
+        return repository.addRent(entity);
     }
 
     @Override
     public Rent updateRentRemaining(int rentId, Rent rent) {
-        repository.updateRentRemaining(rentId, rent);
-
-        return rent;
+        return repository.updateRentRemaining(rentId, rent);
     }
 
     @Override
     public Rent updateRentIsPaidStatus(int rentId, Rent rent) {
-        repository.updateRentIsPaidStatus(rentId, rent);
+        return repository.updateRentIsPaidStatus(rentId, rent);
 
-        return rent;
     }
 }

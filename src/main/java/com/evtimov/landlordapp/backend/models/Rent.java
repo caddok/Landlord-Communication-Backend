@@ -13,8 +13,6 @@ public class Rent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rentId")
-    @NotNull(message = "Rent ID cannot be null!")
-    @Min(value = 1, message = "Rent ID must be at least 1!")
     @Max(value = 2147483647, message = "Rent ID is too big!")
     private int rentID;
 
@@ -42,14 +40,14 @@ public class Rent {
 
     @Column(name = "duedate")
     @NotNull(message = "Date cannot be null!")
-    private Date dueDate;
+    private String dueDate;
 
 
     public Rent() {
         //default
     }
 
-    public Rent(double totalAmount, double remaining, boolean isPaid, Date dueDate, int placeID) {
+    public Rent(double totalAmount, double remaining, boolean isPaid, String dueDate, int placeID) {
         setPlaceID(placeID);
         setTotalAmount(totalAmount);
         setRemaining(remaining);
@@ -89,11 +87,11 @@ public class Rent {
         this.isPaid = isPaid;
     }
 
-    public Date getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
 

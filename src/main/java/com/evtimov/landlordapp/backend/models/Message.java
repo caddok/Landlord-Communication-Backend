@@ -15,9 +15,7 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "messageId")
-    @Min(value = 1, message = "Message ID must be at least 1!")
     @Max(value = 2147483647, message = "Message ID is too big!")
-    @NotNull(message = "Message ID cannot be null!")
     private int messageID;
 
     @Column(name = "timestamp")

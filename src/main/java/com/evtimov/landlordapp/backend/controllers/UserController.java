@@ -50,12 +50,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/checkusername/{username}", method = RequestMethod.GET)
-    public String checkUsername(@PathVariable(value = "username") String username){
+    public User checkUsername(@PathVariable(value = "username") String username){
         return service.checkUsername(username);
     }
 
     @RequestMapping(value = "/checkemail/{email}", method = RequestMethod.GET)
-    public String checkEmail(@PathVariable(value = "email") String email){
+    public User checkEmail(@PathVariable(value = "email") String email){
         return service.checkEmail(email);
     }
 

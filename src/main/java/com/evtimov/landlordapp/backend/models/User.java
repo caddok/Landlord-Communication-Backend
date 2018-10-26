@@ -12,8 +12,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
-    @NotNull(message = "User ID cannot be null!")
-    @Min(value = 1, message = "User ID must be at least 1!")
     @Max(value = 2147483647, message = "User ID is too big!")
     private int userID;
 

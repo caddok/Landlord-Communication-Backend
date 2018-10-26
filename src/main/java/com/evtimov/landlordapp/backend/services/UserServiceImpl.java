@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
         this.passwordAgent = passwordAgent;
     }
 
+    @Override
     public User registerUser(User entity) {
         repository.registerUser(entity);
         return repository.registerUser(entity);
@@ -45,13 +46,23 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public String checkUsername(String pattern) {
-        return repository.checkUsername(pattern);
+    public User checkUsername(String pattern) {
+        String username = repository.checkUsername(pattern);
+
+        User userModel = new User(false, username, null, null, null,
+                null, false, null, null);
+
+        return userModel;
     }
 
     @Override
-    public String checkEmail(String pattern) {
-        return repository.checkEmail(pattern);
+    public User checkEmail(String pattern) {
+        String email =  repository.checkEmail(pattern);
+
+        User userModel = new User(false, null, null, null, null,
+                email, false, null, null);
+
+        return userModel;
     }
 
 

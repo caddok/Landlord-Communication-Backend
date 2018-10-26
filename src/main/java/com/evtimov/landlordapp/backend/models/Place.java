@@ -14,13 +14,10 @@ public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "placeId")
-    @NotNull(message = "Place ID cannot be null!")
-    @Min(value = 1, message = "Place ID must be at least 1!")
     @Max(value = 2147483647, message = "Place ID is too big!")
     private int placeID;
 
     @Column(name = "tenantId")
-//    @NotNull(message = "Tenant ID cannot be null!")
     @Min(value = 1, message = "Tenant ID must be at least 1!")
     @Max(value = 2147483647, message = "Tenant ID is too big!")
     private int tenantID;
