@@ -42,4 +42,9 @@ public class PlaceController {
 
         return service.getPlaceById(placeId);
     }
+
+    @RequestMapping(value = "/{placeId}", method = RequestMethod.PUT)
+    public PlaceDTO updateTenantId(int tenantId, @PathVariable(value = "placeId") int placeId){
+        return service.updateTenantId(tenantId, placeId);
+    }
 }

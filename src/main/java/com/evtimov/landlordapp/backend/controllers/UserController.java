@@ -23,7 +23,6 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public User registerUser(@RequestBody @Valid User user){
-
         return service.registerUser(user);
     }
 

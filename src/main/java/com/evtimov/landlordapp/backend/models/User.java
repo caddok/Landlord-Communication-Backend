@@ -82,11 +82,13 @@ public class User {
         return userID;
     }
 
+    public void setUserId(int userId){ this.userID = userId;}
+
     public boolean getIsLandlord() {
         return this.isLandlord;
     }
 
-    private void setIsLandlord(boolean isLandlord) {
+    public void setIsLandlord(boolean isLandlord) {
         this.isLandlord = isLandlord;
     }
 
@@ -94,7 +96,7 @@ public class User {
         return username;
     }
 
-    private void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -142,7 +144,7 @@ public class User {
         return passwordHash;
     }
 
-    private void setPasswordHash(String passwordHash) {
+    public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 
@@ -150,7 +152,7 @@ public class User {
         return passwordSalt;
     }
 
-    private void setPasswordSalt(String passwordSalt) {
+    public void setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
     }
 }
