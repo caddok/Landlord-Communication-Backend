@@ -40,8 +40,8 @@ public class PlaceServiceImpl implements PlaceService {
         placeDTO.setDescription(place.getDescription());
         placeDTO.setLandlordID(place.getLandlordID());
         placeDTO.setTenantID(place.getTenantID());
-        if(place.getRents() != null){
-            for (Rent rent:place.getRents()) {
+        if (place.getRents() != null) {
+            for (Rent rent : place.getRents()) {
                 placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
                         + rent.getRemaining() + "\n" + "Due date: "
                         + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");
@@ -57,15 +57,15 @@ public class PlaceServiceImpl implements PlaceService {
         List<Place> places = repository.getAllByTenantId(tenantId);
         List<PlaceDTO> placesDTO = new ArrayList<>();
 
-        for (Place place:places) {
+        for (Place place : places) {
             PlaceDTO placeDTO = new PlaceDTO();
             placeDTO.setPlaceID(place.getPlaceID());
             placeDTO.setAddress(place.getAddress());
             placeDTO.setDescription(place.getDescription());
             placeDTO.setLandlordID(place.getLandlordID());
             placeDTO.setTenantID(place.getTenantID());
-            if(place.getRents() != null){
-                for (Rent rent:place.getRents()) {
+            if (place.getRents() != null) {
+                for (Rent rent : place.getRents()) {
                     placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
                             + rent.getRemaining() + "\n" + "Due date: "
                             + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");
@@ -82,15 +82,15 @@ public class PlaceServiceImpl implements PlaceService {
         List<Place> places = repository.getAllByLandlordId(landlordId);
         List<PlaceDTO> placesDTO = new ArrayList<>();
 
-        for (Place place:places) {
+        for (Place place : places) {
             PlaceDTO placeDTO = new PlaceDTO();
             placeDTO.setPlaceID(place.getPlaceID());
             placeDTO.setAddress(place.getAddress());
             placeDTO.setDescription(place.getDescription());
             placeDTO.setLandlordID(place.getLandlordID());
             placeDTO.setTenantID(place.getTenantID());
-            if(place.getRents() != null){
-                for (Rent rent:place.getRents()) {
+            if (place.getRents() != null) {
+                for (Rent rent : place.getRents()) {
                     placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
                             + rent.getRemaining() + "\n" + "Due date: "
                             + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");
@@ -114,8 +114,8 @@ public class PlaceServiceImpl implements PlaceService {
         placeDTO.setDescription(place.getDescription());
         placeDTO.setLandlordID(place.getLandlordID());
         placeDTO.setTenantID(place.getTenantID());
-        if(place.getRents() != null){
-            for (Rent rent:place.getRents()) {
+        if (place.getRents() != null) {
+            for (Rent rent : place.getRents()) {
                 placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
                         + rent.getRemaining() + "\n" + "Due date: "
                         + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");
@@ -123,5 +123,30 @@ public class PlaceServiceImpl implements PlaceService {
         }
 
         return placeDTO;
+    }
+
+    @Override
+    public List<PlaceDTO> getAllPlacesWhereNoTenant() {
+        List<Place> noTenantPlaces = repository.getAllPlacesWhereNoTenant();
+        List<PlaceDTO> placesDTO = new ArrayList<>();
+
+        for (Place place : noTenantPlaces) {
+            PlaceDTO placeDTO = new PlaceDTO();
+            placeDTO.setPlaceID(place.getPlaceID());
+            placeDTO.setAddress(place.getAddress());
+            placeDTO.setDescription(place.getDescription());
+            placeDTO.setLandlordID(place.getLandlordID());
+            placeDTO.setTenantID(place.getTenantID());
+            if (place.getRents() != null) {
+                for (Rent rent : place.getRents()) {
+                    placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
+                            + rent.getRemaining() + "\n" + "Due date: "
+                            + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");
+                }
+            }
+            placesDTO.add(placeDTO);
+        }
+
+        return placesDTO;
     }
 }

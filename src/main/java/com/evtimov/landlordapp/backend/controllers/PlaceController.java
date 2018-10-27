@@ -47,4 +47,9 @@ public class PlaceController {
     public PlaceDTO updateTenantId(int tenantId, @PathVariable(value = "placeId") int placeId){
         return service.updateTenantId(tenantId, placeId);
     }
+
+    @RequestMapping(value = "/notenant", method = RequestMethod.GET)
+    public List<PlaceDTO> getAllPlacesWhereNoTenant(){
+        return service.getAllPlacesWhereNoTenant();
+    }
 }

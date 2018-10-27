@@ -121,4 +121,11 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         }
         return placeToChange;
     }
+
+    @Override
+    public List<Place> getAllPlacesWhereNoTenant() {
+
+        List<Place> noTenantPlaces = getAllByTenantId(0);
+        return noTenantPlaces;
+    }
 }
