@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(User entity) {
-        repository.registerUser(entity);
         return repository.registerUser(entity);
     }
 

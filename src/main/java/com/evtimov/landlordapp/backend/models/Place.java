@@ -62,7 +62,7 @@ public class Place {
         return address;
     }
 
-    private void setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -70,7 +70,7 @@ public class Place {
         return description;
     }
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -82,7 +82,7 @@ public class Place {
         return tenantID;
     }
 
-    private void setTenantID(int tenantID) {
+    public void setTenantID(int tenantID) {
         this.tenantID = tenantID;
     }
 
