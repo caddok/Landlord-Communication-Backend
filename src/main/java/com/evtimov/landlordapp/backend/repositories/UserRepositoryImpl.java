@@ -25,6 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User registerUser(User entity) {
+
         try (
                 Session session = sessionFactory.openSession();
         ) {

@@ -103,19 +103,19 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public PlaceDTO updateTenantId(int tenantId, int placeId) {
+    public PlaceDTO updateTenantId(Place place, int placeId) {
 
-        Place place = repository.updateTenantId(tenantId, placeId);
+        Place placeModel = repository.updateTenantId(place, placeId);
 
         PlaceDTO placeDTO = new PlaceDTO();
 
-        placeDTO.setPlaceID(place.getPlaceID());
-        placeDTO.setAddress(place.getAddress());
-        placeDTO.setDescription(place.getDescription());
-        placeDTO.setLandlordID(place.getLandlordID());
-        placeDTO.setTenantID(place.getTenantID());
-        if (place.getRents() != null) {
-            for (Rent rent : place.getRents()) {
+        placeDTO.setPlaceID(placeModel.getPlaceID());
+        placeDTO.setAddress(placeModel.getAddress());
+        placeDTO.setDescription(placeModel.getDescription());
+        placeDTO.setLandlordID(placeModel.getLandlordID());
+        placeDTO.setTenantID(placeModel.getTenantID());
+        if (placeModel.getRents() != null) {
+            for (Rent rent : placeModel.getRents()) {
                 placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
                         + rent.getRemaining() + "\n" + "Due date: "
                         + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");

@@ -44,8 +44,8 @@ public class PlaceController {
     }
 
     @RequestMapping(value = "/{placeId}", method = RequestMethod.PUT)
-    public PlaceDTO updateTenantId(int tenantId, @PathVariable(value = "placeId") int placeId){
-        return service.updateTenantId(tenantId, placeId);
+    public PlaceDTO updateTenantId(@RequestBody Place place, @PathVariable(value = "placeId") int placeId){
+        return service.updateTenantId(place, placeId);
     }
 
     @RequestMapping(value = "/notenant", method = RequestMethod.GET)

@@ -2,7 +2,7 @@ CREATE SCHEMA `landlordcommunicationdb` ;
 
 CREATE TABLE `landlordcommunicationdb`.`users` (
   `userId` INT NOT NULL AUTO_INCREMENT,
-  `picture` BLOB NULL,
+  `picture` LONGTEXT NULL,
   `islandlord` TINYINT NOT NULL DEFAULT 0,
   `username` VARCHAR(45) NOT NULL,
   `firstname` VARCHAR(45) NOT NULL,

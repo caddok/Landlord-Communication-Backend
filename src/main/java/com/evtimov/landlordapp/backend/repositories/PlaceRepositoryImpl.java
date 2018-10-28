@@ -102,7 +102,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
     }
 
     @Override
-    public Place updateTenantId(int tenantId, int placeId) {
+    public Place updateTenantId(Place place, int placeId) {
 
         Place placeToChange;
 
@@ -112,7 +112,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             session.beginTransaction();
             placeToChange = session.get(Place.class, placeId);
 
-            placeToChange.setTenantID(tenantId);
+            placeToChange.setTenantID(place.getTenantID());
 
             session.getTransaction().commit();
         } catch (Exception ex) {
