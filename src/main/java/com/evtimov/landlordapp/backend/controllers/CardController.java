@@ -28,13 +28,13 @@ public class CardController {
         return card;
     }
 
-    @RequestMapping(value = "/{cardId}", method = RequestMethod.DELETE)
-    public void removeCard(@PathVariable(value = "cardId") int cardId){
-        service.removeCard(cardId);
-    }
-
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public List<Card> getAllCardsByUserId(@PathVariable(value = "userId") int userId){
         return service.getAllCardsByUserId(userId);
+    }
+
+    @RequestMapping(value = "/update/balance/{cardId}", method = RequestMethod.PUT)
+    public Card updateCardBalance(@PathVariable(value = "cardId") int cardId, @RequestBody Card card){
+        return service.updateCardBalance(cardId, card);
     }
 }

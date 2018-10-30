@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(User entity) {
+
         return repository.registerUser(entity);
     }
 
@@ -62,6 +63,18 @@ public class UserServiceImpl implements UserService {
                 email, false, null, null);
 
         return userModel;
+    }
+
+    @Override
+    public User getUserById(int userId) {
+
+        User incoming = repository.getUserById(userId);
+
+        // cause we don't want to send the whole user info
+        User sending = new User(false, incoming.getUsername(), null, incoming.getFirstName(), incoming.getLastName(),
+                incoming.getEmail(), false, null, null);
+
+        return sending;
     }
 
 

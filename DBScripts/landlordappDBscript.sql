@@ -2,7 +2,7 @@ CREATE SCHEMA `landlordcommunicationdb` ;
 
 CREATE TABLE `landlordcommunicationdb`.`users` (
   `userId` INT NOT NULL AUTO_INCREMENT,
-  `picture` BLOB NULL,
+  `picture` LONGTEXT NULL,
   `islandlord` TINYINT NOT NULL DEFAULT 0,
   `username` VARCHAR(45) NOT NULL,
   `firstname` VARCHAR(45) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `landlordcommunicationdb`.`payments` (
   `cardId` INT NOT NULL,
   `rentId` INT NOT NULL,
   `amount` DECIMAL(7,2) NOT NULL,
-  `date` DATE NOT NULL,
+  `date` VARCHAR(11) NOT NULL,
   PRIMARY KEY (`paymentId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

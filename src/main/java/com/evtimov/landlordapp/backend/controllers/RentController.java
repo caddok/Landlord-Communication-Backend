@@ -24,17 +24,19 @@ public class RentController {
         service.addRent(rent);
     }
 
-    @RequestMapping(value = "/updateremaining/{rentIdRemaining}", method = RequestMethod.PUT)
-    public Rent updateRentRemaining(@PathVariable(value = "rentIdRemaining") int rentId, @RequestBody @Valid Rent rent){
-        service.updateRentRemaining(rentId, rent);
+    @RequestMapping(value = "/updateremaining/{rentId}", method = RequestMethod.PUT)
+    public Rent updateRentRemaining(@PathVariable(value = "rentId") int rentId, @RequestBody Rent rent){
+        return service.updateRentRemaining(rentId, rent);
 
-        return rent;
     }
 
-    @RequestMapping(value = "/updatestatus/{rentIdStatus}", method = RequestMethod.PUT)
-    public Rent updateRentStatus(@PathVariable(value = "rentIdStatus") int rentId, @RequestBody @Valid Rent rent){
-        service.updateRentIsPaidStatus(rentId, rent);
+    @RequestMapping(value = "/updatestatus/{rentId}", method = RequestMethod.PUT)
+    public Rent updateRentStatus(@PathVariable(value = "rentId") int rentId){
+        return service.updateRentIsPaidStatus(rentId);
+    }
 
-        return rent;
+    @RequestMapping(value = "/{placeId}", method = RequestMethod.GET)
+    public Rent getRentByPlaceId(@PathVariable(value = "placeId") int placeId){
+        return service.getRentByPlaceId(placeId);
     }
 }

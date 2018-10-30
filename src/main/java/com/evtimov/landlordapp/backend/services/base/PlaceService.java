@@ -15,7 +15,9 @@ public interface PlaceService {
 
     List<PlaceDTO> getAllByLandlordId(int landlordId);
 
-    PlaceDTO updateTenantId(int tenantId, int placeId);
+    PlaceDTO updateTenantId(Place place, int placeId);
 
     List<PlaceDTO> getAllPlacesWhereNoTenant();
+
+    List<PlaceDTO> getAllPlacesByUserId(int userId);
 }

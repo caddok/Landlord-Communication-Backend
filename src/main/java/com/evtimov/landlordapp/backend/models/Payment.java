@@ -41,7 +41,8 @@ public class Payment {
 
     @Column(name = "date")
     @NotNull(message = "Date cannot be null!")
-    private Date date;
+    @Size(min = 1, max = 11, message = "Enter a date with length between 1 and 11!")
+    private String date;
 
     @ManyToOne
     @JoinColumn(name = "cardId", insertable = false, updatable = false)
@@ -56,7 +57,7 @@ public class Payment {
         //default
     }
 
-    public Payment(double amount, Date date, int userID, int cardID, int rentID) {
+    public Payment(double amount, String date, int userID, int cardID, int rentID) {
         setRentID(rentID);
         setUserID(userID);
         setCardID(cardID);
@@ -80,11 +81,11 @@ public class Payment {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    private void setDate(Date date) {
+    private void setDate(String date) {
         this.date = date;
     }
 

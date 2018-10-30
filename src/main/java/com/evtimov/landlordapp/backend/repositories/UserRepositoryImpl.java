@@ -25,6 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User registerUser(User entity) {
+
         try (
                 Session session = sessionFactory.openSession();
         ) {
@@ -178,6 +179,23 @@ public class UserRepositoryImpl implements UserRepository {
             throw new RuntimeException(e);
         }
         return email;
+    }
+
+    @Override
+    public User getUserById(int userId) {
+        User user;
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            user = session.get(User.class, userId);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return user;
     }
 
     private List<User> getAll() {
