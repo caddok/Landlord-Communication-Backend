@@ -141,7 +141,32 @@ public class PlaceServiceImpl implements PlaceService {
                 for (Rent rent : place.getRents()) {
                     placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + "\n" + " Remaining: "
                             + rent.getRemaining() + "\n" + "Due date: "
-                            + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n");
+                            + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n" + "\n");
+                }
+            }
+            placesDTO.add(placeDTO);
+        }
+
+        return placesDTO;
+    }
+
+    @Override
+    public List<PlaceDTO> getAllPlacesByUserId(int userId) {
+        List<Place> places = repository.getAllPlacesByUserId(userId);
+        List<PlaceDTO> placesDTO = new ArrayList<>();
+
+        for (Place place : places) {
+            PlaceDTO placeDTO = new PlaceDTO();
+            placeDTO.setPlaceID(place.getPlaceID());
+            placeDTO.setAddress(place.getAddress());
+            placeDTO.setDescription(place.getDescription());
+            placeDTO.setLandlordID(place.getLandlordID());
+            placeDTO.setTenantID(place.getTenantID());
+            if (place.getRents() != null) {
+                for (Rent rent : place.getRents()) {
+                    placeDTO.getRents().add("Total amount: " + rent.getTotalAmount() + " lv.\n" + "Remaining: "
+                            + rent.getRemaining() + " lv.\n" + "Due date: "
+                            + rent.getDueDate() + "\n" + "Paid: " + rent.getIsPaid() + "\n" + "\n");
                 }
             }
             placesDTO.add(placeDTO);

@@ -181,6 +181,23 @@ public class UserRepositoryImpl implements UserRepository {
         return email;
     }
 
+    @Override
+    public User getUserById(int userId) {
+        User user;
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            user = session.get(User.class, userId);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return user;
+    }
+
     private List<User> getAll() {
         List<User> users;
 

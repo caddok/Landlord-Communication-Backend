@@ -8,5 +8,7 @@ public interface RentRepository {
 
     Rent updateRentRemaining(int rentId, Rent rent);
 
-    Rent updateRentIsPaidStatus(int rentId, Rent rent);
+    Rent updateRentIsPaidStatus(int rentId);
+
+    Rent getRentByPlaceId(int placeId);
 }

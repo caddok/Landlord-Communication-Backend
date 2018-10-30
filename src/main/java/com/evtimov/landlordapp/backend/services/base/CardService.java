@@ -8,7 +8,7 @@ public interface CardService {
 
     Card addCard(Card card);
 
-    void removeCard(int cardId);
-
     List<Card> getAllCardsByUserId(int userId);
+
+    Card updateCardBalance(int cardId, Card card);
 }

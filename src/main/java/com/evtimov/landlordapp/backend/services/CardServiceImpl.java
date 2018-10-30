@@ -24,13 +24,13 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public void removeCard(int cardId){
-        repository.removeCard(cardId);
+    public List<Card> getAllCardsByUserId(int userId) {
+        return repository.getAllCardsByUserId(userId);
     }
 
     @Override
-    public List<Card> getAllCardsByUserId(int userId) {
-        return repository.getAllCardsByUserId(userId);
+    public Card updateCardBalance(int cardId, Card card) {
+        return repository.updateCardBalance(cardId, card);
     }
 }
 

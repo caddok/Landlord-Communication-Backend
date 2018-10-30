@@ -128,4 +128,25 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         List<Place> noTenantPlaces = getAllByTenantId(0);
         return noTenantPlaces;
     }
+
+    @Override
+    public List<Place> getAllPlacesByUserId(int userId) {
+        List<Place> places;
+        String statement = "from Place where landlordID = :pattern or tenantID = :pattern ";
+
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("pattern", userId);
+            places = query.list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return places;
+    }
 }

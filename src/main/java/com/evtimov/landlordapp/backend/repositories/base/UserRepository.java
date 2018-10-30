@@ -21,4 +21,6 @@ public interface UserRepository {
     String checkUsername(String pattern);
 
     String checkEmail(String pattern);
+
+    User getUserById(int userId);
 }

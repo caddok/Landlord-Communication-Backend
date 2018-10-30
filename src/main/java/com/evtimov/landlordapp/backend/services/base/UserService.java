@@ -22,4 +22,5 @@ public interface UserService {
 
     User checkEmail(String pattern);
 
+    User getUserById(int userId);
 }

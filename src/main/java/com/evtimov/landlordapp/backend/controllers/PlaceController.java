@@ -43,7 +43,7 @@ public class PlaceController {
         return service.getPlaceById(placeId);
     }
 
-    @RequestMapping(value = "/{placeId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/place/{placeId}", method = RequestMethod.PUT)
     public PlaceDTO updateTenantId(@RequestBody Place place, @PathVariable(value = "placeId") int placeId){
         return service.updateTenantId(place, placeId);
     }
@@ -51,5 +51,10 @@ public class PlaceController {
     @RequestMapping(value = "/notenant", method = RequestMethod.GET)
     public List<PlaceDTO> getAllPlacesWhereNoTenant(){
         return service.getAllPlacesWhereNoTenant();
+    }
+
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    public List<PlaceDTO> getAllByUserId(@PathVariable(value = "userId") int userId){
+        return service.getAllPlacesByUserId(userId);
     }
 }

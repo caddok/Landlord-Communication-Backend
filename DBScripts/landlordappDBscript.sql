@@ -62,7 +62,7 @@ CREATE TABLE `landlordcommunicationdb`.`payments` (
   `cardId` INT NOT NULL,
   `rentId` INT NOT NULL,
   `amount` DECIMAL(7,2) NOT NULL,
-  `date` DATE NOT NULL,
+  `date` VARCHAR(11) NOT NULL,
   PRIMARY KEY (`paymentId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8

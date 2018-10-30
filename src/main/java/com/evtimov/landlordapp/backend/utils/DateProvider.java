@@ -1,6 +1,8 @@
 package com.evtimov.landlordapp.backend.utils;
 
 import org.joda.time.LocalDateTime;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateProvider {
@@ -8,9 +10,20 @@ public class DateProvider {
     public Date getDateBeforeThreeMonths(){
 
         LocalDateTime currentLocalDateTime = LocalDateTime.now();
-        LocalDateTime beforeNinetyDays = currentLocalDateTime.minusDays(90);
+        LocalDateTime beforeNinetyDays = currentLocalDateTime.minusMonths(3);
         Date date = beforeNinetyDays.toDate();
 
         return date;
+    }
+
+    public String getDateAfterOneMonth(){
+
+        LocalDateTime currentLocalDateTime = LocalDateTime.now();
+        LocalDateTime afterOneMonth = currentLocalDateTime.plusMonths(1);
+        Date date = afterOneMonth.toDate();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String paymentDate = format.format(date);
+
+        return paymentDate;
     }
 }

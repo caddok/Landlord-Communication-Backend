@@ -17,4 +17,6 @@ public interface PlaceRepository {
     Place updateTenantId(Place place, int placeId);
 
     List<Place> getAllPlacesWhereNoTenant();
+
+    List<Place> getAllPlacesByUserId(int userId);
 }

@@ -36,11 +36,10 @@ public class UserController {
         return service.findAllLandlords();
     }
 
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
     public User getUserByUsername(@PathVariable(value = "username") String username){
         return service.findUserByUsername(username);
     }
-
 
     @RequestMapping(value = "/updatestatus/{userId}", method = RequestMethod.PUT)
     public User updateUserOnlineStatus(@PathVariable(value = "userId") int userId, @RequestBody User user){
@@ -61,5 +60,10 @@ public class UserController {
     @RequestMapping(value = "/gethashandsalt/{username}", method = RequestMethod.GET)
     public User getUserHashAndSaltByUsername(@PathVariable(value = "username") String username){
         return service.getUserHashAndSaltByUsername(username);
+    }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public User getUserById(@PathVariable(value = "userId") int userId){
+        return service.getUserById(userId);
     }
 }
