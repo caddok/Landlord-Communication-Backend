@@ -1,7 +1,6 @@
 package com.evtimov.landlordapp.backend.controllers;
 
 
-import com.evtimov.landlordapp.backend.DTOmodels.PlaceDTO;
 import com.evtimov.landlordapp.backend.models.Place;
 import com.evtimov.landlordapp.backend.services.base.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,33 +27,33 @@ public class PlaceController {
     }
 
     @RequestMapping(value = "/tenant/{tenantId}", method = RequestMethod.GET)
-    public List<PlaceDTO> getAllByTenantId(@PathVariable(value = "tenantId") int tenantId){
+    public List<Place> getAllByTenantId(@PathVariable(value = "tenantId") int tenantId){
         return service.getAllByTenantId(tenantId);
     }
 
     @RequestMapping(value = "/landlord/{landlordId}", method = RequestMethod.GET)
-    public List<PlaceDTO> getAllByLandlordId(@PathVariable(value = "landlordId") int landlordId){
+    public List<Place> getAllByLandlordId(@PathVariable(value = "landlordId") int landlordId){
         return service.getAllByLandlordId(landlordId);
     }
 
     @RequestMapping(value = "/{placeId}", method = RequestMethod.GET)
-    public PlaceDTO getPlaceById(@PathVariable(value = "placeId") int placeId){
+    public Place getPlaceById(@PathVariable(value = "placeId") int placeId){
 
         return service.getPlaceById(placeId);
     }
 
     @RequestMapping(value = "/place/{placeId}", method = RequestMethod.PUT)
-    public PlaceDTO updateTenantId(@RequestBody Place place, @PathVariable(value = "placeId") int placeId){
+    public Place updateTenantId(@RequestBody Place place, @PathVariable(value = "placeId") int placeId){
         return service.updateTenantId(place, placeId);
     }
 
     @RequestMapping(value = "/notenant", method = RequestMethod.GET)
-    public List<PlaceDTO> getAllPlacesWhereNoTenant(){
+    public List<Place> getAllPlacesWhereNoTenant(){
         return service.getAllPlacesWhereNoTenant();
     }
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-    public List<PlaceDTO> getAllByUserId(@PathVariable(value = "userId") int userId){
+    public List<Place> getAllByUserId(@PathVariable(value = "userId") int userId){
         return service.getAllPlacesByUserId(userId);
     }
 }

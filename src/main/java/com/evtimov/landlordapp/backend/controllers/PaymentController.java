@@ -28,8 +28,13 @@ public class PaymentController {
         return payment;
     }
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public List<Payment> getAllPaymentsByUserId(@PathVariable(value = "userId") int userId){
-        return service.getAllPaymentsByUserId(userId);
+    @RequestMapping(value = "/tenant/{userId}", method = RequestMethod.GET)
+    public List<Payment> getAllPaymentsByUserId(@PathVariable(value = "userId") int tenantId){
+        return service.getAllPaymentsByUserId(tenantId);
+    }
+
+    @RequestMapping(value = "/landlord/{userId}", method = RequestMethod.GET)
+    public List<Payment> getAllPaymentsByLandlordId(@PathVariable(value = "userId") int landlordId){
+        return service.getAllPaymentsByLandlordId(landlordId);
     }
 }

@@ -38,10 +38,6 @@ public class Place {
     @Size(min = 1, max = 16777215, message = "Enter description with length between 1 and 16777215!")
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "placeId", insertable = false, updatable = false)
-    private Set<Rent> rents;
-
     public Place() {
         //default
     }
@@ -72,10 +68,6 @@ public class Place {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<Rent> getRents() {
-        return rents;
     }
 
     public int getTenantID() {

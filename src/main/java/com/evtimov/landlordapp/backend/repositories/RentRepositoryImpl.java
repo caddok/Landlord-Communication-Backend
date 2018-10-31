@@ -84,7 +84,7 @@ public class RentRepositoryImpl implements RentRepository {
     @Override
     public Rent getRentByPlaceId(int placeId) {
         List<Rent> rents;
-        String statement = "from Rent where placeID = :pattern ";
+        String statement = "from Rent where placeID = :pattern and isPaid = :paidPattern ";
 
         try (
                 Session session = sessionFactory.openSession();
@@ -92,6 +92,7 @@ public class RentRepositoryImpl implements RentRepository {
             session.beginTransaction();
             Query query = session.createQuery(statement);
             query.setParameter("pattern", placeId);
+            query.setParameter("paidPattern", false);
             rents = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
