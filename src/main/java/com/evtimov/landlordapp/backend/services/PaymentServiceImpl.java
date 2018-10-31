@@ -30,4 +30,14 @@ public class PaymentServiceImpl implements PaymentService {
     public List<Payment> getAllPaymentsByUserId(int userId){
         return repository.getAllPaymentsByUserId(userId);
     }
+
+    @Override
+    public List<Payment> getAllPaymentsByLandlordId(int landlordId) {
+        List<Payment> allPayments = repository.getAllPayments();
+        List<Payment> landlordIncomingPayments = allPayments
+                .stream()
+                .filter(payment -> payment.getPlace().getLandlordID() == landlordId)
+                .collect(Collectors.toList());
+        return landlordIncomingPayments;
+    }
 }

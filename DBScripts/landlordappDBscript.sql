@@ -45,7 +45,7 @@ CREATE TABLE `landlordcommunicationdb`.`cards` (
   `brand` VARCHAR(45) NOT NULL,
   `type` VARCHAR(45) NOT NULL,
   `cardnumber` VARCHAR(16) NOT NULL,
-  `cvvnumber` INT NOT NULL,
+  `cvvnumber` VARCHAR(3) NOT NULL,
   `userId` INT NOT NULL,
   `balance` DECIMAL(9,2) NOT NULL,
   PRIMARY KEY (`cardId`),
@@ -61,6 +61,7 @@ CREATE TABLE `landlordcommunicationdb`.`payments` (
   `userId` INT NOT NULL,
   `cardId` INT NOT NULL,
   `rentId` INT NOT NULL,
+  `placeId` INT NOT NULL,
   `amount` DECIMAL(7,2) NOT NULL,
   `date` VARCHAR(11) NOT NULL,
   PRIMARY KEY (`paymentId`))
@@ -121,8 +122,8 @@ ADD CONSTRAINT `FK_Card_User`
 ALTER TABLE `landlordcommunicationdb`.`payments` 
 ADD INDEX `FK_Payment_User_idx` (`userId` ASC) ,
 ADD INDEX `FK_Payment_Card_idx` (`cardId` ASC) ,
-ADD INDEX `FK_Payment_Place_idx` (`placeId` ASC) ,
-ADD INDEX `FK_Payment_Rent_idx` (`rentId` ASC) ;
+ADD INDEX `FK_Payment_Rent_idx` (`rentId` ASC) ,
+ADD INDEX `FK_Payment_Place_idx` (`placeId` ASC) ;
 ;
 ALTER TABLE `landlordcommunicationdb`.`payments` 
 ADD CONSTRAINT `FK_Payment_User`
@@ -133,6 +134,11 @@ ADD CONSTRAINT `FK_Payment_User`
 ADD CONSTRAINT `FK_Payment_Card`
   FOREIGN KEY (`cardId`)
   REFERENCES `landlordcommunicationdb`.`cards` (`cardId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `FK_Payment_Place`
+  FOREIGN KEY (`placeId`)
+  REFERENCES `landlordcommunicationdb`.`places` (`placeId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 ADD CONSTRAINT `FK_Payment_Rent`

@@ -22,7 +22,7 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public Rent addRent(Rent entity)  {
-        String date = dateProvider.getDateAfterOneMonth();
+        String date = dateProvider.getDateAfterOneMonth(entity.getDueDate());
         entity.setDueDate(date);
         return repository.addRent(entity);
     }

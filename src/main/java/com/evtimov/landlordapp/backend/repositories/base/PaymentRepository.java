@@ -8,5 +8,7 @@ public interface PaymentRepository {
 
     Payment payYourBill(Payment payment);
 
+    List<Payment> getAllPayments();
+
     List<Payment> getAllPaymentsByUserId(int userId);
 }

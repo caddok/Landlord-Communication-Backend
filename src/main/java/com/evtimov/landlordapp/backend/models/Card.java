@@ -26,14 +26,13 @@ public class Card {
 
     @Column(name = "cardnumber")
     @NotNull(message = "Card number cannot be null! Please enter number!")
-    @Size(min = 1, max = 16, message = "Enter a card number with length between 1 and 16!")
+    @Size(min = 16, max = 16, message = "Enter a card number with length between 1 and 16!")
     private String cardNumber;
 
     @Column(name = "cvvnumber")
     @NotNull(message = "CVV card number cannot be null!")
-    @Min(value = 100)
-    @Max(value = 999)
-    private int cvvNumber;
+    @Size(min = 3, max = 3, message = "CVV number must contains exactly 3 digits!")
+    private String cvvNumber;
 
     @Column(name = "balance")
     @DecimalMax(value = "9999999.99", message = "Balance is too big!")
@@ -47,15 +46,11 @@ public class Card {
     @NotNull(message = "User ID cannot be null!")
     private int userID;
 
-    @ManyToOne
-    @JoinColumn(name = "userId", insertable = false, updatable = false)
-    private User user;
-
     public Card() {
         //default
     }
 
-    public Card(String brand, String type, String cardNumber, int cvvNumber, double balance, int userID) {
+    public Card(String brand, String type, String cardNumber, String cvvNumber, double balance, int userID) {
         setUserID(userID);
         setBrand(brand);
         setType(type);
@@ -96,11 +91,11 @@ public class Card {
         this.cardNumber = cardNumber;
     }
 
-    public int getCvvNumber() {
+    public String getCvvNumber() {
         return cvvNumber;
     }
 
-    private void setCvvNumber(int cvvNumber) {
+    private void setCvvNumber(String cvvNumber) {
         this.cvvNumber = cvvNumber;
     }
 
@@ -110,10 +105,6 @@ public class Card {
 
     public void setBalance(double balance) {
         this.balance = balance;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public int getUserID() {
