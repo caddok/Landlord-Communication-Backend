@@ -71,8 +71,9 @@ public class UserServiceImpl implements UserService {
         User incoming = repository.getUserById(userId);
 
         // cause we don't want to send the whole user info
-        User sending = new User(false, incoming.getUsername(), null, incoming.getFirstName(), incoming.getLastName(),
-                incoming.getEmail(), false, null, null);
+        User sending = new User(incoming.getIsLandlord(), incoming.getUsername(), incoming.getPicture(), incoming.getFirstName(), incoming.getLastName(),
+                incoming.getEmail(), incoming.getIsOnline(), null, null);
+        sending.setUserId(userId);
 
         return sending;
     }

@@ -22,8 +22,7 @@ public class RatingController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Rating addVote(@RequestBody @Valid Rating rating){
-        service.addVote(rating);
-        return rating;
+        return service.addVote(rating);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
@@ -31,8 +30,8 @@ public class RatingController {
         return service.getRatingsByUserUd(userId);
     }
 
-    @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public boolean isVotedTwoTimes(int voteFor, int voteFrom){
-        return service.isVotedTwoTimes(voteFor, voteFrom);
+    @RequestMapping(value = "/check/{voteForId}/{voteFromId}", method = RequestMethod.GET)
+    public Rating isVotedTwoTimes(@PathVariable(value = "voteForId") int voteForId, @PathVariable(value = "voteFromId") int voteFromId){
+        return service.isVotedTwoTimes(voteForId, voteFromId);
     }
 }

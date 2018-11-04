@@ -38,24 +38,6 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         return place;
     }
 
-    @Override
-    public Place getPlaceById(int placeId) {
-        Place place;
-
-        try (
-                Session session = sessionFactory.openSession();
-        ) {
-            session.beginTransaction();
-            place = session.get(Place.class, placeId);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        return place;
-    }
-
 
     @Override
     public List<Place> getAllByTenantId(int tenantId) {
@@ -69,28 +51,6 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             session.beginTransaction();
             Query query = session.createQuery(statement);
             query.setParameter("pattern", tenantId);
-            places = query.list();
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        return places;
-    }
-
-    @Override
-    public List<Place> getAllByLandlordId(int landlordId) {
-
-        List<Place> places;
-        String statement = "from Place where landlordID = :pattern ";
-
-        try (
-                Session session = sessionFactory.openSession();
-        ) {
-            session.beginTransaction();
-            Query query = session.createQuery(statement);
-            query.setParameter("pattern", landlordId);
             places = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -140,6 +100,28 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             session.beginTransaction();
             Query query = session.createQuery(statement);
             query.setParameter("pattern", userId);
+            places = query.list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return places;
+    }
+
+    @Override
+    public List<Place> getAllByTenantIdAndLandlordId(int tenantId, int landlordId) {
+        List<Place> places;
+        String statement = "from Place where landlordID = :pattern and tenantID = :pattern2 ";
+
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("pattern", landlordId);
+            query.setParameter("pattern2", tenantId);
             places = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {

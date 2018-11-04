@@ -26,20 +26,10 @@ public class PlaceServiceImpl implements PlaceService {
         return place;
     }
 
-    @Override
-    public Place getPlaceById(int placeId) {
-        return repository.getPlaceById(placeId);
-    }
-
 
     @Override
     public List<Place> getAllByTenantId(int tenantId) {
         return repository.getAllByTenantId(tenantId);
-    }
-
-    @Override
-    public List<Place> getAllByLandlordId(int landlordId) {
-        return repository.getAllByLandlordId(landlordId);
     }
 
     @Override
@@ -56,5 +46,10 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public List<Place> getAllPlacesByUserId(int userId) {
         return repository.getAllPlacesByUserId(userId);
+    }
+
+    @Override
+    public List<Place> getAllByTenantIdAndLandlordId(int tenantId, int landlordId) {
+        return repository.getAllByTenantIdAndLandlordId(tenantId, landlordId);
     }
 }
