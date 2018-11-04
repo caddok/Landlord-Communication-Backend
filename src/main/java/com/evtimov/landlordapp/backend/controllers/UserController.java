@@ -41,12 +41,6 @@ public class UserController {
         return service.findUserByUsername(username);
     }
 
-    @RequestMapping(value = "/updatestatus/{userId}", method = RequestMethod.PUT)
-    public User updateUserOnlineStatus(@PathVariable(value = "userId") int userId, @RequestBody User user){
-
-        return service.updateUserOnlineStatus(userId, user);
-    }
-
     @RequestMapping(value = "/checkusername/{username}", method = RequestMethod.GET)
     public User checkUsername(@PathVariable(value = "username") String username){
         return service.checkUsername(username);

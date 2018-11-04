@@ -22,8 +22,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public Rating addVote(Rating rating) {
-        repository.addVote(rating);
-        return rating;
+        return repository.addVote(rating);
     }
 
     @Override
@@ -32,7 +31,8 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public boolean isVotedTwoTimes(int voteFor, int voteFrom) {
-        return repository.isVotedTwoTimes(voteFor, voteFrom);
+    public Rating isVotedTwoTimes(int voteForId, int voteFromId) {
+
+        return repository.isVotedTwoTimes(voteForId, voteFromId);
     }
 }

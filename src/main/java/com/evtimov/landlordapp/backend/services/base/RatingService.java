@@ -10,5 +10,5 @@ public interface RatingService {
 
     List<Rating> getRatingsByUserUd(int userId);
 
-    boolean isVotedTwoTimes(int voteFor, int voteFrom);
+    Rating isVotedTwoTimes(int voteForId, int voteFromId);
 }

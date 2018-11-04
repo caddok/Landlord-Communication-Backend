@@ -26,22 +26,6 @@ public class PlaceController {
         return place;
     }
 
-    @RequestMapping(value = "/tenant/{tenantId}", method = RequestMethod.GET)
-    public List<Place> getAllByTenantId(@PathVariable(value = "tenantId") int tenantId){
-        return service.getAllByTenantId(tenantId);
-    }
-
-    @RequestMapping(value = "/landlord/{landlordId}", method = RequestMethod.GET)
-    public List<Place> getAllByLandlordId(@PathVariable(value = "landlordId") int landlordId){
-        return service.getAllByLandlordId(landlordId);
-    }
-
-    @RequestMapping(value = "/{placeId}", method = RequestMethod.GET)
-    public Place getPlaceById(@PathVariable(value = "placeId") int placeId){
-
-        return service.getPlaceById(placeId);
-    }
-
     @RequestMapping(value = "/place/{placeId}", method = RequestMethod.PUT)
     public Place updateTenantId(@RequestBody Place place, @PathVariable(value = "placeId") int placeId){
         return service.updateTenantId(place, placeId);
@@ -55,5 +39,10 @@ public class PlaceController {
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
     public List<Place> getAllByUserId(@PathVariable(value = "userId") int userId){
         return service.getAllPlacesByUserId(userId);
+    }
+
+    @RequestMapping(value = "/commonplace/{tenantId}/{landlordId}", method = RequestMethod.GET)
+    public List<Place> getAllByTenantIdAndLandlordId(@PathVariable(value = "tenantId") int tenantId, @PathVariable(value = "landlordId")int landlordId){
+        return service.getAllByTenantIdAndLandlordId(tenantId, landlordId);
     }
 }

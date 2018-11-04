@@ -58,7 +58,7 @@ public class RatingRepositoryImpl implements RatingRepository {
     }
 
     @Override
-    public boolean isVotedTwoTimes(int voteFor, int voteFrom) {
+    public Rating isVotedTwoTimes(int voteForId, int voteFromId) {
 
         List<Rating> ratings;
         String statement = "from Rating where voteFor = :pattern and voteFrom = :pattern2 ";
@@ -68,14 +68,19 @@ public class RatingRepositoryImpl implements RatingRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", voteFor);
-            query.setParameter("pattern2", voteFrom);
+            query.setParameter("pattern", voteForId);
+            query.setParameter("pattern2", voteFromId);
             ratings = query.list();
             session.getTransaction().commit();
         }catch (Exception e){
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        return ratings.size() > 0;
+
+        if(ratings.size() > 0){
+            return null;
+        }else{
+            return new Rating();
+        }
     }
 }
