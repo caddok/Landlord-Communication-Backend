@@ -6,12 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/api/users")
+<<<<<<< HEAD
 public class UserController {                    //CHECKED
+=======
+public class UserController {
+
+>>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
     private final UserService service;
 
     @Autowired
@@ -21,9 +27,14 @@ public class UserController {                    //CHECKED
 
 
     @RequestMapping(method = RequestMethod.POST)
+<<<<<<< HEAD
     public User registerUser(@RequestBody User user){
         service.registerUser(user);
         return user;
+=======
+    public User registerUser(@RequestBody @Valid User user){
+        return service.registerUser(user);
+>>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
     }
 
     @RequestMapping(value = "/{username}",method = RequestMethod.POST)
@@ -43,40 +54,28 @@ public class UserController {                    //CHECKED
         return service.findAllLandlords();
     }
 
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
     public User getUserByUsername(@PathVariable(value = "username") String username){
         return service.findUserByUsername(username);
     }
 
-    @RequestMapping(value = "/rating/{rating}", method = RequestMethod.GET)
-    public List<User> getUsersByRating(@PathVariable(value = "rating") double rating){
-        return service.findUserByRating(rating);
-    }
-
-
-    @RequestMapping(value = "/updaterating/{userId}", method = RequestMethod.PUT)
-    public User updateUserRating(@PathVariable(value = "userId") int userId, @RequestBody User user){
-
-        service.updateUserRating(userId, user);
-
-        return user;
-    }
-
-    @RequestMapping(value = "/updatestatus/{userId}", method = RequestMethod.PUT)
-    public User updateUserOnlineStatus(@PathVariable(value = "userId") int userId, @RequestBody User user){
-
-        service.updateUserOnlineStatus(userId, user);
-
-        return user;
-    }
-
     @RequestMapping(value = "/checkusername/{username}", method = RequestMethod.GET)
-    public String checkUsername(@PathVariable(value = "username") String username){
+    public User checkUsername(@PathVariable(value = "username") String username){
         return service.checkUsername(username);
     }
 
     @RequestMapping(value = "/checkemail/{email}", method = RequestMethod.GET)
-    public String checkEmail(@PathVariable(value = "email") String email){
+    public User checkEmail(@PathVariable(value = "email") String email){
         return service.checkEmail(email);
+    }
+
+    @RequestMapping(value = "/gethashandsalt/{username}", method = RequestMethod.GET)
+    public User getUserHashAndSaltByUsername(@PathVariable(value = "username") String username){
+        return service.getUserHashAndSaltByUsername(username);
+    }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public User getUserById(@PathVariable(value = "userId") int userId){
+        return service.getUserById(userId);
     }
 }

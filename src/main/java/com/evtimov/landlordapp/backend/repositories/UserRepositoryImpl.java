@@ -25,6 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User registerUser(User entity) {
+
         try (
                 Session session = sessionFactory.openSession();
         ) {
@@ -57,27 +58,6 @@ public class UserRepositoryImpl implements UserRepository {
         return users;
     }
 
-    @Override
-    public User updateUserRating(int userId, User model) {
-        User userToChange;
-        try (
-                Session session = sessionFactory.openSession();
-        ) {
-            session.beginTransaction();
-            userToChange = session.get(User.class, userId);
-
-            userToChange.setVotes(model.getVotes());
-            userToChange.setVoteSum(model.getVoteSum());
-            userToChange.setRating(userToChange.getVoteSum() / userToChange.getVotes());
-
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            throw new RuntimeException();
-        }
-
-        return userToChange;
-    }
 
     @Override
     public User updateUserOnlineStatus(int userId, User model) {
@@ -140,28 +120,30 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findUserByRating(double pattern) {
+    public User getUserHashAndSaltByUsername(String username) {
         List<User> users;
-        String statement = "from User where rating = :pattern ";
+        User model;
+        String statement = "from User where username = :pattern ";
 
         try (
                 Session session = sessionFactory.openSession();
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
+            query.setParameter("pattern", username);
             users = query.list();
+            if (users.size() > 0) {
+                model = new User(users.get(0).getPasswordHash(), users.get(0).getPasswordSalt());
+                return model;
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        if (users.size() > 0) {
-            return users;
-        } else {
-            return null;
-        }
+        return null;
     }
+
 
     @Override
     public String checkUsername(String pattern) {
@@ -177,9 +159,9 @@ public class UserRepositoryImpl implements UserRepository {
             query.setParameter("pattern", pattern);
             users = query.list();
             if (users.size() > 0) {
-                username = users.get(0).getUsername();
-            }else{
-                username = null;
+                username = "used";
+            } else {
+                username = "free";
             }
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -203,9 +185,9 @@ public class UserRepositoryImpl implements UserRepository {
             query.setParameter("pattern", pattern);
             users = query.list();
             if (users.size() > 0) {
-                email = users.get(0).getEmail();
-            }else{
-                email = null;
+                email = "used";
+            } else {
+                email = "free";
             }
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -213,6 +195,23 @@ public class UserRepositoryImpl implements UserRepository {
             throw new RuntimeException(e);
         }
         return email;
+    }
+
+    @Override
+    public User getUserById(int userId) {
+        User user;
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            user = session.get(User.class, userId);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return user;
     }
 
     private List<User> getAll() {

@@ -4,6 +4,7 @@ package com.evtimov.landlordapp.backend.services;
 import com.evtimov.landlordapp.backend.models.User;
 import com.evtimov.landlordapp.backend.repositories.base.UserRepository;
 import com.evtimov.landlordapp.backend.services.base.UserService;
+import com.evtimov.landlordapp.backend.utils.password.PasswordAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +14,18 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
+    private final PasswordAgent passwordAgent;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository) {
+    public UserServiceImpl(UserRepository repository, PasswordAgent passwordAgent) {
         this.repository = repository;
+        this.passwordAgent = passwordAgent;
     }
 
+    @Override
     public User registerUser(User entity) {
-        entity.setRating(entity.getVoteSum()/entity.getVotes());
-        repository.registerUser(entity);
-        return entity;
+
+        return repository.registerUser(entity);
     }
 
 
@@ -41,26 +44,40 @@ public class UserServiceImpl implements UserService {
         return repository.getUserByUsername(pattern);
     }
 
+
     @Override
-    public List<User> findUserByRating(double pattern){
-        return repository.findUserByRating(pattern);
+    public User checkUsername(String pattern) {
+        String username = repository.checkUsername(pattern);
+
+        User userModel = new User(false, username, null, null, null,
+                null, false, null, null);
+
+        return userModel;
     }
 
     @Override
-    public String checkUsername(String pattern) {
-        return repository.checkUsername(pattern);
+    public User checkEmail(String pattern) {
+        String email =  repository.checkEmail(pattern);
+
+        User userModel = new User(false, null, null, null, null,
+                email, false, null, null);
+
+        return userModel;
     }
 
     @Override
-    public String checkEmail(String pattern) {
-        return repository.checkEmail(pattern);
+    public User getUserById(int userId) {
+
+        User incoming = repository.getUserById(userId);
+
+        // cause we don't want to send the whole user info
+        User sending = new User(incoming.getIsLandlord(), incoming.getUsername(), incoming.getPicture(), incoming.getFirstName(), incoming.getLastName(),
+                incoming.getEmail(), incoming.getIsOnline(), null, null);
+        sending.setUserId(userId);
+
+        return sending;
     }
 
-    @Override
-    public User updateUserRating(int userId, User model){
-        repository.updateUserRating(userId, model);
-        return model;
-    }
 
     @Override
     public User updateUserOnlineStatus(int userId, User model){
@@ -69,10 +86,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+<<<<<<< HEAD
     public String updateUserRegistrationToken(int userId, String token) {
         repository.updateUserRegistrationToken(userId,token);
         return token;
     }
 
+=======
+    public User getUserHashAndSaltByUsername(String username){
+        return repository.getUserHashAndSaltByUsername(username);
+    }
+>>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
 }
 

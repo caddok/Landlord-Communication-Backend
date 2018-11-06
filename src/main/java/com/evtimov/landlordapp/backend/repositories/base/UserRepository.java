@@ -12,17 +12,17 @@ public interface UserRepository {
 
     List<User> findAllLandlords();
 
-    User updateUserRating(int userId, User model);
-
     User updateUserOnlineStatus(int userId, User model);
 
     User updateUserRegistrationToken(int userId, String token);
 
     User getUserByUsername(String pattern);
 
-    List<User> findUserByRating(double pattern);
+    User getUserHashAndSaltByUsername(String username);
 
     String checkUsername(String pattern);
 
     String checkEmail(String pattern);
+
+    User getUserById(int userId);
 }

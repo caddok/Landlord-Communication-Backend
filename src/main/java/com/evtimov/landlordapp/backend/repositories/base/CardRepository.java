@@ -8,7 +8,7 @@ public interface CardRepository {
 
     Card addCard(Card card);
 
-    Card removeCard(int cardId);
-
     List<Card> getAllCardsByUserId(int userId);
+
+    Card updateCardBalance(int cardId, Card card);
 }

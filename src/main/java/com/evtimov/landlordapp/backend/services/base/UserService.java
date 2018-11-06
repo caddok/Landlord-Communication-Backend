@@ -12,18 +12,17 @@ public interface UserService {
 
     List<User> findAllLandlords();
 
-    User updateUserRating(int userId, User model);
-
     User updateUserOnlineStatus(int userId, User model);
 
     String updateUserRegistrationToken(int userId, String token);
 
     User findUserByUsername(String pattern);
 
-    List<User> findUserByRating(double pattern);
+    User getUserHashAndSaltByUsername(String username);
 
-    String checkUsername(String pattern);
+    User checkUsername(String pattern);
 
-    String checkEmail(String pattern);
+    User checkEmail(String pattern);
 
+    User getUserById(int userId);
 }

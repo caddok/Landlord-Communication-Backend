@@ -35,6 +35,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+<<<<<<< HEAD
     public void sendMessage(String token) {
         String title = "New Message";
         String body = messageToSend.getText();
@@ -99,4 +100,14 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> getAllUndeliveredMessagesByLandlordId(int landlordId) {
         return repository.getAllUndeliveredMessagesByLandlordId(landlordId);
     }*/
+=======
+    public List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId) {
+        return repository.getMessagesBySenderIdAndChatId(senderId,chatId);
+    }
+
+    @Override
+    public List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId) {
+        return repository.getMessagesByReceiverIdAndChatId(receiverId,chatId);
+    }
+>>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
 }

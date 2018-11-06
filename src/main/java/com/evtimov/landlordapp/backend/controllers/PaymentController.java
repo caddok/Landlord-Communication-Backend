@@ -6,10 +6,11 @@ import com.evtimov.landlordapp.backend.services.base.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/payments")                    //CHECKED
+@RequestMapping("/api/payments")
 public class PaymentController {
 
 
@@ -21,14 +22,19 @@ public class PaymentController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Payment payYourBill(@RequestBody Payment payment){
+    public Payment payYourBill(@RequestBody @Valid Payment payment){
         service.payYourBill(payment);
 
         return payment;
     }
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public List<Payment> getAllPaymentsByUserId(@PathVariable(value = "userId") int userId){
-        return service.getAllPaymentsByUserId(userId);
+    @RequestMapping(value = "/tenant/{userId}", method = RequestMethod.GET)
+    public List<Payment> getAllPaymentsByUserId(@PathVariable(value = "userId") int tenantId){
+        return service.getAllPaymentsByUserId(tenantId);
+    }
+
+    @RequestMapping(value = "/landlord/{userId}", method = RequestMethod.GET)
+    public List<Payment> getAllPaymentsByLandlordId(@PathVariable(value = "userId") int landlordId){
+        return service.getAllPaymentsByLandlordId(landlordId);
     }
 }

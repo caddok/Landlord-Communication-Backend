@@ -38,6 +38,23 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         return payment;
     }
 
+    @Override
+    public List<Payment> getAllPayments() {
+        List<Payment> payments;
+
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            payments = session.createQuery("from Payment").list();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new RuntimeException();
+        }
+        return payments;
+    }
+
 
     @Override
     public List<Payment> getAllPaymentsByUserId(int userId){

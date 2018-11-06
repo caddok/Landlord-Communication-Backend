@@ -9,4 +9,6 @@ public interface PaymentService {
     Payment payYourBill(Payment payment);
 
     List<Payment> getAllPaymentsByUserId(int userId);
+
+    List<Payment> getAllPaymentsByLandlordId(int landlordId);
 }

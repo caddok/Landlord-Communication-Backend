@@ -5,8 +5,11 @@ import com.evtimov.landlordapp.backend.models.Rent;
 import com.evtimov.landlordapp.backend.repositories.base.RentRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class RentRepositoryImpl implements RentRepository {
@@ -57,7 +60,7 @@ public class RentRepositoryImpl implements RentRepository {
     }
 
     @Override
-    public Rent updateRentIsPaidStatus(int rentId, Rent rent) {
+    public Rent updateRentIsPaidStatus(int rentId) {
 
         Rent rentToChange;
         try (
@@ -66,7 +69,8 @@ public class RentRepositoryImpl implements RentRepository {
             session.beginTransaction();
             rentToChange = session.get(Rent.class, rentId);
 
-            rentToChange.setIsPaid(rent.getIsPaid());
+            rentToChange.setIsPaid(true);
+            rentToChange.setRemaining(0);
 
             session.getTransaction().commit();
         } catch (Exception ex) {
@@ -77,4 +81,28 @@ public class RentRepositoryImpl implements RentRepository {
         return rentToChange;
     }
 
+    @Override
+    public Rent getRentByPlaceId(int placeId) {
+        List<Rent> rents;
+        String statement = "from Rent where placeID = :pattern and isPaid = :paidPattern ";
+
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("pattern", placeId);
+            query.setParameter("paidPattern", false);
+            rents = query.list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        if (rents.size() > 0) {
+            return rents.get(0);
+        } else {
+            return null;
+        }
+    }
 }
