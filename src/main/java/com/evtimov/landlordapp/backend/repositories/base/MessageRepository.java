@@ -8,11 +8,11 @@ public interface MessageRepository {
 
     Message createMessage(Message message);
 
-    List<Message> getAllDeliveredMessagesByTenantId(int tenantId);
+   /* List<Message> getAllDeliveredMessagesByTenantId(int tenantId);
 
     List<Message> getAllUndeliveredMessagesByTenantId(int tenantId);
 
     List<Message> getAllDeliveredMessagesByLandlordId(int landlordId);
 
-    List<Message> getAllUndeliveredMessagesByLandlordId(int landlordId);
+    List<Message> getAllUndeliveredMessagesByLandlordId(int landlordId);*/
 }

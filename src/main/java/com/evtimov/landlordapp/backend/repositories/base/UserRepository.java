@@ -16,6 +16,8 @@ public interface UserRepository {
 
     User updateUserOnlineStatus(int userId, User model);
 
+    User updateUserRegistrationToken(int userId, String token);
+
     User getUserByUsername(String pattern);
 
     List<User> findUserByRating(double pattern);

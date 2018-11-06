@@ -67,5 +67,12 @@ public class UserServiceImpl implements UserService {
         repository.updateUserOnlineStatus(userId, model);
         return model;
     }
+
+    @Override
+    public String updateUserRegistrationToken(int userId, String token) {
+        repository.updateUserRegistrationToken(userId,token);
+        return token;
+    }
+
 }
 

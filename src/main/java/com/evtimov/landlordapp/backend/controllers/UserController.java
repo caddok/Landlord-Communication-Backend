@@ -3,16 +3,16 @@ package com.evtimov.landlordapp.backend.controllers;
 import com.evtimov.landlordapp.backend.models.User;
 import com.evtimov.landlordapp.backend.services.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {                    //CHECKED
-
     private final UserService service;
-
 
     @Autowired
     public UserController(UserService service) {
@@ -23,8 +23,14 @@ public class UserController {                    //CHECKED
     @RequestMapping(method = RequestMethod.POST)
     public User registerUser(@RequestBody User user){
         service.registerUser(user);
-
         return user;
+    }
+
+    @RequestMapping(value = "/{username}",method = RequestMethod.POST)
+    public ResponseEntity<String> getRegistrationToken(@PathVariable String username, String token) {
+        User user = service.findUserByUsername(username);
+        service.updateUserRegistrationToken(user.getUserID(),token);
+        return ResponseEntity.ok(token);
     }
 
     @RequestMapping(value = "/tenants", method = RequestMethod.GET)
@@ -32,7 +38,7 @@ public class UserController {                    //CHECKED
         return service.findAllTenants();
     }
 
-    @RequestMapping(value = "/landlords", method = RequestMethod.GET)
+    @RequestMapping(/*value = "/landlords", */method = RequestMethod.GET)
     public List<User> getAllLandlords(){
         return service.findAllLandlords();
     }

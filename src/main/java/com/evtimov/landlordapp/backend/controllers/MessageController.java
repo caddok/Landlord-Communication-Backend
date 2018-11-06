@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/messages")
 public class MessageController {
-
     private final MessageService service;
 
     @Autowired
@@ -19,13 +18,19 @@ public class MessageController {
         this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.POST)                      // NOT WORKING POST method
-    public Message createMessage(@RequestBody Message message){
+    @RequestMapping(method = RequestMethod.POST)
+    public Message getMessage(@RequestBody Message message) {
         service.createMessage(message);
         return message;
     }
 
-    @RequestMapping(value = "/tenantdelivered/{tenantIdDelivered}", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)                      // NOT WORKING POST method
+    public Message sendMessage(@RequestBody Message message){
+        service.sendMessage(message.getReceiverToken());
+        return message;
+    }
+
+    /*@RequestMapping(value = "/tenantdelivered/{tenantIdDelivered}", method = RequestMethod.GET)
     public List<Message> getAllDeliveredMessagesByTenantId(@PathVariable(value = "tenantIdDelivered") int tenantId){
         return service.getAllDeliveredMessagesByTenantId(tenantId);
     }
@@ -43,5 +48,5 @@ public class MessageController {
     @RequestMapping(value = "/landlordundelivered/{landlordIdUndelivered}", method = RequestMethod.GET)
     public List<Message> getAllUndeliveredMessagesByLandlordId(@PathVariable(value = "landlordIdUndelivered") int landlordId){
         return service.getAllUndeliveredMessagesByLandlordId(landlordId);
-    }
+    }*/
 }

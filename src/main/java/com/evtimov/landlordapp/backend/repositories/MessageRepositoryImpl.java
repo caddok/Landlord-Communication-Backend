@@ -15,7 +15,6 @@ import java.util.List;
 
 @Repository
 public class MessageRepositoryImpl implements MessageRepository {
-
     private final SessionFactory sessionFactory;
     private final DateProvider dateProvider;
 
@@ -42,7 +41,7 @@ public class MessageRepositoryImpl implements MessageRepository {
         return message;
     }
 
-    @Override
+/*    @Override
     public List<Message> getAllDeliveredMessagesByTenantId(int tenantId) {
 
         Date date = dateProvider.getDateBeforeThreeMonths();
@@ -139,5 +138,5 @@ public class MessageRepositoryImpl implements MessageRepository {
             throw new RuntimeException(e);
         }
         return messages;
-    }
+    }*/
 }

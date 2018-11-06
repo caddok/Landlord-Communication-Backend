@@ -2,7 +2,6 @@ package com.evtimov.landlordapp.backend.models;
 
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -10,11 +9,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private int userID;
 
     @Column(name = "islandlord")
     private boolean isLandlord;
+
+    @Column(name = "registrationtoken")
+    private String registrationToken;
 
     @Column(name = "username")
     private String username;
@@ -49,13 +51,13 @@ public class User {
     @Column(name = "votesum")
     private double voteSum;
 
-
     public User() {
         //default
     }
 
     public User(boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
-                boolean isOnline, String passwordHash, String passwordSalt, int votes, double voteSum) {
+                boolean isOnline, String passwordHash, String passwordSalt, int votes, double voteSum, String registrationToken) {
+        this.registrationToken = registrationToken;
         setIsLandlord(isLandlord);
         setUsername(username);
         setPicture(picture);
@@ -167,5 +169,13 @@ public class User {
 
     public void setVoteSum(double voteSum) {
         this.voteSum = voteSum;
+    }
+
+    public String getRegistrationToken() {
+        return registrationToken;
+    }
+
+    public void setRegistrationToken(String registrationToken) {
+        this.registrationToken = registrationToken;
     }
 }

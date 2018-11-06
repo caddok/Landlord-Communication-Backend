@@ -16,6 +16,8 @@ public interface UserService {
 
     User updateUserOnlineStatus(int userId, User model);
 
+    String updateUserRegistrationToken(int userId, String token);
+
     User findUserByUsername(String pattern);
 
     List<User> findUserByRating(double pattern);

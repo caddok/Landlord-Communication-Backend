@@ -16,26 +16,29 @@ public class Message {
     @Column(name = "timestamp")
     private Date timestamp;
 
-    @Column(name = "tenantId")
-    private int tenantID;
+    @Column(name = "sender_token")
+    private String senderRegistrationToken;
 
-    @Column(name = "landlordId")
+    @Column(name = "receiver_token")
+    private String receiverToken;
+
+    /*@Column(name = "landlordId")
     private int landlordID;
-
-    @Column(name = "chatsessionId")
+*/
+    /*@Column(name = "chatsessionId")
     private int chatSessionID;
-
+*/
     @Column(name = "text")
     private String text;
 
     @Column(name = "picture")
     private String picture;
 
-    @Column(name = "isdelivered")
+/*    @Column(name = "isdelivered")
     private boolean isDelivered;
 
     @Column(name = "archive")
-    private boolean isArchived;
+    private boolean isArchived;*/
 
 
     public Message() {
@@ -43,12 +46,15 @@ public class Message {
     }
 
     public Message(Date timestamp, String text,
-                   String picture, int tenantID, int landlordID, boolean isDelivered, int chatSessionId, boolean isArchived) {
-        setArchived(isArchived);
+                   String picture, int tenantID, int landlordID, boolean isDelivered, int chatSessionId, boolean isArchived, String senderRegistrationToken, String receiverToken) {
+        this.receiverToken = receiverToken;
+        setSenderRegistrationToken(senderRegistrationToken);
+        /*setArchived(isArchived);
         setChatSessionId(chatSessionId);
         setTenantID(tenantID);
         setLandlordID(landlordID);
         setIsDelivered(isDelivered);
+        */
         setTimestamp(timestamp);
         setText(text);
         setPicture(picture);
@@ -87,7 +93,23 @@ public class Message {
         this.picture = picture;
     }
 
-    public int getTenantID() {
+    public String getSenderRegistrationToken() {
+        return senderRegistrationToken;
+    }
+
+    public void setSenderRegistrationToken(String senderRegistrationToken) {
+        this.senderRegistrationToken = senderRegistrationToken;
+    }
+
+    public String getReceiverToken() {
+        return receiverToken;
+    }
+
+    public void setReceiverToken(String receiverToken) {
+        this.receiverToken = receiverToken;
+    }
+
+  /*  public int getTenantID() {
         return tenantID;
     }
 
@@ -125,5 +147,5 @@ public class Message {
 
     private void setArchived(boolean archived) {
         isArchived = archived;
-    }
+    }*/
 }

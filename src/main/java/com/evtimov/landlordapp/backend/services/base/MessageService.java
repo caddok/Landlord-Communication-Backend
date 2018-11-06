@@ -8,12 +8,14 @@ public interface MessageService {
 
     Message createMessage(Message message);
 
-    List<Message> getAllDeliveredMessagesByTenantId(int tenantId);
+    void sendMessage(String receiverToken);
+
+    /*List<Message> getAllDeliveredMessagesByTenantId(int tenantId);
 
     List<Message> getAllUndeliveredMessagesByTenantId(int tenantId);
 
     List<Message> getAllDeliveredMessagesByLandlordId(int landlordId);
 
-    List<Message> getAllUndeliveredMessagesByLandlordId(int landlordId);
+    List<Message> getAllUndeliveredMessagesByLandlordId(int landlordId);*/
 
 }
