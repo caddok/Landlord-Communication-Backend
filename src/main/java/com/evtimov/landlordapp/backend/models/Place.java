@@ -18,7 +18,6 @@ public class Place {
     private int placeID;
 
     @Column(name = "tenantId")
-    @Min(value = 1, message = "Tenant ID must be at least 1!")
     @Max(value = 2147483647, message = "Tenant ID is too big!")
     private int tenantID;
 

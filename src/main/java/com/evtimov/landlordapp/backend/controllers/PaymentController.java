@@ -23,14 +23,12 @@ public class PaymentController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Payment payYourBill(@RequestBody @Valid Payment payment){
-        service.payYourBill(payment);
-
-        return payment;
+        return service.payYourBill(payment);
     }
 
     @RequestMapping(value = "/tenant/{userId}", method = RequestMethod.GET)
-    public List<Payment> getAllPaymentsByUserId(@PathVariable(value = "userId") int tenantId){
-        return service.getAllPaymentsByUserId(tenantId);
+    public List<Payment> getAllPaymentsByTenantId(@PathVariable(value = "userId") int tenantId){
+        return service.getAllPaymentsByTenantId(tenantId);
     }
 
     @RequestMapping(value = "/landlord/{userId}", method = RequestMethod.GET)

@@ -21,14 +21,17 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Payment payYourBill(Payment payment) {
-        repository.payYourBill(payment);
-
-        return payment;
+        return repository.payYourBill(payment);
     }
 
     @Override
-    public List<Payment> getAllPaymentsByUserId(int userId){
-        return repository.getAllPaymentsByUserId(userId);
+    public List<Payment> getAllPaymentsByTenantId(int tenantId){
+        List<Payment> allPayments = repository.getAllPayments();
+        List<Payment> tenantPayments = allPayments
+                .stream()
+                .filter(payment -> payment.getUserID() == tenantId)
+                .collect(Collectors.toList());
+        return tenantPayments;
     }
 
     @Override

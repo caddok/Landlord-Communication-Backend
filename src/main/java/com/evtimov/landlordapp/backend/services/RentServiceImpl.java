@@ -21,10 +21,15 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public Rent addRent(Rent entity)  {
+    public Rent addNextRent(Rent entity)  {
         String date = dateProvider.getDateAfterOneMonth(entity.getDueDate());
         entity.setDueDate(date);
         return repository.addRent(entity);
+    }
+
+    @Override
+    public Rent addFirstRent(Rent rent) {
+        return repository.addRent(rent);
     }
 
     @Override
@@ -40,5 +45,10 @@ public class RentServiceImpl implements RentService {
     @Override
     public Rent getRentByPlaceId(int placeId) {
         return repository.getRentByPlaceId(placeId);
+    }
+
+    @Override
+    public Rent editRent(Rent rent, int rentId) {
+        return repository.editRent(rent, rentId);
     }
 }

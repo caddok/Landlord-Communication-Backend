@@ -2,7 +2,6 @@ package com.evtimov.landlordapp.backend.utils;
 
 import org.joda.time.LocalDateTime;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,9 +16,9 @@ public class DateProvider {
         return date;
     }
 
-    public String getDateAfterOneMonth(String lastRentDate) {
+    public String getDateAfterOneMonth(String lastDate) {
 
-        LocalDateTime currentLocalDateTime = LocalDateTime.parse(lastRentDate);
+        LocalDateTime currentLocalDateTime = LocalDateTime.parse(lastDate);
         LocalDateTime afterOneMonth = currentLocalDateTime.plusMonths(1);
         Date date = afterOneMonth.toDate();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
