@@ -8,6 +8,8 @@ public interface ChatSessionRepository {
 
     List<ChatSession> getAllByTenantId(int tenantId);
 
+    List<ChatSession> checkIfChatSessionExistsByTenantIdAndLandlordId(int tenantId, int landlordId);
+
     List<ChatSession> getAllByLandlordId(int landlordId);
 
     ChatSession createSession(ChatSession chat);

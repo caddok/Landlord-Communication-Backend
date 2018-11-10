@@ -21,18 +21,22 @@ public class MessageController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Message createMessage(@RequestBody @Valid Message message){
-        service.createMessage(message);
-        return message;
+    public Message createMessage(@RequestBody @Valid Message message) {
+        return service.createMessage(message);
+    }
+
+    @RequestMapping(value = "/chat/{chatId}", method = RequestMethod.GET)
+    public List<Message> getMessagesByChatId(@PathVariable(value = "chatId") int chatId) {
+        return service.getMessagesByChatId(chatId);
     }
 
     @RequestMapping(value = "/sender/{chatId}/{senderId}", method = RequestMethod.GET)
-    public List<Message> getMessagesBySenderIdAndChatId(@PathVariable(value = "senderId") int senderId, @PathVariable(value = "chatId")int chatId){
+    public List<Message> getMessagesBySenderIdAndChatId(@PathVariable(value = "senderId") int senderId, @PathVariable(value = "chatId") int chatId) {
         return service.getMessagesBySenderIdAndChatId(senderId, chatId);
     }
 
     @RequestMapping(value = "/receiver/{chatId}/{receiverId}", method = RequestMethod.GET)
-    public List<Message> getMessagesByReceiverIdAndChatId(@PathVariable(value = "receiverId") int receiverId, @PathVariable(value = "chatId")int chatId){
+    public List<Message> getMessagesByReceiverIdAndChatId(@PathVariable(value = "receiverId") int receiverId, @PathVariable(value = "chatId") int chatId) {
         return service.getMessagesByReceiverIdAndChatId(receiverId, chatId);
     }
 }

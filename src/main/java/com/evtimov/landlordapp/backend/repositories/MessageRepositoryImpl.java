@@ -91,4 +91,24 @@ public class MessageRepositoryImpl implements MessageRepository {
         }
         return messages;
     }
+
+    @Override
+    public List<Message> getMessagesByChatId(int chatId) {
+        List<Message> messages = null;
+        String statement = "from Message where chatSessionID = :chatPattern";
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("chatPattern", chatId);
+            messages = query.list();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return messages;
+    }
 }

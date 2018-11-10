@@ -11,4 +11,6 @@ public interface MessageRepository {
     List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId);
 
     List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId);
+
+    List<Message> getMessagesByChatId(int chatId);
 }

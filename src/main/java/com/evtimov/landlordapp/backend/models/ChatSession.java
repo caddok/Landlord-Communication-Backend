@@ -5,6 +5,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 
@@ -16,64 +17,51 @@ public class ChatSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chatsessionId")
     @Max(value = 2147483647, message = "ChatSession ID is too big!")
-    private int chatsessionID;
+    private int chatsessionId;
 
     @Column(name = "tenantId")
     @NotNull(message = "Tenant ID cannot be null!")
-    @Min(value = 1, message = "Tenant ID must be at least 1!")
     @Max(value = 2147483647, message = "Tenant ID is too big!")
     private int tenantID;
 
     @Column(name = "landlordId")
     @NotNull(message = "Landlord ID cannot be null!")
-    @Min(value = 1, message = "Landlord ID must be at least 1!")
     @Max(value = 2147483647, message = "Landlord ID is too big!")
     private int landlordID;
 
     @Column(name = "createdate")
     @NotNull(message = "Date cannot be null!")
-    private Date createDate;
+    private String createDate;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "chatsessionId", insertable = false, updatable = false)
-    private Set<Message> messages;
+    private List<Message> messages;
 
 
     public ChatSession() {
         //default
     }
 
-    public ChatSession(Date createDate, int tenantID, int landlordID) {
+    public ChatSession(String createDate, int tenantID, int landlordID) {
         setTenantID(tenantID);
         setLandlordID(landlordID);
         setCreateDate(createDate);
     }
 
-    public int getChatsessionID() {
-        return chatsessionID;
+
+    public int getChatsessionId() {
+        return chatsessionId;
     }
 
-    private void setChatsessionID(int chatsessionID) {
-        this.chatsessionID = chatsessionID;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    private void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Set<Message> getMessages() {
-        return messages;
+    public void setChatsessionId(int chatsessionId) {
+        this.chatsessionId = chatsessionId;
     }
 
     public int getTenantID() {
         return tenantID;
     }
 
-    private void setTenantID(int tenantID) {
+    public void setTenantID(int tenantID) {
         this.tenantID = tenantID;
     }
 
@@ -81,7 +69,23 @@ public class ChatSession {
         return landlordID;
     }
 
-    private void setLandlordID(int landlordID) {
+    public void setLandlordID(int landlordID) {
         this.landlordID = landlordID;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }

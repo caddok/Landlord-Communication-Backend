@@ -12,4 +12,6 @@ public interface MessageService {
 
     List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId);
 
+    List<Message> getMessagesByChatId(int chatId);
+
 }

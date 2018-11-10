@@ -22,10 +22,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Message createMessage(Message message) {
-
-        repository.createMessage(message);
-
-        return message;
+        return repository.createMessage(message);
     }
 
     @Override
@@ -36,5 +33,10 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId) {
         return repository.getMessagesByReceiverIdAndChatId(receiverId,chatId);
+    }
+
+    @Override
+    public List<Message> getMessagesByChatId(int chatId) {
+        return repository.getMessagesByChatId(chatId);
     }
 }
