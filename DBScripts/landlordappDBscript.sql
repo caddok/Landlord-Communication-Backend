@@ -76,7 +76,7 @@ CREATE TABLE `landlordcommunicationdb`.`rents` (
   `remaining` DECIMAL(7,2) NOT NULL,
   `placeId` INT NOT NULL,
   `ispaid` TINYINT NOT NULL DEFAULT 0,
-  `duedate` VARCHAR()15 NOT NULL,
+  `duedate` VARCHAR(15) NOT NULL,
   PRIMARY KEY (`rentId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
