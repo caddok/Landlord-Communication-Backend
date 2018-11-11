@@ -86,16 +86,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-<<<<<<< HEAD
-    public String updateUserRegistrationToken(int userId, String token) {
-        repository.updateUserRegistrationToken(userId,token);
-        return token;
-    }
-
-=======
     public User getUserHashAndSaltByUsername(String username){
         return repository.getUserHashAndSaltByUsername(username);
     }
->>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
 }
 
