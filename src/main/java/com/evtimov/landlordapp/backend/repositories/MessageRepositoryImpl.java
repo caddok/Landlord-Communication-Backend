@@ -15,6 +15,7 @@ import java.util.List;
 
 @Repository
 public class MessageRepositoryImpl implements MessageRepository {
+
     private final SessionFactory sessionFactory;
     private final DateProvider dateProvider;
 
@@ -41,13 +42,8 @@ public class MessageRepositoryImpl implements MessageRepository {
         return message;
     }
 
-<<<<<<< HEAD
-/*    @Override
-    public List<Message> getAllDeliveredMessagesByTenantId(int tenantId) {
-=======
     @Override
     public List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId) {
->>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
 
         Date date = dateProvider.getDateBeforeThreeMonths();
 
@@ -94,5 +90,25 @@ public class MessageRepositoryImpl implements MessageRepository {
             System.out.println(e.getMessage());
         }
         return messages;
-    }*/
+    }
+
+    @Override
+    public List<Message> getMessagesByChatId(int chatId) {
+        List<Message> messages = null;
+        String statement = "from Message where chatSessionID = :chatPattern";
+
+        try(
+                Session session = sessionFactory.openSession();
+        ){
+            session.beginTransaction();
+            Query query = session.createQuery(statement);
+            query.setParameter("chatPattern", chatId);
+            messages = query.list();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return messages;
+    }
 }
