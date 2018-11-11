@@ -34,7 +34,7 @@ public class UserRepositoryImpl implements UserRepository {
             session.getTransaction().commit();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            throw ex;
+            throw new RuntimeException();
         }
         return entity;
     }
@@ -71,22 +71,6 @@ public class UserRepositoryImpl implements UserRepository {
 
             userToChange.setIsOnline(model.getIsOnline());
 
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            throw new RuntimeException();
-        }
-        return userToChange;
-    }
-
-    @Override
-    public User updateUserRegistrationToken(int userId, String token) {
-        User userToChange;
-        try(Session session = sessionFactory.openSession())
-        {
-            session.beginTransaction();
-            userToChange = session.get(User.class,userId);
-            userToChange.setRegistrationToken(token);
             session.getTransaction().commit();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
