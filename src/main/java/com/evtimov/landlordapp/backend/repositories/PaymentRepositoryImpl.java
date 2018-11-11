@@ -54,27 +54,4 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         }
         return payments;
     }
-
-
-    @Override
-    public List<Payment> getAllPaymentsByUserId(int userId){
-
-        List<Payment> payments;
-        String statement = "from Payment where userID = :pattern ";
-
-        try(
-                Session session = sessionFactory.openSession();
-        ){
-            session.beginTransaction();
-            Query query = session.createQuery(statement);
-            query.setParameter("pattern", userId);
-            payments = query.list();
-            session.getTransaction().commit();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        return payments;
-    }
 }
