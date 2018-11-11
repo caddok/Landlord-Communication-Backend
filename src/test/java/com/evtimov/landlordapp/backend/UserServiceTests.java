@@ -145,7 +145,4 @@ public class UserServiceTests {
         verify(mockRepository,times(1))
                 .getUserById(1);
     }
-
-
-
 }
