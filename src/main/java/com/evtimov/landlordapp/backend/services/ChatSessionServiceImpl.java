@@ -26,12 +26,17 @@ public class ChatSessionServiceImpl implements ChatSessionService {
     }
 
     @Override
+    public List<ChatSession> checkIfChatSessionExistsByTenantIdAndLandlordId(int tenantId, int landlordId) {
+        return repository.checkIfChatSessionExistsByTenantIdAndLandlordId(tenantId, landlordId);
+    }
+
+    @Override
     public List<ChatSession> getAllByLandlordId(int landlordId) {
         return repository.getAllByLandlordId(landlordId);
     }
 
     @Override
-    public ChatSession createChat(ChatSession chat){
+    public ChatSession createChat(ChatSession chat) {
         repository.createSession(chat);
         return chat;
     }
