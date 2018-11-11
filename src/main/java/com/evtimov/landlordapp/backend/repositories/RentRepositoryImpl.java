@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -104,5 +105,25 @@ public class RentRepositoryImpl implements RentRepository {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public Rent editRent(Rent rent, int rentId) {
+        Rent rentToChange;
+        try (
+                Session session = sessionFactory.openSession();
+        ) {
+            session.beginTransaction();
+            rentToChange = session.get(Rent.class, rentId);
+            rentToChange.setRemaining(rent.getRemaining());
+            rentToChange.setTotalAmount(rent.getTotalAmount());
+
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new RuntimeException();
+        }
+
+        return rentToChange;
     }
 }
