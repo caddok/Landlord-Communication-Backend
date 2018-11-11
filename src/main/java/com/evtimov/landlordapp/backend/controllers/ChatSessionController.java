@@ -20,25 +20,28 @@ public class ChatSessionController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/tenantchats/{tenantId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/tenant/{tenantId}", method = RequestMethod.GET)
     public List<ChatSession> getAllByTenantId(@PathVariable(value = "tenantId") int tenantId){
         return service.getAllByTenantId(tenantId);
     }
 
-    @RequestMapping(value = "/landlordchats/{landlordId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/landlord/{landlordId}", method = RequestMethod.GET)
     public List<ChatSession> getAllByLandlordId(@PathVariable(value = "landlordId") int landlordId){
         return service.getAllByLandlordId(landlordId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ChatSession createChat(@RequestBody @Valid ChatSession chat){
-        service.createChat(chat);
-
-        return chat;
+        return service.createChat(chat);
     }
 
     @RequestMapping(value = "/{chatId}", method = RequestMethod.DELETE)
     public void deleteChat(@PathVariable int chatId){
         service.deleteChat(chatId);
+    }
+
+    @RequestMapping(value = "/check/{tenantId}/{landlordId}", method = RequestMethod.GET)
+    public List<ChatSession> checkChatSessionIfExists(@PathVariable(value = "tenantId") int tenantId, @PathVariable(value = "landlordId") int landlordId){
+        return service.checkIfChatSessionExistsByTenantIdAndLandlordId(tenantId, landlordId);
     }
 }
