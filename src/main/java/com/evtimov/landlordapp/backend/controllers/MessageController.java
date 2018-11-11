@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/messages")
 public class MessageController {
+
     private final MessageService service;
 
     @Autowired
@@ -20,50 +21,22 @@ public class MessageController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-<<<<<<< HEAD
-    public Message getMessage(@RequestBody Message message) {
-=======
-    public Message createMessage(@RequestBody @Valid Message message){
->>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
-        service.createMessage(message);
-        return message;
+    public Message createMessage(@RequestBody @Valid Message message) {
+        return service.createMessage(message);
     }
 
-<<<<<<< HEAD
-    @RequestMapping(method = RequestMethod.GET)                      // NOT WORKING POST method
-    public Message sendMessage(@RequestBody Message message){
-        service.sendMessage(message.getReceiverToken());
-        return message;
+    @RequestMapping(value = "/chat/{chatId}", method = RequestMethod.GET)
+    public List<Message> getMessagesByChatId(@PathVariable(value = "chatId") int chatId) {
+        return service.getMessagesByChatId(chatId);
     }
 
-    /*@RequestMapping(value = "/tenantdelivered/{tenantIdDelivered}", method = RequestMethod.GET)
-    public List<Message> getAllDeliveredMessagesByTenantId(@PathVariable(value = "tenantIdDelivered") int tenantId){
-        return service.getAllDeliveredMessagesByTenantId(tenantId);
-    }
-
-    @RequestMapping(value = "/tenantundelivered/{tenantIdUndelivered}", method = RequestMethod.GET)
-    public List<Message> getAllUndeliveredMessagesByTenantId(@PathVariable(value = "tenantIdUndelivered") int tenantId){
-        return service.getAllUndeliveredMessagesByTenantId(tenantId);
-    }
-
-    @RequestMapping(value = "/landlorddelivered/{landlordIdDelivered}", method = RequestMethod.GET)
-    public List<Message> getAllDeliveredMessagesByLandlordId(@PathVariable(value = "landlordIdDelivered") int landlordId){
-        return service.getAllDeliveredMessagesByLandlordId(landlordId);
-    }
-
-    @RequestMapping(value = "/landlordundelivered/{landlordIdUndelivered}", method = RequestMethod.GET)
-    public List<Message> getAllUndeliveredMessagesByLandlordId(@PathVariable(value = "landlordIdUndelivered") int landlordId){
-        return service.getAllUndeliveredMessagesByLandlordId(landlordId);
-    }*/
-=======
     @RequestMapping(value = "/sender/{chatId}/{senderId}", method = RequestMethod.GET)
-    public List<Message> getMessagesBySenderIdAndChatId(@PathVariable(value = "senderId") int senderId, @PathVariable(value = "chatId")int chatId){
+    public List<Message> getMessagesBySenderIdAndChatId(@PathVariable(value = "senderId") int senderId, @PathVariable(value = "chatId") int chatId) {
         return service.getMessagesBySenderIdAndChatId(senderId, chatId);
     }
 
     @RequestMapping(value = "/receiver/{chatId}/{receiverId}", method = RequestMethod.GET)
-    public List<Message> getMessagesByReceiverIdAndChatId(@PathVariable(value = "receiverId") int receiverId, @PathVariable(value = "chatId")int chatId){
+    public List<Message> getMessagesByReceiverIdAndChatId(@PathVariable(value = "receiverId") int receiverId, @PathVariable(value = "chatId") int chatId) {
         return service.getMessagesByReceiverIdAndChatId(receiverId, chatId);
     }
->>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
 }
