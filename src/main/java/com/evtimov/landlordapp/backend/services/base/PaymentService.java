@@ -8,7 +8,7 @@ public interface PaymentService {
 
     Payment payYourBill(Payment payment);
 
-    List<Payment> getAllPaymentsByUserId(int userId);
+    List<Payment> getAllPaymentsByTenantId(int tenantId);
 
     List<Payment> getAllPaymentsByLandlordId(int landlordId);
 }
