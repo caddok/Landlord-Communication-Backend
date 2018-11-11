@@ -14,8 +14,6 @@ public interface UserService {
 
     User updateUserOnlineStatus(int userId, User model);
 
-    String updateUserRegistrationToken(int userId, String token);
-
     User findUserByUsername(String pattern);
 
     User getUserHashAndSaltByUsername(String username);
