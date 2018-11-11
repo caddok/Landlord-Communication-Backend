@@ -11,4 +11,6 @@ public interface RentRepository {
     Rent updateRentIsPaidStatus(int rentId);
 
     Rent getRentByPlaceId(int placeId);
+
+    Rent editRent(Rent rent, int rentId);
 }
