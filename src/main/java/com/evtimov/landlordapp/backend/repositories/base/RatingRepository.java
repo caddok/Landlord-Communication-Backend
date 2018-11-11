@@ -8,7 +8,7 @@ public interface RatingRepository {
 
     Rating addVote(Rating rating);
 
-    List<Rating> getRatingsByUserUd(int userId);
+    List<Rating> getRatingsByUserId(int userId);
 
     Rating isVotedTwoTimes(int voteForId, int voteFromId);
 }

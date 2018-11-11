@@ -1,93 +1,36 @@
-package com.evtimov.landlordapp.backend.services;
-
-
-import com.evtimov.landlordapp.backend.models.User;
-import com.evtimov.landlordapp.backend.repositories.base.UserRepository;
-import com.evtimov.landlordapp.backend.services.base.UserService;
-import com.evtimov.landlordapp.backend.utils.password.PasswordAgent;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-@Service
-public class UserServiceImpl implements UserService {
-
-    private final UserRepository repository;
-    private final PasswordAgent passwordAgent;
-
-    @Autowired
-    public UserServiceImpl(UserRepository repository, PasswordAgent passwordAgent) {
-        this.repository = repository;
-        this.passwordAgent = passwordAgent;
+buildscript {
+    ext {
+        springBootVersion = '2.0.6.RELEASE'
     }
-
-    @Override
-    public User registerUser(User entity) {
-
-        return repository.registerUser(entity);
+    repositories {
+        mavenCentral()
     }
-
-
-    @Override
-    public List<User> findAllTenants(){
-        return repository.findAllTenants();
-    }
-
-    @Override
-    public List<User> findAllLandlords(){
-        return repository.findAllLandlords();
-    }
-
-    @Override
-    public User findUserByUsername(String pattern){
-        return repository.getUserByUsername(pattern);
-    }
-
-
-    @Override
-    public User checkUsername(String pattern) {
-        String username = repository.checkUsername(pattern);
-
-        User userModel = new User(false, username, null, null, null,
-                null, false, null, null);
-
-        return userModel;
-    }
-
-    @Override
-    public User checkEmail(String pattern) {
-        String email =  repository.checkEmail(pattern);
-
-        User userModel = new User(false, null, null, null, null,
-                email, false, null, null);
-
-        return userModel;
-    }
-
-    @Override
-    public User getUserById(int userId) {
-
-        User incoming = repository.getUserById(userId);
-
-        // cause we don't want to send the whole user info
-        User sending = new User(incoming.getIsLandlord(), incoming.getUsername(), incoming.getPicture(), incoming.getFirstName(), incoming.getLastName(),
-                incoming.getEmail(), incoming.getIsOnline(), null, null);
-        sending.setUserId(userId);
-
-        return sending;
-    }
-
-
-    @Override
-    public User updateUserOnlineStatus(int userId, User model){
-        repository.updateUserOnlineStatus(userId, model);
-        return model;
-    }
-
-    @Override
-    public User getUserHashAndSaltByUsername(String username){
-        return repository.getUserHashAndSaltByUsername(username);
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.evtimov.landlordapp'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    compile 'org.hibernate:hibernate-core:5.3.7.Final'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
+
+    compile 'joda-time:joda-time:2.10'
+
+}

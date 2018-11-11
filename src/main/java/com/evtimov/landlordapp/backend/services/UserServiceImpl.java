@@ -90,4 +90,3 @@ public class UserServiceImpl implements UserService {
         return repository.getUserHashAndSaltByUsername(username);
     }
 }
-
