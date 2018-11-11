@@ -67,7 +67,7 @@ public class Rent {
         return totalAmount;
     }
 
-    private void setTotalAmount(double totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
