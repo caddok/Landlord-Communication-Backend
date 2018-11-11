@@ -2,11 +2,8 @@ package com.evtimov.landlordapp.backend.models;
 
 
 import javax.persistence.*;
-<<<<<<< HEAD
-=======
 import javax.validation.constraints.*;
 import java.util.Set;
->>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
 
 @Entity
 @Table(name = "users")
@@ -14,20 +11,13 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
-    @Column(name = "user_id")
-=======
     @Column(name = "userId")
     @Max(value = 2147483647, message = "User ID is too big!")
->>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
     private int userID;
 
     @Column(name = "islandlord")
     @NotNull(message = "Is landlord type cannot be null!")
     private boolean isLandlord;
-
-    @Column(name = "registrationtoken")
-    private String registrationToken;
 
     @Column(name = "username")
     @NotNull(message = "Username cannot be null! Please enter username!")
@@ -65,6 +55,7 @@ public class User {
     private String passwordSalt;
 
 
+
     public User() {
         //default
     }
@@ -75,12 +66,7 @@ public class User {
     }
 
     public User(boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
-<<<<<<< HEAD
-                boolean isOnline, String passwordHash, String passwordSalt, int votes, double voteSum, String registrationToken) {
-        this.registrationToken = registrationToken;
-=======
                 boolean isOnline, String passwordHash, String passwordSalt) {
->>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
         setIsLandlord(isLandlord);
         setUsername(username);
         setPicture(picture);
@@ -169,31 +155,4 @@ public class User {
     public void setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
     }
-<<<<<<< HEAD
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
-
-    public double getVoteSum() {
-        return voteSum;
-    }
-
-    public void setVoteSum(double voteSum) {
-        this.voteSum = voteSum;
-    }
-
-    public String getRegistrationToken() {
-        return registrationToken;
-    }
-
-    public void setRegistrationToken(String registrationToken) {
-        this.registrationToken = registrationToken;
-    }
-=======
->>>>>>> 5b466dffa9d1220212ba3c19f1bf0f0a333530e4
 }
