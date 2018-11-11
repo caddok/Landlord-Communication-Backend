@@ -19,9 +19,14 @@ public class RentController {
         this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void addRent(@RequestBody @Valid Rent rent){
-        service.addRent(rent);
+    @RequestMapping(value = "/first", method = RequestMethod.POST)
+    public void addFirstRent(@RequestBody @Valid Rent rent){
+        service.addFirstRent(rent);
+    }
+
+    @RequestMapping(value = "/next", method = RequestMethod.POST)
+    public void addNextRent(@RequestBody @Valid Rent rent){
+        service.addNextRent(rent);
     }
 
     @RequestMapping(value = "/updateremaining/{rentId}", method = RequestMethod.PUT)
@@ -38,5 +43,10 @@ public class RentController {
     @RequestMapping(value = "/{placeId}", method = RequestMethod.GET)
     public Rent getRentByPlaceId(@PathVariable(value = "placeId") int placeId){
         return service.getRentByPlaceId(placeId);
+    }
+
+    @RequestMapping(value = "/edit/{rentId}", method = RequestMethod.PUT)
+    public Rent editRent(@PathVariable(value = "rentId") int rentId, @RequestBody Rent rent){
+        return service.editRent(rent, rentId);
     }
 }
