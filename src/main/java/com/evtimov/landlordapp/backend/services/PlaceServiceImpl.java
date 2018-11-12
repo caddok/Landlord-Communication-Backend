@@ -22,8 +22,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public Place addLandlordPlace(Place place) {
-        repository.addLandlordPlace(place);
-        return place;
+        return repository.addLandlordPlace(place);
     }
 
 
@@ -34,7 +33,6 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public Place updateTenantId(Place place, int placeId) {
-
         return repository.updateTenantId(place, placeId);
     }
 

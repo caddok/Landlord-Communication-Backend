@@ -1,57 +1,62 @@
 package com.evtimov.landlordapp.backend.models;
 
 
+import com.evtimov.landlordapp.backend.utils.Constants;
+import net.bytebuddy.matcher.CollectionOneToOneMatcher;
+import org.apache.tomcat.util.bcel.Const;
+import org.yaml.snakeyaml.scanner.Constant;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = Constants.USERS)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
-    @Max(value = 2147483647, message = "User ID is too big!")
+    @Column(name = Constants.USER_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.USER_ID_MAX_VALUE_MESSAGE)
     private int userID;
 
-    @Column(name = "islandlord")
-    @NotNull(message = "Is landlord type cannot be null!")
+    @Column(name = Constants.IS_LANDLORD)
+    @NotNull(message = Constants.IS_LANDLORD_NULL_MESSAGE)
     private boolean isLandlord;
 
-    @Column(name = "username")
-    @NotNull(message = "Username cannot be null! Please enter username!")
-    @Size(min = 1, max = 45, message = "Enter username with length between 1 and 45!")
+    @Column(name = Constants.USERNAME)
+    @NotNull(message = Constants.USERNAME_NULL_MESSAGE)
+    @Size(min = 1, max = 45, message = Constants.USERNAME_LENGTH_CONSTRAINT_MESSAGE)
     private String username;
 
-    @Column(name = "picture")
+    @Column(name = Constants.PICTURE)
     private String picture;
 
-    @Column(name = "firstname")
-    @NotNull(message = "First name cannot be null! Please enter first name!")
-    @Size(min = 1, max = 45, message = "Enter first name with length between 1 and 45!")
+    @Column(name = Constants.FIRST_NAME)
+    @NotNull(message = Constants.FIRST_NAME_NULL_MESSAGE)
+    @Size(min = 1, max = 45, message = Constants.FIRST_NAME_LENGTH_CONSTRAINT_MESSAGE)
     private String firstName;
 
-    @Column(name = "lastname")
-    @NotNull(message = "Last name cannot be null! Please enter last name!")
-    @Size(min = 1, max = 45, message = "Last first name with length between 1 and 45!")
+    @Column(name = Constants.LAST_NAME)
+    @NotNull(message = Constants.LAST_NAME_NULL_MESSAGE)
+    @Size(min = 1, max = 45, message = Constants.LAST_NAME_LENGTH_CONSTRAINT_MESSAGE)
     private String lastName;
 
-    @Column(name = "email")
-    @NotNull(message = "Email cannot be null! Please enter email!")
-    @Size(min = 1, max = 45, message = "Enter email with length between 1 and 45!")
+    @Column(name = Constants.EMAIL)
+    @NotNull(message = Constants.EMAIL_NULL_MESSAGE)
+    @Size(min = 1, max = 45, message = Constants.EMAIL_LENGTH_CONSTRAINT_MESSAGE)
     private String email;
 
-    @Column(name = "isonline")
-    @NotNull(message = "Online status cannot be null!")
+    @Column(name = Constants.IS_ONLINE)
+    @NotNull(message = Constants.IS_ONLINE_NULL_MESSAGE)
     private boolean isOnline;
 
-    @Column(name = "passwordhash")
-    @Size(min = 1, max = 255, message = "Enter pass hash with length between 1 and 255!")
+    @Column(name = Constants.PASS_HASH)
+    @Size(min = 1, max = 255, message = Constants.PASS_HASH_LENGTH_CONSTRAINTS)
     private String passwordHash;
 
-    @Column(name = "passwordsalt")
-    @Size(min = 1, max = 255, message = "Enter pass salt with length between 1 and 255!")
+    @Column(name = Constants.PASS_SALT)
+    @Size(min = 1, max = 255, message = Constants.PASS_SALT_LENGTH_CONSTRAINTS_MESSAGE)
     private String passwordSalt;
 
 

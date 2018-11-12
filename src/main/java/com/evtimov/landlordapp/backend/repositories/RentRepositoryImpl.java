@@ -3,13 +3,13 @@ package com.evtimov.landlordapp.backend.repositories;
 
 import com.evtimov.landlordapp.backend.models.Rent;
 import com.evtimov.landlordapp.backend.repositories.base.RentRepository;
+import com.evtimov.landlordapp.backend.utils.Constants;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -83,7 +83,7 @@ public class RentRepositoryImpl implements RentRepository {
     }
 
     @Override
-    public Rent getRentByPlaceId(int placeId) {
+    public List<Rent> getRentByPlaceId(int placeId) {
         List<Rent> rents;
         String statement = "from Rent where placeID = :pattern and isPaid = :paidPattern ";
 
@@ -92,19 +92,15 @@ public class RentRepositoryImpl implements RentRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", placeId);
-            query.setParameter("paidPattern", false);
+            query.setParameter(Constants.PATTERN, placeId);
+            query.setParameter(Constants.PAID_PATTERN, false);
             rents = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        if (rents.size() > 0) {
-            return rents.get(0);
-        } else {
-            return null;
-        }
+        return rents;
     }
 
     @Override

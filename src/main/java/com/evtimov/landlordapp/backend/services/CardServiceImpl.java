@@ -19,8 +19,7 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public Card addCard(Card card) {
-        repository.addCard(card);
-        return card;
+        return repository.addCard(card);
     }
 
     @Override

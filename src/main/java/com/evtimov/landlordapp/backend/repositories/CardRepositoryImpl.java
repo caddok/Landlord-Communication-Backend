@@ -3,6 +3,8 @@ package com.evtimov.landlordapp.backend.repositories;
 
 import com.evtimov.landlordapp.backend.models.Card;
 import com.evtimov.landlordapp.backend.repositories.base.CardRepository;
+import com.evtimov.landlordapp.backend.utils.Constants;
+import org.apache.tomcat.util.bcel.Const;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -44,7 +46,7 @@ public class CardRepositoryImpl implements CardRepository {
     @Override
     public List<Card> getAllCardsByUserId(int userId) {
 
-        List<Card> cards = new ArrayList<>();
+        List<Card> cards;
         String statement = "from Card where userID = :pattern ";
 
         try (
@@ -52,7 +54,7 @@ public class CardRepositoryImpl implements CardRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", userId);
+            query.setParameter(Constants.PATTERN, userId);
             cards = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {

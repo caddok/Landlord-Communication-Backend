@@ -37,12 +37,6 @@ public class ChatSessionServiceImpl implements ChatSessionService {
 
     @Override
     public ChatSession createChat(ChatSession chat) {
-        repository.createSession(chat);
-        return chat;
-    }
-
-    @Override
-    public void deleteChat(int chatId) {
-        repository.deleteChat(chatId);
+        return repository.createSession(chat);
     }
 }

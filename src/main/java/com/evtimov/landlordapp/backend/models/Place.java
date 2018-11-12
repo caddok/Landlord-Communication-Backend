@@ -1,6 +1,9 @@
 package com.evtimov.landlordapp.backend.models;
 
+import com.evtimov.landlordapp.backend.utils.Constants;
+
 import javax.persistence.*;
+import javax.validation.Configuration;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -8,33 +11,32 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "places")
+@Table(name = Constants.PLACES)
 public class Place {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "placeId")
-    @Max(value = 2147483647, message = "Place ID is too big!")
+    @Column(name = Constants.PLACE_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.PLACE_ID_MAX_MESSAGE)
     private int placeID;
 
-    @Column(name = "tenantId")
-    @Max(value = 2147483647, message = "Tenant ID is too big!")
+    @Column(name = Constants.TENANT_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.TENANT_ID_MAX_MESSAGE)
     private int tenantID;
 
-    @Column(name = "landlordId")
-    @NotNull(message = "Landlord ID cannot be null!")
-    @Min(value = 1, message = "Landlord ID must be at least 1!")
-    @Max(value = 2147483647, message = "Landlord ID is too big!")
+    @Column(name = Constants.LANDLORD_ID)
+    @NotNull(message = Constants.LANDLORD_ID_NULL_MESSAGE)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.LANDLORD_ID_MAX_MESSAGE)
     private int landlordID;
 
-    @Column(name = "address")
-    @NotNull(message = "Address cannot be null! Please enter something!")
-    @Size(min = 1, max = 55, message = "Enter address with length between 1 and 55!")
+    @Column(name = Constants.ADDRESS)
+    @NotNull(message = Constants.ADDRESS_NULL_MESSAGE)
+    @Size(min = 1, max = 55, message = Constants.ADDRESS_LENGTH_MESSAGE)
     private String address;
 
-    @Column(name = "description")
-    @NotNull(message = "Description cannot be null! Please enter something!")
-    @Size(min = 1, max = 16777215, message = "Enter description with length between 1 and 16777215!")
+    @Column(name = Constants.DESCRIPTION)
+    @NotNull(message = Constants.DESCRIPTION_NULL_MESSAGE)
+    @Size(min = 1, max = Constants.DESCRIPTION_MAX_VALUE, message = Constants.DESCRIPTION_LENGTH_MESSAGE)
     private String description;
 
     public Place() {

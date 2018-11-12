@@ -32,7 +32,12 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public Rating isVotedTwoTimes(int voteForId, int voteFromId) {
+        List<Rating> ratings = repository.isVotedTwoTimes(voteForId, voteFromId);
 
-        return repository.isVotedTwoTimes(voteForId, voteFromId);
+        if(ratings.size() > 0){
+            return null;
+        }else{
+            return new Rating();
+        }
     }
 }

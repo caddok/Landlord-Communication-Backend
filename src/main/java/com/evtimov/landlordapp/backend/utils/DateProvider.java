@@ -10,7 +10,7 @@ public class DateProvider {
     public Date getDateBeforeThreeMonths(){
 
         LocalDateTime currentLocalDateTime = LocalDateTime.now();
-        LocalDateTime beforeNinetyDays = currentLocalDateTime.minusMonths(3);
+        LocalDateTime beforeNinetyDays = currentLocalDateTime.minusMonths(Constants.DELETE_MESSAGES_MONTHS_PERIOD);
         Date date = beforeNinetyDays.toDate();
 
         return date;
@@ -21,7 +21,7 @@ public class DateProvider {
         LocalDateTime currentLocalDateTime = LocalDateTime.parse(lastDate);
         LocalDateTime afterOneMonth = currentLocalDateTime.plusMonths(1);
         Date date = afterOneMonth.toDate();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat(Constants.DATE_PATTERN);
         String paymentDate = format.format(date);
 
         return paymentDate;

@@ -2,6 +2,7 @@ package com.evtimov.landlordapp.backend.repositories;
 
 import com.evtimov.landlordapp.backend.models.Rating;
 import com.evtimov.landlordapp.backend.repositories.base.RatingRepository;
+import com.evtimov.landlordapp.backend.utils.Constants;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -47,7 +48,7 @@ public class RatingRepositoryImpl implements RatingRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", userId);
+            query.setParameter(Constants.PATTERN, userId);
             ratings = query.list();
             session.getTransaction().commit();
         }catch (Exception e){
@@ -58,7 +59,7 @@ public class RatingRepositoryImpl implements RatingRepository {
     }
 
     @Override
-    public Rating isVotedTwoTimes(int voteForId, int voteFromId) {
+    public List<Rating> isVotedTwoTimes(int voteForId, int voteFromId) {
 
         List<Rating> ratings;
         String statement = "from Rating where voteFor = :pattern and voteFrom = :pattern2 ";
@@ -68,19 +69,14 @@ public class RatingRepositoryImpl implements RatingRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", voteForId);
-            query.setParameter("pattern2", voteFromId);
+            query.setParameter(Constants.PATTERN, voteForId);
+            query.setParameter(Constants.PATTERN_2, voteFromId);
             ratings = query.list();
             session.getTransaction().commit();
         }catch (Exception e){
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-
-        if(ratings.size() > 0){
-            return null;
-        }else{
-            return new Rating();
-        }
+        return ratings;
     }
 }

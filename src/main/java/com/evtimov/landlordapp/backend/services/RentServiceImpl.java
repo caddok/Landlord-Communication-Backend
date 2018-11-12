@@ -7,6 +7,8 @@ import com.evtimov.landlordapp.backend.utils.DateProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RentServiceImpl implements RentService {
 
@@ -44,7 +46,13 @@ public class RentServiceImpl implements RentService {
 
     @Override
     public Rent getRentByPlaceId(int placeId) {
-        return repository.getRentByPlaceId(placeId);
+        List<Rent> rents =  repository.getRentByPlaceId(placeId);
+
+        if (rents.size() > 0) {
+            return rents.get(0);
+        } else {
+            return null;
+        }
     }
 
     @Override

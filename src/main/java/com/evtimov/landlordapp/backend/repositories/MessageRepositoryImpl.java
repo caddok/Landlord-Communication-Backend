@@ -3,7 +3,7 @@ package com.evtimov.landlordapp.backend.repositories;
 
 import com.evtimov.landlordapp.backend.models.Message;
 import com.evtimov.landlordapp.backend.repositories.base.MessageRepository;
-import com.evtimov.landlordapp.backend.utils.DateProvider;
+import com.evtimov.landlordapp.backend.utils.Constants;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -17,13 +17,10 @@ import java.util.List;
 public class MessageRepositoryImpl implements MessageRepository {
 
     private final SessionFactory sessionFactory;
-    private final DateProvider dateProvider;
-
 
     @Autowired
-    public MessageRepositoryImpl(SessionFactory sessionFactory, DateProvider dateProvider) {
+    public MessageRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
-        this.dateProvider = dateProvider;
     }
 
     @Override
@@ -43,9 +40,7 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId) {
-
-        Date date = dateProvider.getDateBeforeThreeMonths();
+    public List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId, Date date) {
 
         List<Message> messages;
         String statement = "from Message where senderID = :idPattern and chatSessionID = :chatPattern " +
@@ -56,9 +51,9 @@ public class MessageRepositoryImpl implements MessageRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("idPattern", senderId);
-            query.setParameter("chatPattern", chatId);
-            query.setParameter("datePattern", date);
+            query.setParameter(Constants.ID_PATTERN, senderId);
+            query.setParameter(Constants.CHAT_PATTERN, chatId);
+            query.setParameter(Constants.DATE_PATTERN_HQL, date);
             messages = query.list();
             session.getTransaction().commit();
         }catch (Exception e){
@@ -69,8 +64,7 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId) {
-        Date date = dateProvider.getDateBeforeThreeMonths();
+    public List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId, Date date) {
 
         List<Message> messages = null;
         String statement = "from Message where receiverID = :idPattern and chatSessionID = :chatPattern " +
@@ -81,9 +75,9 @@ public class MessageRepositoryImpl implements MessageRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("idPattern", receiverId);
-            query.setParameter("chatPattern", chatId);
-            query.setParameter("datePattern", date);
+            query.setParameter(Constants.ID_PATTERN, receiverId);
+            query.setParameter(Constants.CHAT_PATTERN, chatId);
+            query.setParameter(Constants.DATE_PATTERN_HQL, date);
             messages = query.list();
             session.getTransaction().commit();
         }catch (Exception e){
@@ -102,7 +96,7 @@ public class MessageRepositoryImpl implements MessageRepository {
         ){
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("chatPattern", chatId);
+            query.setParameter(Constants.CHAT_PATTERN, chatId);
             messages = query.list();
             session.getTransaction().commit();
         }catch (Exception e){

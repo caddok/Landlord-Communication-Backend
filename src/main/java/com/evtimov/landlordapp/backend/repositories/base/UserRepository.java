@@ -14,13 +14,13 @@ public interface UserRepository {
 
     User updateUserOnlineStatus(int userId, User model);
 
-    User getUserByUsername(String pattern);
+    List<User> getUserByUsername(String pattern);
 
-    User getUserHashAndSaltByUsername(String username);
+    List<User> getUserHashAndSaltByUsername(String username);
 
-    String checkUsername(String pattern);
+    List<User> checkUsername(String pattern);
 
-    String checkEmail(String pattern);
+    List<User> checkEmail(String pattern);
 
     User getUserById(int userId);
 }

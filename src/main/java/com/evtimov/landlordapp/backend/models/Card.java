@@ -1,49 +1,51 @@
 package com.evtimov.landlordapp.backend.models;
 
 
+import com.evtimov.landlordapp.backend.utils.Constants;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Entity
-@Table(name = "cards")
+@Table(name = Constants.CARD_SQL_TABLE_NAME)
 public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cardId")
-    @Max(value = 2147483647, message = "Card ID is too big!")
+    @Column(name = Constants.CARD_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.CARD_ID_MESSAGE)
     private int cardID;
 
-    @Column(name = "brand")
-    @NotNull(message = "Brand name cannot be null! Please enter brand!")
-    @Size(min = 1, max = 45, message = "Enter a brand name with length between 1 and 45!")
+    @Column(name = Constants.BRAND_CARD)
+    @NotNull(message = Constants.BRAND_NULL_MESSAGE)
+    @Size(min = 1, max = 45, message = Constants.BRAND_SIZE_MESSAGE)
     private String brand;
 
-    @Column(name = "type")
-    @NotNull(message = "Card type cannot be null! Please enter card type!")
-    @Size(min = 1, max = 45, message = "Enter a card type with length between 1 and 45!")
+    @Column(name = Constants.CARD_TYPE)
+    @NotNull(message = Constants.CARD_TYPE_NULL_MESSAGE)
+    @Size(min = 1, max = 45, message = Constants.CARD_TYPE_SIZE_MESSAGE)
     private String type;
 
-    @Column(name = "cardnumber")
-    @NotNull(message = "Card number cannot be null! Please enter number!")
-    @Size(min = 16, max = 16, message = "Enter a card number with length between 1 and 16!")
+    @Column(name = Constants.CARD_NUMBER)
+    @NotNull(message = Constants.CARD_NUMBER_NULL_MESSAGE)
+    @Size(min = 16, max = 16, message = Constants.CARD_NUMBER_SIZE_MESSAGE)
     private String cardNumber;
 
-    @Column(name = "cvvnumber")
-    @NotNull(message = "CVV card number cannot be null!")
-    @Size(min = 3, max = 3, message = "CVV number must contains exactly 3 digits!")
+    @Column(name = Constants.CVV_NUMBER)
+    @NotNull(message = Constants.CVV_NULL_MESSAGE)
+    @Size(min = 3, max = 3, message = Constants.CVV_SIZE_MESSAGE)
     private String cvvNumber;
 
-    @Column(name = "balance")
-    @DecimalMax(value = "9999999.99", message = "Balance is too big!")
-    @DecimalMin(value = "0.0", message = "Balance cannot be negative!")
-    @NotNull(message = "Balance cannot be null!")
+    @Column(name = Constants.BALANCE)
+    @DecimalMax(value = Constants.BALANCE_MAX_VALUE, message = Constants.BALANCE_MAX_VALUE_MESSAGE)
+    @DecimalMin(value = Constants.BALANCE_MIN_VALUE, message = Constants.BALANCE_MIN_SIZE_MESSAGE)
+    @NotNull(message = Constants.BALANCE_NULL_MESSAGE)
     private double balance;
 
-    @Column(name = "userId")
-    @Min(value = 1, message = "User ID must be at least 1!")
-    @Max(value = 2147483647, message = "User ID is too big!")
-    @NotNull(message = "User ID cannot be null!")
+    @Column(name = Constants.USER_ID)
+    @Min(value = 1, message = Constants.USER_ID_MIN_VALUE_MESSAGE)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.USER_ID_MAX_VALUE_MESSAGE)
+    @NotNull(message = Constants.USER_ID_NULL_MESSAGE)
     private int userID;
 
     public Card() {
