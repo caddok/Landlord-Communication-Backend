@@ -17,7 +17,6 @@ public class ChatSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
     @Column(name = Constants.CHATSESSIONS_ID)
     @Max(value = Constants.INT_MAX_VALUE, message = Constants.CHATSESSIONS_ID_MAX)
     private int chatsessionId;
@@ -38,28 +37,6 @@ public class ChatSession {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = Constants.CHATSESSIONS_ID, insertable = false, updatable = false)
-=======
-    @Column(name = "chatsessionId")
-    @Max(value = 2147483647, message = "ChatSession ID is too big!")
-    private int chatsessionId;
-
-    @Column(name = "tenantId")
-    @NotNull(message = "Tenant ID cannot be null!")
-    @Max(value = 2147483647, message = "Tenant ID is too big!")
-    private int tenantID;
-
-    @Column(name = "landlordId")
-    @NotNull(message = "Landlord ID cannot be null!")
-    @Max(value = 2147483647, message = "Landlord ID is too big!")
-    private int landlordID;
-
-    @Column(name = "createdate")
-    @NotNull(message = "Date cannot be null!")
-    private String createDate;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "chatsessionId", insertable = false, updatable = false)
->>>>>>> a0e8c1fe79dc781f7ef9588f0f2a22137620308e
     private List<Message> messages;
 
 
