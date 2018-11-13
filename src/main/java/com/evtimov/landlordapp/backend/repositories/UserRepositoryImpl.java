@@ -2,6 +2,7 @@ package com.evtimov.landlordapp.backend.repositories;
 
 import com.evtimov.landlordapp.backend.models.User;
 import com.evtimov.landlordapp.backend.repositories.base.UserRepository;
+import com.evtimov.landlordapp.backend.utils.Constants;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -80,7 +81,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getUserByUsername(String pattern) {
+    public List<User> getUserByUsername(String pattern) {
         List<User> users;
         String statement = "from User where username = :pattern ";
 
@@ -89,24 +90,19 @@ public class UserRepositoryImpl implements UserRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
+            query.setParameter(Constants.PATTERN, pattern);
             users = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        if (users.size() > 0) {
-            return users.get(0);
-        } else {
-            return null;
-        }
+        return users;
     }
 
     @Override
-    public User getUserHashAndSaltByUsername(String username) {
+    public List<User> getUserHashAndSaltByUsername(String username) {
         List<User> users;
-        User model;
         String statement = "from User where username = :pattern ";
 
         try (
@@ -114,25 +110,20 @@ public class UserRepositoryImpl implements UserRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", username);
+            query.setParameter(Constants.PATTERN, username);
             users = query.list();
-            if (users.size() > 0) {
-                model = new User(users.get(0).getPasswordHash(), users.get(0).getPasswordSalt());
-                return model;
-            }
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        return null;
+        return users;
     }
 
 
     @Override
-    public String checkUsername(String pattern) {
+    public List<User> checkUsername(String pattern) {
         List<User> users;
-        String username;
         String statement = "from User where username = :pattern ";
 
         try (
@@ -140,25 +131,19 @@ public class UserRepositoryImpl implements UserRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
+            query.setParameter(Constants.PATTERN, pattern);
             users = query.list();
-            if (users.size() > 0) {
-                username = "used";
-            } else {
-                username = "free";
-            }
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        return username;
+        return users;
     }
 
     @Override
-    public String checkEmail(String pattern) {
+    public List<User> checkEmail(String pattern) {
         List<User> users;
-        String email;
         String statement = "from User where email = :pattern ";
 
         try (
@@ -166,19 +151,14 @@ public class UserRepositoryImpl implements UserRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", pattern);
+            query.setParameter(Constants.PATTERN, pattern);
             users = query.list();
-            if (users.size() > 0) {
-                email = "used";
-            } else {
-                email = "free";
-            }
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
-        return email;
+        return users;
     }
 
     @Override

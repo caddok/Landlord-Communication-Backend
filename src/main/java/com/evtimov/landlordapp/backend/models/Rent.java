@@ -1,45 +1,48 @@
 package com.evtimov.landlordapp.backend.models;
 
 
+import com.evtimov.landlordapp.backend.utils.Constants;
+import net.bytebuddy.matcher.CollectionOneToOneMatcher;
+import org.apache.tomcat.util.bcel.Const;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "rents")
+@Table(name = Constants.RENTS)
 public class Rent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rentId")
-    @Max(value = 2147483647, message = "Rent ID is too big!")
+    @Column(name = Constants.RENT_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.RENT_ID_TOO_BIG)
     private int rentID;
 
-    @Column(name = "totalamount")
-    @DecimalMax(value = "99999.99", message = "Amount is too big!")
-    @DecimalMin(value = "0.0", message = "Amount cannot be negative!")
-    @NotNull(message = "Amount cannot be null!")
+    @Column(name = Constants.RENT_TOTAL)
+    @DecimalMax(value = Constants.RENT_TOTAL_MAX_VALUE, message = Constants.RENT_TOTAL_AMOUNT_TOO_BIG)
+    @DecimalMin(value = Constants.RENT_TOTAL_MIN_VALUE, message = Constants.RENT_TOTAL_AMOUNT_TOO_SMALL)
+    @NotNull(message = Constants.RENT_AMOUNT_NULL_MESSAGE)
     private double totalAmount;
 
-    @Column(name = "placeId")
-    @NotNull(message = "Place ID cannot be null!")
-    @Min(value = 1, message = "Place ID must be at least 1!")
-    @Max(value = 2147483647, message = "Place ID is too big!")
+    @Column(name = Constants.PLACE_ID)
+    @NotNull(message = Constants.PLACE_ID_NULL_MESSAGE)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.PLACE_ID_MAX_MESSAGE)
     private int placeID;
 
-    @Column(name = "remaining")
-    @DecimalMax(value = "99999.99", message = "Remaining is too big!")
-    @DecimalMin(value = "0.0", message = "Remaining cannot be negative!")
-    @NotNull(message = "Remaining cannot be null!")
+    @Column(name = Constants.RENT_REMAINING)
+    @DecimalMax(value = Constants.RENT_REMAINING_MAX_VALUE, message = Constants.RENT_REMAINING_MAX_VALUE_MESSAGE)
+    @NotNull(message = Constants.RENT_REMAINING_NULL_MESSAGE)
     private double remaining;
 
-    @Column(name = "ispaid")
-    @NotNull(message = "Is paid cannot be null!")
+    @Column(name = Constants.IS_PAID)
+    @NotNull(message = Constants.IS_PAID_NULL_MESSAGE)
     private boolean isPaid;
 
-    @Column(name = "duedate")
-    @NotNull(message = "Date cannot be null!")
+    @Column(name = Constants.DUE_DATE)
+    @NotNull(message = Constants.DUE_DATE_NULL_MESSAGE)
     private String dueDate;
 
 

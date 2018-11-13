@@ -3,6 +3,7 @@ package com.evtimov.landlordapp.backend.repositories;
 
 import com.evtimov.landlordapp.backend.models.Place;
 import com.evtimov.landlordapp.backend.repositories.base.PlaceRepository;
+import com.evtimov.landlordapp.backend.utils.Constants;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -50,7 +51,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", tenantId);
+            query.setParameter(Constants.PATTERN, tenantId);
             places = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -99,7 +100,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", userId);
+            query.setParameter(Constants.PATTERN, userId);
             places = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -120,8 +121,8 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", landlordId);
-            query.setParameter("pattern2", tenantId);
+            query.setParameter(Constants.PATTERN, landlordId);
+            query.setParameter(Constants.PATTERN_2, tenantId);
             places = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {

@@ -1,6 +1,9 @@
+
 package com.evtimov.landlordapp.backend.repositories.base;
 
 import com.evtimov.landlordapp.backend.models.Rent;
+
+import java.util.List;
 
 public interface RentRepository {
 
@@ -10,7 +13,7 @@ public interface RentRepository {
 
     Rent updateRentIsPaidStatus(int rentId);
 
-    Rent getRentByPlaceId(int placeId);
+    List<Rent> getRentByPlaceId(int placeId);
 
     Rent editRent(Rent rent, int rentId);
 }

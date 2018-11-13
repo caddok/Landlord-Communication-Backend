@@ -1,5 +1,7 @@
 package com.evtimov.landlordapp.backend.models;
 
+import com.evtimov.landlordapp.backend.utils.Constants;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -10,31 +12,31 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "chatsessions")
+@Table(name = Constants.CHATSESSIONS)
 public class ChatSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chatsessionId")
-    @Max(value = 2147483647, message = "ChatSession ID is too big!")
+    @Column(name = Constants.CHATSESSIONS_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.CHATSESSIONS_ID_MAX)
     private int chatsessionId;
 
-    @Column(name = "tenantId")
-    @NotNull(message = "Tenant ID cannot be null!")
-    @Max(value = 2147483647, message = "Tenant ID is too big!")
+    @Column(name = Constants.TENANT_ID)
+    @NotNull(message = Constants.TENANT_ID_NULL_MESSAGE)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.TENANT_ID_MAX_MESSAGE)
     private int tenantID;
 
-    @Column(name = "landlordId")
-    @NotNull(message = "Landlord ID cannot be null!")
-    @Max(value = 2147483647, message = "Landlord ID is too big!")
+    @Column(name = Constants.LANDLORD_ID)
+    @NotNull(message = Constants.LANDLORD_ID_NULL_MESSAGE)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.LANDLORD_ID_MAX_MESSAGE)
     private int landlordID;
 
-    @Column(name = "createdate")
-    @NotNull(message = "Date cannot be null!")
+    @Column(name = Constants.CREATE_DATE)
+    @NotNull(message = Constants.DATE_NOT_NULL)
     private String createDate;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "chatsessionId", insertable = false, updatable = false)
+    @JoinColumn(name = Constants.CHATSESSIONS_ID, insertable = false, updatable = false)
     private List<Message> messages;
 
 

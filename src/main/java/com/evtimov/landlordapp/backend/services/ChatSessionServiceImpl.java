@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class ChatSessionServiceImpl implements ChatSessionService {
@@ -37,12 +36,6 @@ public class ChatSessionServiceImpl implements ChatSessionService {
 
     @Override
     public ChatSession createChat(ChatSession chat) {
-        repository.createSession(chat);
-        return chat;
-    }
-
-    @Override
-    public void deleteChat(int chatId) {
-        repository.deleteChat(chatId);
+        return repository.createSession(chat);
     }
 }

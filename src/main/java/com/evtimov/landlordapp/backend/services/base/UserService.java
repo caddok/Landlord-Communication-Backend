@@ -6,21 +6,21 @@ import java.util.List;
 
 public interface UserService {
 
-    User registerUser(User entity); //
+    User registerUser(User entity);
 
-    List<User> findAllTenants();//
+    List<User> findAllTenants();
 
-    List<User> findAllLandlords();//
+    List<User> findAllLandlords();
 
-    User updateUserOnlineStatus(int userId, User model);//
+    User updateUserOnlineStatus(int userId, User model);
 
-    User findUserByUsername(String pattern);//
+    User findUserByUsername(String pattern);
 
-    User getUserHashAndSaltByUsername(String username);//
+    User getUserHashAndSaltByUsername(String username);
 
-    User checkUsername(String pattern);//
+    User checkUsername(String pattern);
 
-    User checkEmail(String pattern);//
+    User checkEmail(String pattern);
 
-    User getUserById(int userId);//
+    User getUserById(int userId);
 }

@@ -23,9 +23,7 @@ public class CardController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Card addCard(@RequestBody @Valid Card card){
-        service.addCard(card);
-
-        return card;
+        return service.addCard(card);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)

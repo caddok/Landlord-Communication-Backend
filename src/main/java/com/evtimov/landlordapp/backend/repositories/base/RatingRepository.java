@@ -10,5 +10,5 @@ public interface RatingRepository {
 
     List<Rating> getRatingsByUserId(int userId);
 
-    Rating isVotedTwoTimes(int voteForId, int voteFromId);
+    List<Rating> isVotedTwoTimes(int voteForId, int voteFromId);
 }

@@ -35,11 +35,6 @@ public class ChatSessionController {
         return service.createChat(chat);
     }
 
-    @RequestMapping(value = "/{chatId}", method = RequestMethod.DELETE)
-    public void deleteChat(@PathVariable int chatId){
-        service.deleteChat(chatId);
-    }
-
     @RequestMapping(value = "/check/{tenantId}/{landlordId}", method = RequestMethod.GET)
     public List<ChatSession> checkChatSessionIfExists(@PathVariable(value = "tenantId") int tenantId, @PathVariable(value = "landlordId") int landlordId){
         return service.checkIfChatSessionExistsByTenantIdAndLandlordId(tenantId, landlordId);

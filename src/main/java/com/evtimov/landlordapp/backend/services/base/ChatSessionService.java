@@ -13,7 +13,4 @@ public interface ChatSessionService {
     List<ChatSession> getAllByLandlordId(int landlordId);
 
     ChatSession createChat(ChatSession chat);
-
-    void deleteChat(int chatId);
-
 }

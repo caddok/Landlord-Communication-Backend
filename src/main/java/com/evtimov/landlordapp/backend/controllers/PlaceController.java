@@ -22,8 +22,7 @@ public class PlaceController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Place addLandlordPlace(@RequestBody @Valid Place place){
-        service.addLandlordPlace(place);
-        return place;
+        return service.addLandlordPlace(place);
     }
 
     @RequestMapping(value = "/place/{placeId}", method = RequestMethod.PUT)

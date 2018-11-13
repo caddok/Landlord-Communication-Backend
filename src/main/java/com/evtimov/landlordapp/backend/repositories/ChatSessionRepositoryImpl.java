@@ -3,6 +3,7 @@ package com.evtimov.landlordapp.backend.repositories;
 
 import com.evtimov.landlordapp.backend.models.ChatSession;
 import com.evtimov.landlordapp.backend.repositories.base.ChatSessionRepository;
+import com.evtimov.landlordapp.backend.utils.Constants;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", tenantId);
+            query.setParameter(Constants.PATTERN, tenantId);
             chats = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -54,8 +55,8 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("patternLandlord", landlordId);
-            query.setParameter("patternTenant", tenantId);
+            query.setParameter(Constants.PATTERN_LANDLORD, landlordId);
+            query.setParameter(Constants.TENANT_PATTERN, tenantId);
             chats = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -75,7 +76,7 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
         ) {
             session.beginTransaction();
             Query query = session.createQuery(statement);
-            query.setParameter("pattern", landlordId);
+            query.setParameter(Constants.PATTERN, landlordId);
             chats = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -97,25 +98,6 @@ public class ChatSessionRepositoryImpl implements ChatSessionRepository {
             session.getTransaction().commit();
         } catch (Exception ex) {
 
-            System.out.println(ex.getMessage());
-            throw new RuntimeException();
-        }
-        return chat;
-    }
-
-    @Override
-    public ChatSession deleteChat(int chatId) {
-
-        ChatSession chat;
-
-        try (
-                Session session = sessionFactory.openSession();
-        ) {
-            session.beginTransaction();
-            chat = session.get(ChatSession.class, chatId);
-            session.delete(chat);
-            session.getTransaction().commit();
-        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new RuntimeException();
         }

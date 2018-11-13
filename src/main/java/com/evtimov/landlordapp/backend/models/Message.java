@@ -1,7 +1,11 @@
 package com.evtimov.landlordapp.backend.models;
 
 
+import com.evtimov.landlordapp.backend.utils.Constants;
+import org.apache.tomcat.util.bcel.Const;
+
 import javax.persistence.*;
+import javax.validation.Configuration;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -9,36 +13,36 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "messages")
+@Table(name = Constants.MESSAGES)
 public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "messageId")
-    @Max(value = 2147483647, message = "Message ID is too big!")
+    @Column(name = Constants.MESSAGE_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.MESSAGE_ID_MAX_MESSAGE)
     private int messageID;
 
-    @Column(name = "timestamp")
+    @Column(name = Constants.TIMESTAMP)
     private String timestamp;
 
-    @Column(name = "senderId")
-    @Max(value = 2147483647, message = "Sender ID is too big!")
-    @NotNull(message = "Sender ID cannot be null!")
+    @Column(name = Constants.SENDER_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.SENDER_ID_MAX_MSSG)
+    @NotNull(message = Constants.SENDER_ID_NULL_MESSAGE)
     private int senderID;
 
-    @Column(name = "receiverId")
-    @Max(value = 2147483647, message = "Receiver ID is too big!")
-    @NotNull(message = "Receiver ID cannot be null!")
+    @Column(name = Constants.RECEIVER_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.RECEIVER_ID_MAX_MSSG)
+    @NotNull(message = Constants.RECEIVER_ID_NULL_MESSAGE)
     private int receiverID;
 
-    @Column(name = "chatsessionId")
-    @Max(value = 2147483647, message = "ChatSession ID is too big!")
-    @NotNull(message = "ChatSession ID cannot be null!")
+    @Column(name = Constants.CHATSESSIONS_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.CHATSESSIONS_ID_MAX)
+    @NotNull(message = Constants.CHATSESSION_ID_NULL_MESSAGE)
     private int chatsessionId;
 
-    @Column(name = "text")
-    @NotNull(message = "Text message cannot be null! Please enter something!")
-    @Size(min = 1, max = 16777215, message = "Enter a message with length between 1 and 16777215!")
+    @Column(name = Constants.TEXT)
+    @NotNull(message = Constants.TEXT_NULL_MESSAGE)
+    @Size(min = 1, max = Constants.TEXT_MAX_LENGTH, message = Constants.TEXT_LENGTH_CONSTR)
     private String text;
 
 

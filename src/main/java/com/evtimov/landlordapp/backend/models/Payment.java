@@ -1,69 +1,68 @@
 package com.evtimov.landlordapp.backend.models;
 
 
+import com.evtimov.landlordapp.backend.utils.Constants;
+
 import javax.persistence.*;
+import javax.validation.Configuration;
 import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "payments")
+@Table(name = Constants.PAYMENTS)
 public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "paymentId")
-    @Max(value = 2147483647, message = "Payment ID is too big!")
+    @Column(name = Constants.PAYMENT_ID)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.PAYMENT_ID_TOO_BIG)
     private int paymentID;
 
-    @Column(name = "userId")
-    @NotNull(message = "User ID cannot be null!")
-    @Min(value = 1, message = "User ID must be at least 1!")
-    @Max(value = 2147483647, message = "User ID is too big!")
+    @Column(name = Constants.USER_ID)
+    @NotNull(message = Constants.USER_ID_NULL_MESSAGE)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.USER_ID_MAX_VALUE_MESSAGE)
     private int userID;
 
-    @Column(name = "cardId")
-    @NotNull(message = "Card ID cannot be null!")
-    @Min(value = 1, message = "Card ID must be at least 1!")
-    @Max(value = 2147483647, message = "Card ID is too big!")
+    @Column(name = Constants.CARD_ID)
+    @NotNull(message = Constants.CARD_ID_NULL_MESSAGE)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.CARD_ID_MESSAGE)
     private int cardID;
 
-    @Column(name = "rentId")
-    @NotNull(message = "Rent ID cannot be null!")
-    @Min(value = 1, message = "Rent ID must be at least 1!")
-    @Max(value = 2147483647, message = "Rent ID is too big!")
+    @Column(name = Constants.RENT_ID)
+    @NotNull(message = Constants.RENT_ID_NULL_MESSAGE)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.RENT_ID_TOO_BIG)
     private int rentID;
 
-    @Column(name = "placeId")
-    @NotNull(message = "Place ID cannot be null!")
-    @Min(value = 1, message = "Place ID must be at least 1!")
-    @Max(value = 2147483647, message = "Place ID is too big!")
+    @Column(name = Constants.PLACE_ID)
+    @NotNull(message = Constants.PLACE_ID_NULL_MESSAGE)
+    @Max(value = Constants.INT_MAX_VALUE, message = Constants.PLACE_ID_MAX_MESSAGE)
     private int placeID;
 
-    @Column(name = "amount")
-    @DecimalMax(value = "99999.99", message = "Amount is too big!")
-    @DecimalMin(value = "0.0", message = "Amount cannot be negative!")
-    @NotNull(message = "Amount cannot be null!")
+    @Column(name = Constants.AMOUNT)
+    @DecimalMax(value = Constants.PAYMENT_AMOUNT_MAX_VALUE, message = Constants.PAYMENT_AMOUNT_MAX_VALUE_MESSAGE)
+    @DecimalMin(value = Constants.PAYMENT_AMOUNT_MIN_VALUE, message = Constants.PAYMENT_AMOUNT_MIN_VALUE_MESSAGE)
+    @NotNull(message = Constants.PAYMENT_AMOUNT_NULL_MESSAGE)
     private double amount;
 
-    @Column(name = "date")
-    @NotNull(message = "Date cannot be null!")
-    @Size(min = 1, max = 11, message = "Enter a date with length between 1 and 11!")
+    @Column(name = Constants.DATE)
+    @NotNull(message = Constants.DATE_NOT_NULL)
+    @Size(min = 1, max = 11, message = Constants.DATE_LENGTH_CONSTR)
     private String date;
 
     @ManyToOne
-    @JoinColumn(name = "cardId", insertable = false, updatable = false)
+    @JoinColumn(name = Constants.CARD_ID, insertable = false, updatable = false)
     private Card card;
 
     @ManyToOne
-    @JoinColumn(name = "rentId", insertable = false, updatable = false)
+    @JoinColumn(name = Constants.RENT_ID, insertable = false, updatable = false)
     private Rent rent;
 
     @ManyToOne
-    @JoinColumn(name = "placeId", insertable = false, updatable = false)
+    @JoinColumn(name = Constants.PLACE_ID, insertable = false, updatable = false)
     private Place place;
 
     @ManyToOne
-    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @JoinColumn(name = Constants.USER_ID, insertable = false, updatable = false)
     private User user;
 
 
