@@ -10,7 +10,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -40,7 +39,7 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId, Date date) {
+    public List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId, String date) {
 
         List<Message> messages;
         String statement = "from Message where senderID = :idPattern and chatSessionID = :chatPattern " +
@@ -64,7 +63,7 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId, Date date) {
+    public List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId, String date) {
 
         List<Message> messages = null;
         String statement = "from Message where receiverID = :idPattern and chatSessionID = :chatPattern " +
