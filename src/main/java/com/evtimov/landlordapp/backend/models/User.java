@@ -70,6 +70,7 @@ public class User {
         setPasswordSalt(passwordSalt);
     }
 
+
     public User(boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
                 boolean isOnline, String passwordHash, String passwordSalt) {
         setIsLandlord(isLandlord);

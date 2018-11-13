@@ -13,7 +13,6 @@ import java.util.List;
 
 @Repository
 public class PaymentRepositoryImpl implements PaymentRepository {
-
     private final SessionFactory sessionFactory;
 
     @Autowired

@@ -20,8 +20,13 @@ public class Place {
     @Max(value = Constants.INT_MAX_VALUE, message = Constants.PLACE_ID_MAX_MESSAGE)
     private int placeID;
 
+<<<<<<< HEAD
     @Column(name = Constants.TENANT_ID)
     @Max(value = Constants.INT_MAX_VALUE, message = Constants.TENANT_ID_MAX_MESSAGE)
+=======
+    @Column(name = "tenantId")
+    @Max(value = 2147483647, message = "Tenant ID is too big!")
+>>>>>>> a0e8c1fe79dc781f7ef9588f0f2a22137620308e
     private int tenantID;
 
     @Column(name = Constants.LANDLORD_ID)

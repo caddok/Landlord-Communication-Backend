@@ -39,7 +39,7 @@ public class RatingRepositoryImpl implements RatingRepository {
     }
 
     @Override
-    public List<Rating> getRatingsByUserUd(int userId) {
+    public List<Rating> getRatingsByUserId(int userId) {
         List<Rating> ratings;
         String statement = "from Rating where voteFor = :pattern ";
 

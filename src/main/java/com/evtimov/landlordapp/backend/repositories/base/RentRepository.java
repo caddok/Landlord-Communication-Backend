@@ -1,3 +1,4 @@
+
 package com.evtimov.landlordapp.backend.repositories.base;
 
 import com.evtimov.landlordapp.backend.models.Rent;

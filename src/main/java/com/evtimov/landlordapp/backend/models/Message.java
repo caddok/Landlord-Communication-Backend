@@ -22,6 +22,7 @@ public class Message {
     @Max(value = Constants.INT_MAX_VALUE, message = Constants.MESSAGE_ID_MAX_MESSAGE)
     private int messageID;
 
+<<<<<<< HEAD
     @Column(name = Constants.TIMESTAMP)
     private String timestamp;
 
@@ -38,6 +39,24 @@ public class Message {
     @Column(name = Constants.CHATSESSIONS_ID)
     @Max(value = Constants.INT_MAX_VALUE, message = Constants.CHATSESSIONS_ID_MAX)
     @NotNull(message = Constants.CHATSESSION_ID_NULL_MESSAGE)
+=======
+    @Column(name = "timestamp")
+    private String timestamp;
+
+    @Column(name = "senderId")
+    @Max(value = 2147483647, message = "Sender ID is too big!")
+    @NotNull(message = "Sender ID cannot be null!")
+    private int senderID;
+
+    @Column(name = "receiverId")
+    @Max(value = 2147483647, message = "Receiver ID is too big!")
+    @NotNull(message = "Receiver ID cannot be null!")
+    private int receiverID;
+
+    @Column(name = "chatsessionId")
+    @Max(value = 2147483647, message = "ChatSession ID is too big!")
+    @NotNull(message = "ChatSession ID cannot be null!")
+>>>>>>> a0e8c1fe79dc781f7ef9588f0f2a22137620308e
     private int chatsessionId;
 
     @Column(name = Constants.TEXT)

@@ -27,7 +27,7 @@ public class RatingController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public List<Rating> getRatingsByUserId(@PathVariable(value = "userId") int userId){
-        return service.getRatingsByUserUd(userId);
+        return service.getRatingsByUserId(userId);
     }
 
     @RequestMapping(value = "/check/{voteForId}/{voteFromId}", method = RequestMethod.GET)
