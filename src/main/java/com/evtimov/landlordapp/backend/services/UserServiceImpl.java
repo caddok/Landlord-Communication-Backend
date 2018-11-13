@@ -56,7 +56,11 @@ public class UserServiceImpl implements UserService {
     public User checkUsername(String pattern) {
         List<User> users = repository.checkUsername(pattern);
         String username;
-        
+        if (users.size() > 0) {
+            username = Constants.USED;
+        } else {
+            username = Constants.FREE;
+        }
 
         User userModel = new User(false, username, null, null, null,
                 null, false, null, null);
