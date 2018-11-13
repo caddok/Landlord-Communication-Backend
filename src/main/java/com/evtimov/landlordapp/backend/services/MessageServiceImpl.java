@@ -8,7 +8,6 @@ import com.evtimov.landlordapp.backend.utils.DateProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,13 +30,13 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId) {
-        Date date = dateProvider.getDateBeforeThreeMonths();
+        String date = dateProvider.getDateBeforeThreeMonths();
         return repository.getMessagesBySenderIdAndChatId(senderId, chatId, date);
     }
 
     @Override
     public List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId) {
-        Date date = dateProvider.getDateBeforeThreeMonths();
+        String date = dateProvider.getDateBeforeThreeMonths();
         return repository.getMessagesByReceiverIdAndChatId(receiverId, chatId, date);
     }
 

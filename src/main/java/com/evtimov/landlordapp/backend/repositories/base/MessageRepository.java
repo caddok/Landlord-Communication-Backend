@@ -9,9 +9,9 @@ public interface MessageRepository {
 
     Message createMessage(Message message);
 
-    List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId, Date date);
+    List<Message> getMessagesBySenderIdAndChatId(int senderId, int chatId, String date);
 
-    List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId, Date date);
+    List<Message> getMessagesByReceiverIdAndChatId(int receiverId, int chatId, String date);
 
     List<Message> getMessagesByChatId(int chatId);
 }
